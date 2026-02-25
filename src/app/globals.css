@@ -3,9 +3,9 @@
 @theme {
   --color-primary: #19A354;
   --color-background: #07101B;
-  --color-card: #111A24;
+  --color-card: #0A131F;
   --color-foreground: #FFFFFF;
-  --color-muted: #CED0DF;
+  --color-muted: #9CA3AF;
   --font-heading: var(--font-plus-jakarta);
   --font-body: var(--font-inter);
 }
@@ -23,27 +23,13 @@
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.05em;
   }
 }
 
-@utility glass {
-  background-color: rgba(17, 26, 36, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-@utility glass-green {
-  background-color: rgba(25, 163, 84, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(25, 163, 84, 0.1);
-}
-
-@utility text-gradient {
-  background: linear-gradient(to right, #FFFFFF, #CED0DF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+@utility bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }

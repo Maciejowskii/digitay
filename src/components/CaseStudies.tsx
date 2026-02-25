@@ -1,107 +1,190 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, BarChart3, Users, Zap } from "lucide-react";
-import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import React from "react";
 
 const cases = [
   {
-    title: "QuickPick",
-    description: "Kompleksowe wdrożenie e-commerce B2B wraz z aplikacją mobilną do szybkiego skanowania produktów.",
-    metric: "+200 000 zł",
-    metricLabel: "Dodatkowego przychodu w Q1",
+    title: "QuickPick B2B Platform",
+    year: "2024",
+    client: "QuickPick SA",
+    metric1: "+200k",
+    metric1Label: "PLN W Q1",
+    metric2: "85%",
+    metric2Label: "Mniej Błędów",
     tag: "E-commerce & App",
-    icon: <Zap className="w-5 h-5 text-yellow-400" />
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
   },
   {
-    title: "FitLife CRM",
-    description: "System do zarządzania siecią siłowni i rezerwacji online. Zastąpienie 4 niezależnych narzędzi.",
-    metric: "45%",
-    metricLabel: "Więcej rezerwacji online",
+    title: "FitLife CRM Ecosystem",
+    year: "2023",
+    client: "FitLife Group",
+    metric1: "45%",
+    metric1Label: "Więcej rezerwacji",
+    metric2: "4",
+    metric2Label: "Zastąpione aplikacje",
     tag: "Custom Software",
-    icon: <Users className="w-5 h-5 text-blue-400" />
+    image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=2070&auto=format&fit=crop"
   },
   {
-    title: "EcoEnergy",
-    description: "Optymalizacja procesu i wdrożenie Landing Page ze wsparciem SEO dla branży OZE.",
-    metric: "3x",
-    metricLabel: "Wzrost konwersji z leadów",
-    tag: "Web Design & SEO",
-    icon: <BarChart3 className="w-5 h-5 text-primary" />
+    title: "EcoEnergy Organic Growth",
+    year: "2024",
+    client: "EcoEnergy Sp z o.o.",
+    metric1: "3x",
+    metric1Label: "Wzrost CVR",
+    metric2: "Top 3",
+    metric2Label: "Wyniki Google",
+    tag: "SEO & Web Design",
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop"
   }
 ];
 
 export default function CaseStudies() {
   return (
-    <section id="cases" className="py-24 max-w-7xl mx-auto px-6 md:px-12 bg-background border-t border-white/5">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-        <div>
-          <span className="text-primary font-mono text-sm tracking-widest uppercase mb-4 block">
-            [ Case study ]
-          </span>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white max-w-xl">
-            Sprawdź nasze <span className="text-primary">realizacje</span>
-          </h2>
-        </div>
-        
-        <motion.button 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-background font-semibold hover:bg-white/90 transition-colors"
-        >
-          Wszystkie projekty
-          <ArrowUpRight className="w-4 h-4" />
-        </motion.button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {cases.map((study, idx) => (
-          <motion.div
-            key={study.title}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: idx * 0.15 }}
-            className="group relative bg-[#111A24] rounded-3xl overflow-hidden border border-white/10 hover:border-primary/50 transition-all duration-300"
+    <section id="cases" className="py-32 border-b border-white/10 bg-[#07101B]">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Header section  */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+          <div>
+            <span className="font-mono text-xs tracking-widest text-muted uppercase mb-4 block">
+              [03 // CASE STUDIES]
+            </span>
+            <h2 className="text-5xl md:text-7xl font-heading font-black text-white uppercase tracking-tighter leading-[0.9]">
+              WYNIKI, NIE <br className="hidden md:block"/> <span className="text-primary italic font-light tracking-normal">OBIETNICE.</span>
+            </h2>
+          </div>
+          
+          <motion.button 
+            whileHover={{ backgroundColor: "#ffffff" }}
+            className="flex items-center gap-4 border border-white/20 bg-background px-8 py-5 uppercase text-xs font-bold tracking-widest hover:bg-white hover:text-black hover:border-white transition-colors duration-0 rounded-none shrink-0"
           >
-            {/* Image Placeholder with gradient overlay */}
-            <div className="h-48 relative overflow-hidden bg-white/5">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111A24] to-transparent z-10" />
-              {/* Abstract pattern instead of image */}
-              <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/40 via-background to-background group-hover:scale-110 duration-700" />
-              
-              <div className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-xs font-medium text-white flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                {study.tag}
-              </div>
+            Pełne portfolio
+            <ArrowUpRight className="w-4 h-4" />
+          </motion.button>
+        </div>
+
+        {/* Asymmetrical Editorial Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/10 border border-white/10">
+          
+          {/* Featured Large Case Study (Left) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="bg-[#07101B] p-8 md:p-12 lg:row-span-2 flex flex-col group hover:bg-[#0A131F] transition-colors duration-0 relative overflow-hidden"
+          >
+            {/* Top Info row */}
+            <div className="flex justify-between items-start font-mono text-xs text-muted uppercase tracking-widest mb-12 border-b border-white/10 pb-4">
+               <div>{cases[0].client}</div>
+               <div>{cases[0].year}</div>
             </div>
 
-            <div className="p-8 pt-0 relative z-20">
-              <h3 className="text-2xl font-heading font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                {study.title}
-              </h3>
-              <p className="text-muted text-sm leading-relaxed mb-8">
-                {study.description}
-              </p>
-              
-              <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 group-hover:bg-primary/5 group-hover:border-primary/20 transition-all">
-                <div className="mt-1 bg-white/10 p-2 rounded-lg">
-                  {study.icon}
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-white font-heading">
-                    {study.metric}
-                  </div>
-                  <div className="text-xs text-muted mt-1 font-medium">
-                    {study.metricLabel}
-                  </div>
-                </div>
-              </div>
+            {/* Content Container */}
+            <div className="flex-1 flex flex-col justify-end relative z-10">
+               <h3 className="text-4xl md:text-5xl font-heading font-black text-white uppercase tracking-tighter mb-8 max-w-sm">
+                 {cases[0].title}
+               </h3>
+               
+               <div className="mb-12">
+                 <div className="text-[100px] md:text-[140px] font-heading font-black leading-none text-white tracking-tighter group-hover:text-primary transition-colors duration-0">
+                   {cases[0].metric1}
+                 </div>
+                 <div className="font-mono text-sm uppercase tracking-widest text-muted mt-2 ml-2">
+                   {cases[0].metric1Label}
+                 </div>
+               </div>
+            </div>
+
+            {/* Media Reveal on Hover */}
+            <div className="w-full h-72 border border-white/10 bg-black overflow-hidden relative grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+               <div className="absolute top-4 right-4 bg-black border border-white/10 px-3 py-1 font-mono text-[10px] text-white/50 z-10 uppercase">{cases[0].tag}</div>
+               <img src={cases[0].image} alt="Case study visual" className="w-full h-full object-cover opacity-60 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-300 group-hover:scale-105" />
             </div>
             
-            <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/20 rounded-3xl pointer-events-none transition-colors" />
+            <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+               <div className="w-12 h-12 border border-primary flex items-center justify-center bg-black hover:bg-primary hover:text-black text-primary transition-colors cursor-pointer">
+                  <ArrowUpRight className="w-6 h-6" />
+               </div>
+            </div>
           </motion.div>
-        ))}
+
+          {/* Grid Right: Smaller Case Study 1 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-[#07101B] p-8 md:p-10 flex flex-col justify-between group hover:bg-[#0A131F] transition-colors duration-0 relative overflow-hidden"
+          >
+            {/* Top Info row */}
+            <div className="flex justify-between items-start font-mono text-xs text-muted uppercase tracking-widest mb-8 border-b border-white/10 pb-4">
+               <div>{cases[1].client}</div>
+               <div className="flex items-center gap-4">
+                 <span>{cases[1].tag}</span>
+                 <span>{cases[1].year}</span>
+               </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-8 items-end justify-between relative z-10 mb-8">
+               <h3 className="text-3xl font-heading font-black text-white uppercase tracking-tighter max-w-[250px]">
+                 {cases[1].title}
+               </h3>
+               
+               <div className="text-right">
+                 <div className="text-6xl md:text-8xl font-heading font-black leading-none text-white tracking-tighter group-hover:text-primary transition-colors duration-0">
+                   {cases[1].metric1}
+                 </div>
+                 <div className="font-mono text-[10px] uppercase tracking-widest text-muted mt-1">
+                   {cases[1].metric1Label}
+                 </div>
+               </div>
+            </div>
+
+            <div className="w-full h-40 border border-white/10 bg-black overflow-hidden relative grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 mt-auto">
+               <img src={cases[1].image} alt="Case study visual" className="w-full h-full object-cover opacity-50 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-300 group-hover:scale-105" />
+            </div>
+          </motion.div>
+
+          {/* Grid Right: Smaller Case Study 2 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-[#07101B] p-8 md:p-10 flex flex-col justify-between group hover:bg-[#0A131F] transition-colors duration-0 relative overflow-hidden"
+          >
+            {/* Top Info row */}
+            <div className="flex justify-between items-start font-mono text-xs text-muted uppercase tracking-widest mb-8 border-b border-white/10 pb-4">
+               <div>{cases[2].client}</div>
+               <div className="flex items-center gap-4">
+                 <span>{cases[2].tag}</span>
+                 <span>{cases[2].year}</span>
+               </div>
+            </div>
+
+            <div className="flex flex-col md:flex-row gap-8 items-end justify-between relative z-10 mb-8">
+               <h3 className="text-3xl font-heading font-black text-white uppercase tracking-tighter max-w-[250px]">
+                 {cases[2].title}
+               </h3>
+               
+               <div className="text-right">
+                 <div className="text-6xl md:text-8xl font-heading font-black leading-none text-white tracking-tighter group-hover:text-primary transition-colors duration-0">
+                   {cases[2].metric1}
+                 </div>
+                 <div className="font-mono text-[10px] uppercase tracking-widest text-muted mt-1">
+                   {cases[2].metric1Label}
+                 </div>
+               </div>
+            </div>
+
+            <div className="w-full h-40 border border-white/10 bg-black overflow-hidden relative grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300 mt-auto">
+               <img src={cases[2].image} alt="Case study visual" className="w-full h-full object-cover opacity-50 mix-blend-luminosity group-hover:opacity-100 group-hover:mix-blend-normal transition-all duration-300 group-hover:scale-105" />
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

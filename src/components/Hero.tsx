@@ -1,146 +1,95 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Play } from "lucide-react";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
-      {/* Background Gradients */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] opacity-60 mix-blend-screen" />
-        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] opacity-40 mix-blend-screen" />
-      </div>
+    <section className="relative min-h-screen pt-32 pb-16 flex flex-col justify-center border-b border-white/10 bg-grid-pattern overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full z-10">
+        
+        {/* Top Label */}
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="font-mono text-xs tracking-widest text-muted uppercase mb-8 flex items-center gap-4"
+        >
+          <span>DIGITAY // EST. 2025</span>
+          <div className="h-px bg-white/20 flex-1 max-w-[150px]" />
+        </motion.div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Content */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex flex-col items-start max-w-2xl"
+        {/* Massive Typography */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-6xl sm:text-7xl md:text-8xl lg:text-[140px] font-heading font-black leading-[0.85] text-white uppercase max-w-[1200px] mb-12 tracking-tighter mix-blend-difference"
+        >
+          ZAMIENIAMY WIZJE <br/>
+          W <span className="italic font-light text-primary">Działające</span> <br/>
+          PRODUKTY
+        </motion.h1>
+
+        {/* Content & Action */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-12 mb-20">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-lg text-muted max-w-md font-medium leading-relaxed"
           >
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-6 backdrop-blur-md"
-            >
-              Twój partner technologiczny
-            </motion.div>
-            
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[1.1] text-white mb-6"
-            >
-              Zamieniamy <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-300">pomysły</span> w działające produkty
-            </motion.h1>
-            
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="text-lg md:text-xl text-muted leading-relaxed mb-10 max-w-xl"
-            >
-              Wystarczy pomysł – resztą zajmiemy się my: analizą, designem, developmentem i wdrożeniem. Skup się na wizji, my zajmiemy się realizacją.
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
-            >
-              <Link 
-                href="#cases"
-                className="group relative flex items-center justify-center gap-3 bg-white text-background px-8 py-4 rounded-full font-semibold overflow-hidden transition-transform hover:scale-105 active:scale-95"
-              >
-                <span className="relative z-10">Zobacz Case Study</span>
-                <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
-                <div className="absolute inset-0 bg-gray-200 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-              </Link>
-              
-              <Link 
-                href="tel:+48535645322"
-                className="flex items-center justify-center gap-3 bg-card border border-white/5 hover:border-primary/50 text-white px-8 py-4 rounded-full font-medium transition-all hover:bg-card/80 hover:shadow-[0_0_20px_rgba(25,163,84,0.15)]"
-              >
-                <Phone className="w-5 h-5 text-primary" />
-                <span>+48 535 645 322</span>
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Abstract Visual / Decorative */}
+            Surowa precyzja, inżynieria kodu i design nastawiony na najwyższą konwersję. Tworzymy narzędzia cyfrowe dla liderów rynku.
+          </motion.p>
+          
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 1, type: "spring" }}
-            className="hidden lg:block relative h-[600px] w-full"
+             initial={{ opacity: 0, x: -20 }}
+             animate={{ opacity: 1, x: 0 }}
+             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <div className="absolute inset-0 flex items-center justify-center">
-              {/* Abstract Glassmorphic Dashboard Representation */}
-              <motion.div 
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-20 w-[80%] h-[70%] glass rounded-2xl border border-white/10 shadow-2xl p-6 flex flex-col gap-4 overflow-hidden"
-              >
-                {/* Header */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-4">
-                  <div className="flex gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  </div>
-                  <div className="h-4 w-24 bg-white/5 rounded-full" />
-                </div>
-                {/* Content lines */}
-                <div className="flex gap-4 h-full pt-2">
-                  <div className="w-1/3 flex flex-col gap-3">
-                    <div className="h-20 bg-primary/10 rounded-xl border border-primary/20 backdrop-blur-md" />
-                    <div className="h-10 bg-white/5 rounded-xl" />
-                    <div className="h-10 bg-white/5 rounded-xl" />
-                    <div className="h-full bg-white/5 rounded-xl" />
-                  </div>
-                  <div className="w-2/3 flex flex-col gap-3">
-                    <div className="flex gap-3 h-24">
-                       <div className="w-1/2 bg-white/5 rounded-xl" />
-                       <div className="w-1/2 bg-white/5 rounded-xl" />
-                    </div>
-                    <div className="h-full bg-gradient-to-tr from-white/5 to-primary/5 rounded-xl border border-white/5 relative overflow-hidden">
-                       {/* Chart simulation */}
-                       <svg className="absolute bottom-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-                          <path d="M0 100 L0 80 Q25 60 50 70 T100 40 L100 100 Z" fill="rgba(25, 163, 84, 0.2)" />
-                          <path d="M0 80 Q25 60 50 70 T100 40" fill="none" stroke="#19A354" strokeWidth="2" />
-                       </svg>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              
-              {/* Decorative floating elements */}
-              <motion.div 
-                animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-10 -left-10 w-40 h-40 glass rounded-2xl z-30 flex items-center justify-center border border-white/10"
-              >
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">+200%</div>
-                  <div className="text-xs text-muted">Wzrost konwersji</div>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                animate={{ y: [0, -25, 0], rotate: [0, -10, 0] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -top-10 -right-5 w-32 h-32 bg-primary/20 backdrop-blur-xl border border-primary/30 rounded-full z-10"
-              />
-            </div>
+            <Link 
+              href="#cases"
+              className="group inline-flex items-center gap-4 bg-primary text-[#07101B] px-10 py-5 text-sm font-bold tracking-widest uppercase rounded-sm transition-colors hover:bg-white"
+            >
+              Zobacz realizacje
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
         </div>
+
+        {/* Video Reel Placeholder (Raw Media Container) */}
+        <motion.div
+           initial={{ opacity: 0, y: 40 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ duration: 1, delay: 0.5 }}
+           className="w-full aspect-[21/9] bg-[#0A131F] border border-white/10 rounded-none relative group cursor-pointer overflow-hidden flex items-center justify-center transition-colors hover:border-white/30"
+        >
+           {/* Visual inside the Raw Media Container */}
+           <div className="absolute inset-0 bg-neutral-900 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-300">
+               <div className="w-full h-full opacity-40 bg-[url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop')] bg-cover bg-center mix-blend-luminosity" />
+               <div className="text-white/20 font-mono text-4xl font-bold uppercase tracking-widest absolute z-0 select-none pointer-events-none">RAW MEDIA REEL</div>
+           </div>
+           
+           {/* Center Play Button indicator */}
+           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+              <div className="w-24 h-24 bg-black border border-white/20 flex items-center justify-center group-hover:border-primary transition-colors duration-300 rounded-none">
+                 <Play className="w-10 h-10 text-white fill-white ml-2 group-hover:text-primary transition-colors duration-300" />
+              </div>
+           </div>
+           
+           {/* Target Corners */}
+           <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/20 m-4 pointer-events-none" />
+           <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-white/20 m-4 pointer-events-none" />
+           <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-white/20 m-4 pointer-events-none" />
+           <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/20 m-4 pointer-events-none" />
+
+           {/* Info Label overlay */}
+           <div className="absolute bottom-6 right-8 px-4 py-2 bg-black border border-white/10 text-xs font-mono text-white/70 uppercase z-10 rounded-none">
+             REC // SHOWREEL 01
+           </div>
+        </motion.div>
+
       </div>
     </section>
   );
