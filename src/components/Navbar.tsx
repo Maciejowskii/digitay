@@ -1,8 +1,9 @@
 "use client";
 
-import { Phone } from "lucide-react";
+import { motion } from "framer-motion";
+import { Phone, Menu } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const navLinks = [
   { name: "O nas", href: "#about" },
@@ -13,59 +14,86 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      if (isScrolled !== scrolled) setScrolled(isScrolled);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrolled]);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-0 border-b border-white/10 ${
-        scrolled ? "bg-[#07101B]" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-white flex items-center justify-center text-black font-black font-heading rounded-none group-hover:bg-primary transition-colors">
-            D
-          </div>
-          <span className="text-xl font-heading font-black tracking-tighter text-white uppercase sm:block hidden">
-            DIGITAY //
-          </span>
-        </Link>
+    <>
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl z-50">
+        <div className="bg-[#111A24] border border-white/10 rounded-full px-6 py-3 flex items-center justify-between shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group shrink-0">
+            <div className="w-8 h-8 bg-white flex items-center justify-center text-black font-black font-heading rounded-full group-hover:bg-primary transition-colors duration-300">
+              D
+            </div>
+            <span className="text-xl font-heading font-bold text-white tracking-tight hidden sm:block">
+              Digitay
+            </span>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8 h-full">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="h-full flex items-center text-xs font-mono tracking-widest uppercase text-muted hover:text-white transition-colors border-b-2 border-transparent hover:border-primary"
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-sm font-medium text-[#CED0DF] hover:text-white transition-colors duration-200 tracking-wide"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Desktop CTA & Mobile Toggle */}
+          <div className="flex items-center gap-4">
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
+                href="tel:+48733172145"
+                className="hidden md:flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="text-sm font-bold tracking-wide">
+                  Darmowa wycena
+                </span>
+              </Link>
+            </motion.div>
+            
+            {/* Mobile menu button */}
+            <button 
+              className="md:hidden p-2 text-white hover:text-primary transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </header>
 
-        {/* CTA */}
-        <Link
-          href="tel:+48733172145"
-          className="group flex items-center gap-3 bg-white hover:bg-primary border border-white hover:border-primary px-6 py-2.5 rounded-none transition-colors duration-0"
-        >
-          <Phone className="w-4 h-4 text-black" />
-          <span className="text-xs font-bold tracking-widest text-black uppercase">
-            Darmowa wycena
-          </span>
-        </Link>
-      </div>
-    </header>
+      {/* Mobile Navigation Menu Dropdown (Simplified) */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 top-24 z-40 bg-[#07101B]/95 md:hidden px-6 pt-6">
+           <nav className="flex flex-col gap-6 items-center">
+             {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-medium text-white tracking-wide"
+                >
+                  {link.name}
+                </Link>
+             ))}
+             <Link
+                href="tel:+48733172145"
+                className="mt-4 flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full w-full justify-center"
+              >
+                <Phone className="w-5 h-5" />
+                <span className="text-lg font-bold">
+                  Darmowa wycena
+                </span>
+              </Link>
+           </nav>
+        </div>
+      )}
+    </>
   );
 }
