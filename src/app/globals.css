@@ -3,6 +3,7 @@
 
 @theme {
   --color-primary: #19A354;
+  --color-brand-green: var(--color-primary);
   --color-background: #07101B;
   --color-card: #0A131F;
   --color-foreground: #FFFFFF;

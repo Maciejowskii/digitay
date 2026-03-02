@@ -5,9 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function ServicesBento() {
   return (
-    <section id="services" className="py-32 max-w-7xl mx-auto px-6 md:px-12 border-b border-white/10 relative">
-      <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none -z-10" />
-
+    <section id="services" className="py-32 max-w-7xl mx-auto px-6 md:px-12 border-b border-white/10 relative bg-transparent">
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
         <div>
@@ -23,8 +21,7 @@ export default function ServicesBento() {
         </p>
       </div>
 
-      {/* Brutalist Grid Layout: rounded-none, border-white/10 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-none">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-transparent rounded-none">
         
         {/* Service 01 */}
         <motion.div 
@@ -32,7 +29,7 @@ export default function ServicesBento() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
-          className="bg-[#07101B] group relative p-8 md:p-12 min-h-[450px] flex flex-col justify-between hover:border-primary transition-colors duration-0 lg:col-span-2 overflow-hidden border border-transparent rounded-none"
+          className="bg-transparent group relative p-8 md:p-12 min-h-[450px] flex flex-col justify-between hover:border-primary transition-colors duration-0 lg:col-span-2 overflow-hidden border border-white/10"
         >
           {/* Massive Structural Number */}
           <div className="absolute -bottom-12 -right-12 text-[250px] md:text-[300px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">
@@ -47,7 +44,7 @@ export default function ServicesBento() {
           </div>
           
           {/* High-Fidelity UI Snippet Placeholder */}
-          <div className="relative z-10 w-full h-56 mt-auto border-t border-r border-white/10 bg-[#0A131F] relative overflow-hidden flex items-end ml-12">
+          <div className="relative z-10 w-full h-56 mt-auto border-t border-r border-white/10 bg-black/40 relative overflow-hidden flex items-end ml-12">
              <div className="text-[10px] font-mono text-white/40 absolute top-4 left-4 tracking-widest bg-black px-2 py-1">UI_SNIPPET // MOBILE APP</div>
              
              {/* Mocked UI Area */}
@@ -74,7 +71,7 @@ export default function ServicesBento() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-[#07101B] group relative p-8 md:p-12 min-h-[450px] flex flex-col justify-between hover:border-primary transition-colors duration-0 overflow-hidden border border-transparent rounded-none"
+          className="bg-transparent group relative p-8 md:p-12 min-h-[450px] flex flex-col justify-between hover:border-primary transition-colors duration-0 overflow-hidden border border-white/10"
         >
           <div className="absolute -top-16 -right-16 text-[250px] md:text-[300px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">
             02
@@ -87,7 +84,7 @@ export default function ServicesBento() {
             </p>
           </div>
 
-          <div className="relative z-10 w-full h-56 mt-auto border-t border-l border-white/10 bg-[#0A131F] flex items-center justify-center overflow-hidden mr-12 -ml-8">
+          <div className="relative z-10 w-full h-56 mt-auto border-t border-l border-white/10 bg-black/40 flex items-center justify-center overflow-hidden mr-12 -ml-8">
             <div className="text-[10px] font-mono text-white/40 absolute bottom-4 right-4 tracking-widest bg-black px-2 py-1">UI_SNIPPET // DASHBOARD</div>
             
             {/* Mocked UI Area */}
@@ -116,7 +113,7 @@ export default function ServicesBento() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-[#07101B] group relative p-8 md:p-12 lg:col-span-3 min-h-[250px] flex flex-col md:flex-row items-start md:items-center justify-between hover:border-primary transition-colors duration-0 overflow-hidden border border-transparent rounded-none gap-8"
+          className="bg-transparent group relative p-8 md:p-12 lg:col-span-3 min-h-[250px] flex flex-col md:flex-row items-start md:items-center justify-between hover:border-primary transition-colors duration-0 overflow-hidden border border-white/10 gap-8"
         >
           <div className="absolute top-1/2 -translate-y-1/2 left-0 md:left-20 text-[200px] md:text-[350px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">
             03

@@ -15,11 +15,8 @@ export default function LogoMarquee() {
   const duplicatedLogos = [...logos, ...logos, ...logos];
 
   return (
-    <section className="py-8 border-y border-white/10 bg-[#07101B] overflow-hidden flex flex-col items-center relative">
-      <div className="absolute top-0 left-0 w-8 h-8 border-b border-r border-white/10 z-20 pointer-events-none bg-[#0A131F]" />
-      <div className="absolute top-0 right-0 w-8 h-8 border-b border-l border-white/10 z-20 pointer-events-none bg-[#0A131F]" />
-      <div className="absolute bottom-0 left-0 w-8 h-8 border-t border-r border-white/10 z-20 pointer-events-none bg-[#0A131F]" />
-      <div className="absolute bottom-0 right-0 w-8 h-8 border-t border-l border-white/10 z-20 pointer-events-none bg-[#0A131F]" />
+    <section className="py-12 bg-transparent overflow-hidden flex flex-col items-center relative">
+
 
       <div className="relative w-full max-w-full overflow-hidden flex items-center">
         {/* Gradients for fading effect on edges */}
