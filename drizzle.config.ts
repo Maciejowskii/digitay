@@ -1,13 +1,14 @@
 import { defineConfig } from "drizzle-kit";
+import * as dotenv from "dotenv";
+
+dotenv.config({ path: ".env" });
 
 export default defineConfig({
   dialect: "postgresql",
   schema: "./src/db/schema.ts",
   out: "./drizzle",
   dbCredentials: {
-    // URL placeholder (will be used once DB is provisioned on VPS)
-    // Drizzle Kit requires DB URL for push/studio commands
-    url: process.env.DATABASE_URL || "postgres://user:password@localhost:5432/digitay",
+    url: process.env.DATABASE_URL!,
   },
   verbose: true,
   strict: true,

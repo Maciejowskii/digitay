@@ -2,8 +2,8 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LogoMarquee from "@/components/LogoMarquee";
 import ServicesBento from "@/components/ServicesBento";
-import CaseStudies from "@/components/CaseStudies";
-import Testimonials from "@/components/Testimonials";
+import CaseStudies from "@/components/frontend/CaseStudies";
+import Testimonials from "@/components/frontend/Testimonials";
 import ContactFaq from "@/components/ContactFaq";
 import Footer from "@/components/Footer";
 
