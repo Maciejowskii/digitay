@@ -40,13 +40,18 @@ export default async function CaseStudies() {
   const dataToRender = fetchedStudies.length > 0 ? fetchedStudies : mockFallback;
 
   return (
-    <section className="py-24 relative bg-zinc-50">
+    <section className="py-24 relative bg-transparent border-t border-white/10">
       <div className="container mx-auto px-6 max-w-7xl">
-        <div className="mb-16 md:mb-24 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-jakarta font-bold text-zinc-900 tracking-tight leading-tight">
-             Ostatnie <br />
-             <span className="text-zinc-500">realizacje.</span>
-          </h2>
+        <div className="mb-16 md:mb-24 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <span className="font-mono text-xs tracking-widest text-zinc-500 uppercase mb-4 block">
+              [ CASE STUDIES ]
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-heading font-black text-white tracking-tighter leading-none uppercase">
+               Ostatnie <br />
+               <span className="text-zinc-500 font-light italic">realizacje.</span>
+            </h2>
+          </div>
         </div>
         
         <CaseStudiesGrid caseStudies={dataToRender as any} />

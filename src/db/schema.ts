@@ -50,6 +50,7 @@ export const caseStudies = pgTable("case_studies", {
   results: json("results"), // Allow storing structured results like { "Growth": "+150%", "Time": "3 months" }
   coverImage: text("cover_image"),
   tags: json("tags"), // Storing array of strings e.g. ["SEO", "Web Design"]
+  isPublished: boolean("is_published").default(false).notNull(),
   ...timestamps,
 });
 

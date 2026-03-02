@@ -26,7 +26,7 @@ export default function Hero() {
         Ultra Minimalist Glow 
       */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex justify-center items-center">
-        <div className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full bg-indigo-900/15 blur-[120px] mix-blend-screen" />
+        <div className="w-[80vw] h-[80vw] max-w-[800px] max-h-[800px] rounded-full bg-brand-green/10 blur-[120px] mix-blend-screen" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 md:px-12 w-full flex flex-col items-center text-center mt-12 md:mt-24">

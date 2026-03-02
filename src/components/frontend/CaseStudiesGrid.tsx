@@ -85,59 +85,59 @@ export const CaseStudiesGrid = ({ caseStudies }: { caseStudies: CaseStudy[] }) =
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+      className="grid grid-cols-1 md:grid-cols-2 gap-4"
     >
-      {caseStudies.map((study) => (
+      {caseStudies.map((study, idx) => (
         <motion.div key={study.id} variants={itemVariants} className="group cursor-pointer">
-          <Link href={`/case-studies/${study.slug}`} className="block relative overflow-hidden rounded-3xl aspect-[4/3] bg-zinc-100">
+          <Link href={`/case-studies/${study.slug}`} className="block relative overflow-hidden bg-transparent border border-white/10 p-6 flex flex-col h-full min-h-[400px]">
+            
+            <div className="flex justify-between items-start mb-6">
+               <div className="text-[10px] font-mono text-zinc-500 tracking-widest uppercase">
+                 [ CASE // {String(idx + 1).padStart(2, '0')} ]
+               </div>
+               <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-white transition-colors duration-300" />
+            </div>
+
             {/* Image container */}
-            <motion.div className="w-full h-full relative transition-transform duration-700 ease-out group-hover:scale-105">
-              <Image
-                src={study.coverImage || "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2940&auto=format&fit=crop"} // Fallback image setup
-                alt={study.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                placeholder="blur"
-                blurDataURL={blurDataUrl}
-                loading="lazy"
-              />
-            </motion.div>
-
-            {/* Dark overlay specifically on hover */}
-            <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/40 z-10" />
-
-            {/* Magnetic Button */}
-            <MagneticButton>
-              <div className="opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out bg-brand-green text-zinc-900 font-semibold px-6 py-3 rounded-full flex items-center gap-2 shadow-xl shadow-brand-green/20">
-                Zobacz wyniki
-                <ArrowUpRight className="w-4 h-4" />
-              </div>
-            </MagneticButton>
+            <div className="relative w-full aspect-[16/9] mb-8 overflow-hidden border border-white/5 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+               <Image
+                 src={study.coverImage || "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2940&auto=format&fit=crop"}
+                 alt={study.title}
+                 fill
+                 sizes="(max-width: 768px) 100vw, 50vw"
+                 className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105"
+                 placeholder="blur"
+                 blurDataURL={blurDataUrl}
+                 loading="lazy"
+               />
+            </div>
 
             {/* Content pinned to bottom */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10 z-20 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-              <div className="flex gap-2 mb-4 flex-wrap">
-                {getTags(study.tags).slice(0, 3).map((tag, idx) => (
-                  <span key={idx} className="text-xs font-medium uppercase tracking-wider text-white border border-white/20 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <h3 className="text-white text-2xl md:text-3xl font-bold font-jakarta leading-tight mb-2">
+            <div className="mt-auto flex flex-col gap-4">
+              <h3 className="text-white text-2xl lg:text-3xl font-heading font-black tracking-tighter uppercase leading-none">
                 {study.title}
               </h3>
-              <p className="text-zinc-300 font-medium">
-                Dla: {study.clientName}
-              </p>
+              
+              <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-2">
+                 <p className="text-zinc-400 font-mono text-xs uppercase tracking-widest">
+                   Zleceniodawca: <span className="text-white">{study.clientName}</span>
+                 </p>
+                 <div className="flex gap-2">
+                   {getTags(study.tags).slice(0, 2).map((tag, i) => (
+                     <span key={i} className="text-[9px] font-mono font-medium uppercase tracking-widest text-zinc-500 bg-white/5 px-2 py-1">
+                       {tag}
+                     </span>
+                   ))}
+                 </div>
+              </div>
             </div>
           </Link>
         </motion.div>
       ))}
 
       {caseStudies.length === 0 && (
-         <div className="col-span-full py-20 text-center text-zinc-500">
-            Katalog case studies jest chwilowo pusty.
+         <div className="col-span-full py-20 text-center font-mono text-zinc-600 text-sm uppercase tracking-widest">
+            [ / / Brak Case Studies ]
          </div>
       )}
     </motion.div>

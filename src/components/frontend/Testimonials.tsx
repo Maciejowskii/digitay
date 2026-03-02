@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { testimonials } from "@/db/schema";
 import { desc } from "drizzle-orm";
-import { TestimonialsSlider } from "./TestimonialsSlider";
+import { TestimonialsGrid } from "./TestimonialsGrid";
 
 export default async function Testimonials() {
   let fetchedTestimonials: any[] = [];
@@ -50,21 +50,25 @@ export default async function Testimonials() {
   const dataToRender = fetchedTestimonials.length > 0 ? fetchedTestimonials : mockFallback;
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl mb-12">
+    <section className="py-24 bg-transparent border-t border-white/10 overflow-hidden">
+      <div className="container mx-auto px-6 max-w-7xl mb-16 md:mb-24">
         <div className="max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-jakarta font-bold text-zinc-900 tracking-tight leading-tight mb-6">
-             Nie wierzysz nam? <br />
-             <span className="text-brand-green">Posłuchaj klientów.</span>
+          <span className="font-mono text-xs tracking-widest text-zinc-500 uppercase mb-4 block">
+              [ RAPORTY // OPINIE ]
+           </span>
+           <h2 className="text-4xl md:text-5xl lg:text-7xl font-heading font-black text-white tracking-tighter leading-none uppercase mb-6">
+             Nie wierzysz nam?<br />
+             <span className="text-zinc-500 font-light italic">Posłuchaj klientów.</span>
           </h2>
-          <p className="text-zinc-500 text-lg">
-            Słoleczność ludzi i firm, które powierzyły nam swój rozwój. Codziennie pracujemy na ich zaufanie dowożąc mierzalne wyniki.
+          <p className="text-zinc-400 text-lg md:text-xl max-w-xl leading-relaxed">
+            Społeczność zaufanych podmiotów, która powierzyła nam swój rozwój technologiczny i twarde metryki biznesowe.
           </p>
         </div>
       </div>
       
-      {/* Full width slider */}
-      <TestimonialsSlider testimonials={dataToRender as any} />
+      <div className="container mx-auto px-6 max-w-7xl">
+        <TestimonialsGrid testimonials={dataToRender as any} />
+      </div>
     </section>
   );
 }
