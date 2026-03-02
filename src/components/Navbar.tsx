@@ -6,11 +6,11 @@ import Link from "next/link";
 import { useState } from "react";
 
 const navLinks = [
-  { name: "O nas", href: "#about" },
-  { name: "Usługi", href: "#services" },
-  { name: "Case Study", href: "#cases" },
-  { name: "Blog", href: "#blog" },
-  { name: "Kontakt", href: "#contact" },
+  { name: "O nas", href: "/o-nas" },
+  { name: "Usługi", href: "/uslugi" },
+  { name: "Case Study", href: "/case-study" },
+  { name: "Blog", href: "/blog" },
+  { name: "Kontakt", href: "/kontakt" },
 ];
 
 export default function Navbar() {

@@ -59,10 +59,10 @@ export const BlogBentoGrid = ({ posts }: { posts: BlogPost[] }) => {
       >
         <Link 
           href={`/blog/${featuredPost.slug}`} 
-          className="group relative flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-sm border border-zinc-100 hover:shadow-xl hover:shadow-brand-green/10 transition-shadow duration-500 w-full"
+          className="group relative flex flex-col md:flex-row bg-transparent rounded-none overflow-hidden border border-white/10 hover:border-primary transition-colors duration-500 w-full"
         >
           {/* Image Side */}
-          <div className="relative w-full md:w-3/5 aspect-video md:aspect-auto overflow-hidden bg-zinc-100">
+          <div className="relative w-full md:w-3/5 aspect-video md:aspect-auto overflow-hidden bg-white/5 border-r border-white/10">
             <Image 
               src={featuredPost.coverImage || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop"}
               alt={featuredPost.title}
@@ -76,31 +76,31 @@ export const BlogBentoGrid = ({ posts }: { posts: BlogPost[] }) => {
 
           {/* Content Side */}
           <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col justify-center">
-            <div className="flex items-center gap-4 text-xs font-semibold uppercase tracking-wider text-brand-green mb-4">
-              Nowość
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
+            <div className="flex items-center gap-4 text-xs font-mono tracking-widest text-primary mb-4">
+              [ NOWOŚĆ ]
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             </div>
-            <h2 className="text-3xl lg:text-4xl font-jakarta font-bold text-zinc-900 leading-tight mb-4 group-hover:text-brand-green transition-colors duration-300">
+            <h2 className="text-3xl lg:text-5xl font-heading font-black text-white uppercase leading-tight mb-4 group-hover:text-primary transition-colors duration-300">
               {featuredPost.title}
             </h2>
             {featuredPost.excerpt && (
-              <p className="text-zinc-500 text-lg leading-relaxed mb-8 line-clamp-3">
+              <p className="text-zinc-400 text-sm font-medium leading-relaxed mb-8 line-clamp-3">
                 {featuredPost.excerpt}
               </p>
             )}
             
-            <div className="flex items-center justify-between mt-auto pt-8 border-t border-zinc-100">
+            <div className="flex items-center justify-between mt-auto pt-8 border-t border-white/10">
               <div className="flex gap-4">
-                 <div className="flex items-center gap-1.5 text-sm text-zinc-500">
+                 <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500">
                     <User className="w-4 h-4" />
                     {featuredPost.author || 'Zespół'}
                  </div>
-                 <div className="flex items-center gap-1.5 text-sm text-zinc-500">
+                 <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-500">
                     <Calendar className="w-4 h-4" />
                     <span>{formatDate(featuredPost.publishedAt)}</span>
                  </div>
               </div>
-              <div className="w-10 h-10 rounded-full bg-zinc-50 flex items-center justify-center text-zinc-400 group-hover:bg-brand-green group-hover:text-white transition-colors duration-300">
+              <div className="w-10 h-10 rounded-sm bg-white/5 flex items-center justify-center text-zinc-400 group-hover:bg-primary group-hover:text-black transition-colors duration-300">
                  <ArrowUpRight className="w-5 h-5" />
               </div>
             </div>
@@ -121,10 +121,10 @@ export const BlogBentoGrid = ({ posts }: { posts: BlogPost[] }) => {
          >
            <Link 
              href={`/blog/${post.slug}`}
-             className="group relative flex flex-col h-full bg-white rounded-3xl overflow-hidden shadow-sm border border-zinc-100 hover:shadow-xl hover:shadow-brand-green/10 transition-shadow duration-500"
+             className="group relative flex flex-col h-full bg-transparent rounded-none overflow-hidden border border-white/10 hover:border-primary transition-colors duration-500"
            >
              {/* Bento Image Top */}
-             <div className="relative w-full aspect-[4/3] overflow-hidden bg-zinc-100">
+             <div className="relative w-full aspect-[4/3] overflow-hidden bg-white/5 border-b border-white/10">
                 <Image 
                   src={post.coverImage || "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2670&auto=format&fit=crop"}
                   alt={post.title}
@@ -138,19 +138,19 @@ export const BlogBentoGrid = ({ posts }: { posts: BlogPost[] }) => {
              
              {/* Content Bottom */}
              <div className="p-8 flex flex-col flex-grow">
-               <h3 className="text-2xl font-jakarta font-bold text-zinc-900 leading-snug mb-3 group-hover:text-brand-green transition-colors duration-300 line-clamp-3">
+               <h3 className="text-2xl font-heading font-black text-white uppercase leading-snug mb-3 group-hover:text-primary transition-colors duration-300 line-clamp-3">
                  {post.title}
                </h3>
                {post.excerpt && (
-                 <p className="text-zinc-500 leading-relaxed mb-6 line-clamp-2 text-sm">
+                 <p className="text-zinc-400 font-medium leading-relaxed mb-6 line-clamp-2 text-sm">
                    {post.excerpt}
                  </p>
                )}
                
-               <div className="mt-auto pt-6 flex items-center justify-between text-xs text-zinc-400 font-medium border-t border-zinc-50">
+               <div className="mt-auto pt-6 flex items-center justify-between text-xs font-mono tracking-widest text-zinc-500 border-t border-white/10">
                   <span>{formatDate(post.publishedAt)}</span>
-                  <div className="flex items-center gap-1 text-zinc-900 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                    Czytaj <ArrowUpRight className="w-3 h-3" />
+                  <div className="flex items-center gap-1 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    [ CZYTAJ ] <ArrowUpRight className="w-3 h-3" />
                   </div>
                </div>
              </div>

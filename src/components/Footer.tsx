@@ -26,11 +26,11 @@ export default function Footer() {
         <div>
           <h4 className="text-white/40 font-mono text-xs mb-6 tracking-widest">// NAWIGACJA</h4>
           <ul className="flex flex-col gap-4 font-mono text-sm">
-            <li><Link href="#about" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">O NAS</Link></li>
-            <li><Link href="#services" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">USŁUGI</Link></li>
-            <li><Link href="#cases" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">CASE STUDY</Link></li>
-            <li><Link href="#blog" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">BLOG</Link></li>
-            <li><Link href="#contact" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">KONTAKT</Link></li>
+            <li><Link href="/o-nas" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">O NAS</Link></li>
+            <li><Link href="/uslugi" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">USŁUGI</Link></li>
+            <li><Link href="/case-study" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">CASE STUDY</Link></li>
+            <li><Link href="/blog" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">BLOG</Link></li>
+            <li><Link href="/kontakt" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">KONTAKT</Link></li>
           </ul>
         </div>
 
@@ -38,11 +38,11 @@ export default function Footer() {
         <div>
           <h4 className="text-white/40 font-mono text-xs mb-6 tracking-widest">// SPECJALIZACJE</h4>
           <ul className="flex flex-col gap-4 font-mono text-sm">
-            <li className="text-white/70 hover:text-white transition-colors cursor-default">APLIKACJE MOBILE</li>
-            <li className="text-white/70 hover:text-white transition-colors cursor-default">APLIKACJE WEB</li>
-            <li className="text-white/70 hover:text-white transition-colors cursor-default">STRONY B2B / B2C</li>
-            <li className="text-white/70 hover:text-white transition-colors cursor-default">DESIGN SYSTEMY</li>
-            <li className="text-white/70 hover:text-white transition-colors cursor-default">UI/UX DESIGN</li>
+            <li><Link href="/uslugi/aplikacje-mobile" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">APLIKACJE MOBILE</Link></li>
+            <li><Link href="/uslugi/aplikacje-web" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">APLIKACJE WEB</Link></li>
+            <li><Link href="/uslugi/strony-www" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">STRONY B2B / B2C</Link></li>
+            <li><Link href="/uslugi/design-systemy" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">DESIGN SYSTEMY</Link></li>
+            <li><Link href="/uslugi/ui-ux-design" className="text-white/70 hover:text-white hover:pl-2 transition-all duration-300">UI/UX DESIGN</Link></li>
           </ul>
         </div>
 
@@ -80,8 +80,8 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex gap-4 sm:gap-8 uppercase tracking-widest">
-            <Link href="#" className="hover:text-white transition-colors">Polityka Prywatności</Link>
-            <Link href="#" className="hover:text-white transition-colors">Regulamin</Link>
+            <Link href="/polityka-prywatnosci" className="hover:text-white transition-colors">Polityka Prywatności</Link>
+            <Link href="/regulamin" className="hover:text-white transition-colors">Regulamin</Link>
           </div>
         </div>
       </div>

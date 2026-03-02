@@ -58,7 +58,7 @@ function ShareButton({ icon: Icon, onClick, colorClass }: { icon: any, onClick?:
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       onClick={onClick}
-      className={`w-12 h-12 flex items-center justify-center rounded-full bg-zinc-100 text-zinc-600 hover:text-white hover:bg-zinc-900 transition-colors duration-300 ${colorClass || ''}`}
+      className={`w-12 h-12 flex items-center justify-center rounded-none border border-white/10 bg-white/5 text-zinc-400 hover:text-black hover:bg-primary transition-colors duration-300 ${colorClass || ''}`}
     >
       <Icon className="w-5 h-5 pointer-events-none" />
     </motion.button>
@@ -73,18 +73,18 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
   const coverOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
-    <div className="bg-white min-h-screen selection:bg-brand-green/20 selection:text-brand-green">
+    <div className="bg-transparent min-h-screen">
       {/* 
         Reading Progress Bar (Fixed Top)
       */}
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-1.5 bg-brand-green transform-origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1.5 bg-primary transform-origin-left z-50"
         style={{ scaleX: scrollYProgress, transformOrigin: "0% 50%" }}
       />
 
       {/* Basic Navigation Return */}
       <div className="absolute top-10 left-6 md:left-12 z-40">
-        <Link href="/blog" className="flex items-center gap-2 text-white bg-black/20 hover:bg-black/40 backdrop-blur-md px-4 py-2 rounded-full font-medium transition-colors text-sm">
+        <Link href="/blog" className="flex items-center gap-2 text-white bg-black/50 border border-white/10 hover:bg-primary hover:text-black backdrop-blur-md px-4 py-2 rounded-none font-mono tracking-widest uppercase transition-colors text-xs">
            <ArrowLeft className="w-4 h-4" />
            Powrót do Wpisów
         </Link>
@@ -121,13 +121,13 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
                 <User className="w-4 h-4" />
                 {post.author || "Zespół Digitay"}
               </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-green" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 {formatDate(post.publishedAt)}
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-jakarta font-bold text-white leading-[1.1] tracking-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black uppercase text-white leading-[1.1] tracking-tighter">
               {post.title}
             </h1>
           </motion.div>
@@ -137,38 +137,38 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
       {/* 
         Content Body (Tailwind Typography Reader) 
       */}
-      <div className="relative bg-white z-30">
+      <div className="relative bg-transparent border-t border-white/10 z-30">
         <div className="max-w-prose mx-auto px-6 py-20 md:py-32">
           
           {/* Prose Content Container */}
           <article 
-             className="prose prose-zinc prose-lg md:prose-xl max-w-none 
-                        prose-headings:font-jakarta prose-headings:font-bold prose-headings:tracking-tight 
-                        prose-p:leading-relaxed prose-p:text-zinc-600
-                        prose-a:text-brand-green prose-a:no-underline hover:prose-a:text-brand-green/80
-                        prose-blockquote:border-l-4 prose-blockquote:border-brand-green prose-blockquote:bg-brand-green/5 prose-blockquote:p-6 prose-blockquote:rounded-r-2xl prose-blockquote:not-italic prose-blockquote:text-zinc-800 prose-blockquote:font-medium
-                        prose-img:rounded-3xl prose-img:shadow-xl prose-img:border prose-img:border-zinc-100"
+             className="prose prose-invert prose-lg md:prose-xl max-w-none 
+                        prose-headings:font-heading prose-headings:font-black prose-headings:tracking-tighter prose-headings:uppercase 
+                        prose-p:leading-relaxed prose-p:text-zinc-400
+                        prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80
+                        prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:bg-white/5 prose-blockquote:p-6 prose-blockquote:rounded-none prose-blockquote:not-italic prose-blockquote:text-zinc-300 prose-blockquote:font-mono
+                        prose-img:rounded-none prose-img:shadow-2xl prose-img:border prose-img:border-white/10"
              dangerouslySetInnerHTML={{ __html: post.content }} 
           />
 
           {/* 
             Author & Share Footer 
           */}
-          <hr className="my-16 border-zinc-100" />
+          <hr className="my-16 border-white/10" />
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-5">
-              <div className="w-16 h-16 rounded-full bg-zinc-100 flex items-center justify-center text-xl font-bold text-brand-green flex-shrink-0 border-2 border-brand-green/20">
+              <div className="w-16 h-16 rounded-sm bg-white/5 flex items-center justify-center text-xl font-bold text-primary flex-shrink-0 border border-white/10">
                  {post.author ? post.author.charAt(0) : "D"}
               </div>
               <div>
-                <p className="text-sm font-semibold text-brand-green uppercase tracking-wider mb-1">Autor</p>
-                <h4 className="text-xl font-bold text-zinc-900">{post.author || "Zespół Digitay"}</h4>
-                <p className="text-zinc-500">Specjalista ds. marketingu</p>
+                <p className="text-xs font-mono text-primary uppercase tracking-widest mb-1">[ AUTOR ]</p>
+                <h4 className="text-xl font-heading font-black uppercase text-white">{post.author || "Zespół Digitay"}</h4>
+                <p className="text-zinc-500 font-medium">Specjalista ds. digital</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-               <span className="text-sm font-semibold text-zinc-400 mr-2 uppercase tracking-wide">Podaj dalej</span>
+               <span className="text-xs font-mono text-zinc-500 mr-2 uppercase tracking-widest">[ UDOSTĘPNIJ ]</span>
                <ShareButton icon={Facebook} />
                <ShareButton icon={Linkedin} />
                <ShareButton icon={Link2} />
