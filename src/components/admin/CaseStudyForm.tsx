@@ -39,7 +39,7 @@ export function CaseStudyForm({
   onCancel: () => void;
 }) {
   const form = useForm<CaseStudyFormInput, any, CaseStudyFormOutput>({
-    resolver: zodResolver(caseStudySchema),
+    resolver: zodResolver(caseStudySchema) as any,
     defaultValues: initialData ? {
       ...initialData,
       tags: initialData.tags ? (Array.isArray(initialData.tags) ? initialData.tags.join(", ") : initialData.tags) : "",

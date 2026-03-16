@@ -37,7 +37,7 @@ export default function ContactFaq() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(contactSchema) as any,
   });
 
   const onSubmit = async (data: ContactFormValues) => {

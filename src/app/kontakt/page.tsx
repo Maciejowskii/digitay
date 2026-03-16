@@ -11,12 +11,12 @@ const containerVariants = {
     opacity: 1,
     transition: { staggerChildren: 0.15 },
   },
-};
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
-};
+} as const;
 
 const contactDetails = [
   {
@@ -91,7 +91,7 @@ export default function ContactPage() {
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }}
         className="w-full relative"
       >
         <div className="absolute -top-12 left-0 font-mono text-xs text-white/20 tracking-widest uppercase">

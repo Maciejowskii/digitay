@@ -9,10 +9,10 @@ import { Loader2, X } from "lucide-react";
 const testimonialSchema = z.object({
   id: z.number().optional(),
   authorName: z.string().min(1, "Autor jest wymagany"),
-  authorRole: z.string().optional(),
-  company: z.string().optional(),
+  authorRole: z.string().nullable().optional(),
+  company: z.string().nullable().optional(),
   content: z.string().min(1, "Treść jest wymagana"),
-  avatarUrl: z.string().optional(),
+  avatarUrl: z.string().nullable().optional(),
   rating: z.coerce.number().min(1).max(5).default(5),
   isFeatured: z.boolean().default(false)
 });
@@ -29,8 +29,13 @@ export function TestimonialForm({
   onCancel: () => void;
 }) {
   const form = useForm<TestimonialFormValues>({
-    resolver: zodResolver(testimonialSchema),
-    defaultValues: initialData || {
+    resolver: zodResolver(testimonialSchema) as any,
+    defaultValues: initialData ? {
+      ...initialData,
+      authorRole: initialData.authorRole || "",
+      company: initialData.company || "",
+      avatarUrl: initialData.avatarUrl || "",
+    } : {
       authorName: "",
       authorRole: "",
       company: "",
