@@ -64,8 +64,10 @@ export default async function SingleCaseStudyPage({ params }: { params: Promise<
          <h1 className="text-4xl font-bold mb-4">{caseStudy.title}</h1>
          <p className="text-zinc-400 mb-8">Klient: {caseStudy.clientName}</p>
          {caseStudy.coverImage && (
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={caseStudy.coverImage} className="w-full aspect-video object-cover rounded-xl mb-8" alt="Cover"/>
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={caseStudy.coverImage} className="w-full aspect-video object-cover rounded-xl mb-8" alt="Cover"/>
+            </>
          )}
          <div className="prose prose-invert max-w-none w-full" dangerouslySetInnerHTML={{ __html: caseStudy.challenge || "" }} />
          <div className="prose prose-invert max-w-none w-full border-t border-zinc-800 pt-8 mt-8" dangerouslySetInnerHTML={{ __html: caseStudy.solution || "" }} />
