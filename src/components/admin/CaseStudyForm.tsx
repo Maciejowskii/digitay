@@ -1,10 +1,12 @@
 "use client";
 
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { saveCaseStudy } from "@/app/admin/case-studies/actions";
 import { Loader2, Plus, Trash2, X } from "lucide-react";
+import RichTextEditor from "./RichTextEditor";
+import ImageUploadDropzone from "./ImageUploadDropzone";
 
 const caseStudySchema = z.object({
   id: z.number().optional(),
@@ -24,7 +26,8 @@ const caseStudySchema = z.object({
   ).optional()
 });
 
-type CaseStudyFormValues = z.infer<typeof caseStudySchema>;
+type CaseStudyFormInput = z.input<typeof caseStudySchema>;
+type CaseStudyFormOutput = z.output<typeof caseStudySchema>;
 
 export function CaseStudyForm({ 
   initialData, 
@@ -35,13 +38,13 @@ export function CaseStudyForm({
   onSuccess: () => void;
   onCancel: () => void;
 }) {
-  const form = useForm<CaseStudyFormValues>({
+  const form = useForm<CaseStudyFormInput, any, CaseStudyFormOutput>({
     resolver: zodResolver(caseStudySchema),
-    defaultValues: {
+    defaultValues: initialData ? {
       ...initialData,
-      tags: initialData?.tags ? (Array.isArray(initialData.tags) ? initialData.tags.join(", ") : initialData.tags) : "",
-      results: initialData?.results ? (Array.isArray(initialData.results) ? initialData.results : Object.entries(initialData.results).map(([k, v]) => ({ label: k, value: String(v) }))) : []
-    } || {
+      tags: initialData.tags ? (Array.isArray(initialData.tags) ? initialData.tags.join(", ") : initialData.tags) : "",
+      results: initialData.results ? (Array.isArray(initialData.results) ? initialData.results : Object.entries(initialData.results).map(([k, v]) => ({ label: k, value: String(v) }))) : []
+    } : {
       slug: "",
       clientName: "",
       title: "",
@@ -59,7 +62,7 @@ export function CaseStudyForm({
     control: form.control,
   });
 
-  const onSubmit = async (values: CaseStudyFormValues) => {
+  const onSubmit = async (values: CaseStudyFormOutput) => {
     // Transform array of objects to simple record for json storage 
     const resultsObj = values.results?.reduce((acc, curr) => {
       if (curr.label && curr.value) acc[curr.label] = curr.value;
@@ -94,41 +97,70 @@ export function CaseStudyForm({
           <div className="space-y-4">
              <div>
               <label className="block text-sm font-medium mb-1 text-zinc-800">Slug (URL)</label>
-              <input {...form.register("slug")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" placeholder="np. kampania-meta-2024" />
+              <input {...form.register("slug")} className="w-full bg-white border border-zinc-400 text-zinc-900 placeholder:text-zinc-500 rounded-lg px-3 py-2 text-sm" placeholder="np. kampania-meta-2024" />
               {form.formState.errors.slug && <p className="text-red-500 text-xs mt-1">{form.formState.errors.slug.message}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-zinc-800">Nazwa klienta</label>
-              <input {...form.register("clientName")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" />
+              <input {...form.register("clientName")} className="w-full bg-white border border-zinc-400 text-zinc-900 placeholder:text-zinc-500 rounded-lg px-3 py-2 text-sm" />
               {form.formState.errors.clientName && <p className="text-red-500 text-xs mt-1">{form.formState.errors.clientName.message}</p>}
             </div>
           </div>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1 text-zinc-800">Tytuł projektu</label>
-              <input {...form.register("title")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" />
+              <input {...form.register("title")} className="w-full bg-white border border-zinc-400 text-zinc-900 placeholder:text-zinc-500 rounded-lg px-3 py-2 text-sm" />
               {form.formState.errors.title && <p className="text-red-500 text-xs mt-1">{form.formState.errors.title.message}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium mb-1 text-zinc-800">Tagi (po przecinku)</label>
-              <input {...form.register("tags")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" placeholder="SEO, E-commerce, Design" />
+              <input {...form.register("tags")} className="w-full bg-white border border-zinc-400 text-zinc-900 placeholder:text-zinc-500 rounded-lg px-3 py-2 text-sm" placeholder="SEO, E-commerce, Design" />
             </div>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium mb-1 text-zinc-800">Zdjecie okładkowe (URL)</label>
-          <input {...form.register("coverImage")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" placeholder="https://..." />
+          <label className="block text-sm font-medium mb-2 text-zinc-800">Zdjecie okładkowe</label>
+          <Controller 
+             name="coverImage"
+             control={form.control}
+             render={({ field }) => (
+                <ImageUploadDropzone 
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                />
+             )}
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-8">
           <div>
-            <label className="block text-sm font-medium mb-1 text-zinc-800">Wyzwanie (Challenge)</label>
-            <textarea {...form.register("challenge")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm h-32" />
+            <label className="block text-sm font-medium mb-2 text-zinc-800">Wyzwanie (Challenge)</label>
+            <Controller
+              name="challenge"
+              control={form.control}
+              render={({ field }) => (
+                <RichTextEditor
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  placeholder="Opisz jakie problemy napotkał klient..."
+                />
+              )}
+            />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 text-zinc-800">Rozwiązanie (Solution)</label>
-            <textarea {...form.register("solution")} className="w-full bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm h-32" />
+            <label className="block text-sm font-medium mb-2 text-zinc-800">Rozwiązanie (Solution)</label>
+            <Controller
+              name="solution"
+              control={form.control}
+              render={({ field }) => (
+                <RichTextEditor
+                  value={field.value || ""}
+                  onChange={field.onChange}
+                  placeholder="Opisz architekturę i jak rozwiązaliście problem..."
+                />
+              )}
+            />
           </div>
         </div>
 
@@ -144,8 +176,8 @@ export function CaseStudyForm({
            <div className="space-y-3">
              {fields.map((field, index) => (
                 <div key={field.id} className="flex gap-4 items-center">
-                  <input {...form.register(`results.${index}.label`)} placeholder="np. Wzrost ruchu" className="flex-1 bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" />
-                  <input {...form.register(`results.${index}.value`)} placeholder="np. +450%" className="w-32 bg-white border border-zinc-300 text-zinc-900 placeholder:text-zinc-400 rounded-lg px-3 py-2 text-sm" />
+                  <input {...form.register(`results.${index}.label`)} placeholder="np. Wzrost ruchu" className="flex-1 bg-white border border-zinc-400 text-zinc-900 placeholder:text-zinc-500 rounded-lg px-3 py-2 text-sm" />
+                  <input {...form.register(`results.${index}.value`)} placeholder="np. +450%" className="w-32 bg-white border border-zinc-400 text-zinc-900 placeholder:text-zinc-500 rounded-lg px-3 py-2 text-sm" />
                   <button type="button" onClick={() => remove(index)} className="p-2 text-red-500 hover:bg-red-50 rounded-md">
                     <Trash2 className="w-4 h-4" />
                   </button>

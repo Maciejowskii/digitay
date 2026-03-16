@@ -14,6 +14,30 @@ import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  
+  const [service] = await db
+    .select({ name: services.name, description: services.description })
+    .from(services)
+    .where(eq(services.slug, resolvedParams.slug))
+    .limit(1);
+
+  if (!service) {
+    return { title: 'Usługa nie znaleziona | Digitay' };
+  }
+
+  return {
+    title: `${service.name} | Usługi Digitay`,
+    description: service.description || `Sprawdź zaawansowane usługi cyfrowe świadczone przez Digitay.`,
+    openGraph: {
+      title: `${service.name} | Digitay`,
+      description: service.description || `Podejmij współpracę z Digitay w zakresie ${service.name}.`,
+      url: `/uslugi/${resolvedParams.slug}`,
+    }
+  };
+}
+
 // --- Animations ---
 const staggerContainer: Variants = {
   hidden: { opacity: 0 },
@@ -28,9 +52,10 @@ const textReveal: Variants = {
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
 };
 
-export default async function ServicePage({ params }: { params: { slug: string } }) {
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
   // Fetch from DB
-  const fetchedServices = await db.select().from(services).where(eq(services.slug, params.slug)).limit(1);
+  const fetchedServices = await db.select().from(services).where(eq(services.slug, resolvedParams.slug)).limit(1);
   const serviceDb = fetchedServices[0];
 
   if (!serviceDb) {

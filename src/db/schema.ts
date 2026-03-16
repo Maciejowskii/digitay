@@ -69,6 +69,15 @@ export const blogPosts = pgTable("blog_posts", {
   ...timestamps,
 });
 
+export const directories = pgTable("directories", {
+  id: serial("id").primaryKey(),
+  url: text("url").notNull(),
+  name: varchar("name", { length: 255 }),
+  isVerified: boolean("is_verified").default(false).notNull(),
+  notes: text("notes"),
+  ...timestamps,
+});
+
 // --- Auth.js Tables ---
 
 export const users = pgTable("user", {

@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const resolvedParams = await params;
   
   const [post] = await db
-    .select({ title: blogPosts.title, excerpt: blogPosts.excerpt })
+    .select({ title: blogPosts.title, excerpt: blogPosts.excerpt, coverImage: blogPosts.coverImage })
     .from(blogPosts)
     .where(eq(blogPosts.slug, resolvedParams.slug))
     .limit(1);
@@ -23,6 +23,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | Digitay Blog`,
     description: post.excerpt || `Czytaj najnowszy artykuł na blogu Digitay.`,
+    openGraph: {
+      title: `${post.title} | Digitay Blog`,
+      description: post.excerpt || `Czytaj najnowszy artykuł na blogu Digitay.`,
+      url: `/blog/${resolvedParams.slug}`,
+      // Dodamy coverImage do OG jeśli istnieje w bazie
+      images: post.coverImage ? [
+        {
+          url: post.coverImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ] : undefined,
+    },
+    twitter: {
+       card: "summary_large_image",
+       title: `${post.title} | Digitay`,
+       description: post.excerpt || `Czytaj najnowszy artykuł na blogu Digitay.`,
+       images: post.coverImage ? [post.coverImage] : undefined,
+    }
   };
 }
 

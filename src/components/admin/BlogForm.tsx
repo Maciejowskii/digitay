@@ -6,6 +6,8 @@ import { createPost, updatePost } from "@/actions/blog";
 import { Loader2, ArrowLeft, Save } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
+import RichTextEditor from "./RichTextEditor";
+import ImageUploadDropzone from "./ImageUploadDropzone";
 
 type BlogPostType = {
   id?: number;
@@ -110,7 +112,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
 
         {/* Informacje Główne */}
         <div className="space-y-6">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 border-b border-zinc-100 pb-2">Informacje główne</h3>
+          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 border-b border-zinc-200 pb-2">Informacje główne</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
@@ -120,7 +122,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full p-3 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors"
+                className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
                 placeholder="Np. 10 trendów Web Designu..."
               />
             </div>
@@ -131,7 +133,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                 name="slug"
                 value={formData.slug}
                 onChange={handleChange}
-                className="w-full p-3 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors font-mono text-xs"
+                className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors font-mono text-xs placeholder:text-zinc-500"
                 placeholder="Np. 10-trendow-web-designu"
               />
             </div>
@@ -145,23 +147,17 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                 value={formData.excerpt}
                 onChange={handleChange}
                 rows={3}
-                className="w-full p-3 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors"
+                className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
                 placeholder="Widoczne na karcie wpisu na ekranie bloga..."
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-bold text-zinc-900">Zdjęcie okładkowe (URL)</label>
-              <input
-                name="coverImage"
-                value={formData.coverImage}
-                onChange={handleChange}
-                className="w-full p-3 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors text-xs font-mono"
-                placeholder="https://..."
+              <label className="text-sm font-bold text-zinc-900">Zdjęcie okładkowe</label>
+              <ImageUploadDropzone 
+                value={formData.coverImage || ""}
+                onChange={(url) => setFormData(prev => ({ ...prev, coverImage: url }))}
               />
-              {formData.coverImage && (
-                 <div className="mt-2 text-xs text-primary font-bold">✓ Podgląd OK</div>
-              )}
             </div>
 
             <div className="space-y-6">
@@ -171,7 +167,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                   name="author"
                   value={formData.author}
                   onChange={handleChange}
-                  className="w-full p-3 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors"
+                  className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
                 />
               </div>
               <div className="space-y-2">
@@ -181,7 +177,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                   name="publishedAt"
                   value={formData.publishedAt}
                   onChange={handleChange}
-                  className="w-full p-3 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors"
+                  className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
                 />
                 <p className="text-xs text-zinc-500 font-mono">Brak daty = Szkic (niewidoczny publicznie)</p>
               </div>
@@ -189,21 +185,15 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
           </div>
         </div>
 
-        {/* Zawartość */}
         <div className="space-y-6 pt-6">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 border-b border-zinc-100 pb-2">Zawartość Artykułu (HTML)</h3>
+          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 border-b border-zinc-200 pb-2">Zawartość Artykułu</h3>
           
           <div className="space-y-2">
-             <textarea
-               required
-               name="content"
-               value={formData.content}
-               onChange={handleChange}
-               rows={20}
-               className="w-full p-4 border border-zinc-200 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors font-mono text-sm leading-relaxed"
-               placeholder="<h2>Twoja treść...</h2><p>Twórz używając tagów HTML.</p>"
+             <RichTextEditor 
+               value={formData.content} 
+               onChange={(val) => setFormData(prev => ({ ...prev, content: val }))} 
+               placeholder="Zacznij pisać swój artykuł..." 
              />
-             <p className="text-xs text-zinc-500 font-mono">W przyszłości zamienimy to poleceniem wdrażając dedykowany edytor WYSIWYG jak Tiptap. Na ten moment wprowadzasz surowy kod HTML.</p>
           </div>
         </div>
 

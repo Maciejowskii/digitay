@@ -33,18 +33,40 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 export default function ContactFaq() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
   });
 
   const onSubmit = async (data: ContactFormValues) => {
-    // Symulacja wysyłki
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form Data:", data);
-    setIsSuccess(true);
-    reset();
-    setTimeout(() => setIsSuccess(false), 5000);
+    setIsError(false);
+    setErrorMessage("");
+    setIsSuccess(false);
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const resData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(resData.error || "Nieznany błąd serwera.");
+      }
+
+      setIsSuccess(true);
+      reset();
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (error: any) {
+      console.error("Formularz Błąd:", error);
+      setIsError(true);
+      setErrorMessage(error.message || "Błąd sieci.");
+      setTimeout(() => setIsError(false), 5000);
+    }
   };
 
   return (
@@ -150,16 +172,26 @@ export default function ContactFaq() {
                 <button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-white text-black hover:bg-zinc-200 font-mono font-bold text-sm tracking-widest uppercase py-5 transition-colors border border-transparent flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-wait"
+                  className={`w-full font-mono font-bold text-sm tracking-widest uppercase py-5 transition-colors border flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-wait
+                    ${isError 
+                      ? 'bg-red-500/10 text-red-500 border-red-500/50 hover:bg-red-500/20' 
+                      : isSuccess 
+                        ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/50 hover:bg-emerald-500/20' 
+                        : 'bg-white text-black border-transparent hover:bg-zinc-200'
+                    }`}
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
                       WYSYŁANIE...
                     </>
+                  ) : isError ? (
+                     <>
+                        [ BŁĄD TRANSMISJI ]
+                     </>
                   ) : isSuccess ? (
                     <>
-                      TRANSMISJA UDANA
+                      [ TRANSMISJA UDANA ]
                     </>
                   ) : (
                     <>
@@ -168,6 +200,11 @@ export default function ContactFaq() {
                     </>
                   )}
                 </button>
+                {isError && (
+                   <p className="text-red-400 font-mono text-xs uppercase text-center mt-4">
+                     {errorMessage} // Spróbuj ponownie lub napisz przez email.
+                   </p>
+                )}
               </div>
 
             </form>
