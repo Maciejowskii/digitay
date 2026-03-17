@@ -1,53 +1,80 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { db } from "@/db";
-import { blogPosts } from "@/db/schema";
-import { desc, isNotNull } from "drizzle-orm";
-import { BlogBentoGrid } from "@/components/frontend/BlogBentoGrid";
+import { ArrowRight } from "lucide-react";
+import SectionHeader from "@/components/frontend/SectionHeader";
+import { motion } from "framer-motion";
 
-export const metadata = {
-  title: "Blog & Baza Wiedzy | Digitay",
-  description: "Zbiór wiedzy, wskazówek i analiz trendów ze świata Web Designu, SEO i Kampanii reklamowych prowadzony przez zespół Digitay.",
-};
-
-export default async function PublicBlogPage() {
-  let posts: any[] = [];
-  
-  try {
-    // Fetch only published posts (e.g. ones with a publishedAt date physically present, or you could add 'status' field to DB)
-    // Assuming 'publishedAt' being NOT NULL means it's published based on our initial schema.
-    posts = await db
-      .select()
-      .from(blogPosts)
-      .where(isNotNull(blogPosts.publishedAt))
-      .orderBy(desc(blogPosts.publishedAt));
-  } catch (error) {
-    console.error("Failed to fetch blog posts:", error);
+// Mock posts for "tymczasowy widok" as requested
+const mockPosts = [
+  {
+    title: "Jak SEO wspiera skalowanie nowoczesnych SaaSów?",
+    excerpt: "Analizujemy kluczowe czynniki technicznego SEO, które pozwalają aplikacjom Next.js dominować w wynikach wyszukiwania.",
+    tag: "STRATEGIA // SEO",
+    date: "14 marca 2024"
+  },
+  {
+    title: "Dlaczego Next.js 16 to game-changer dla E-commerce?",
+    excerpt: "Poznaj zalety Turbopacka i nowej architektury komponentów w kontekście sklepów o dużej skali.",
+    tag: "TECHNOLOGIA // WEB",
+    date: "10 marca 2024"
+  },
+  {
+    title: "Psychologia koloru w designie Tech Brutalism",
+    excerpt: "Jak używać kontrastów i odważnych barw, aby budować autorytet marki technologicznej.",
+    tag: "DESIGN // UI",
+    date: "05 marca 2024"
   }
+];
 
-  const dataToRender = posts;
-
+export default function BlogPage() {
   return (
-    <main className="min-h-screen overflow-hidden">
+    <>
       <Navbar />
-      
-      {/* Blog Page Header */}
-      <section className="pt-40 pb-16 md:pt-48 md:pb-24 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="max-w-2xl mb-16">
-          <h1 className="text-5xl md:text-7xl font-heading font-black text-white tracking-tighter leading-none mb-6 uppercase">
-             Myśli o cyfrowym <br />
-             <span className="text-primary italic font-light lowercase">rozwoju firm.</span>
-          </h1>
-          <p className="text-zinc-400 font-mono text-sm uppercase md:text-base tracking-wide leading-relaxed">
-             Dzielimy się naszą wiedzą, studiami przypadków i spostrzeżeniami dotyczącymi Web Designu, SEO i marketingu B2B. Uczymy, jak od zera zbudować silną pozycję online.
-          </p>
+      <main className="min-h-screen bg-[#07101B] text-white pt-32 md:pt-40">
+        
+        {/* Header Section */}
+        <div className="px-6 md:px-12 max-w-7xl mx-auto">
+          <SectionHeader 
+            tag="// BAZA WIEDZY"
+            title="Ostatnie"
+            titleAccent="Artykuły"
+            description="Dzielimy się wiedzą o technologii, marketingu i designie. Poznaj nasze spostrzeżenia i naucz się budować lepsze produkty cyfrowe."
+          />
         </div>
 
-        {/* The Interactive Bento Grid component taking data from RSC */}
-        <BlogBentoGrid posts={dataToRender} />
-      </section>
+        {/* Blog Grid Section */}
+        <section className="px-6 md:px-12 max-w-7xl mx-auto pb-32">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {mockPosts.map((post, idx) => (
+              <div
+                key={idx}
+                className="group p-8 border border-white/10 bg-white/5 hover:border-brand-green/30 transition-all duration-500 flex flex-col justify-between aspect-square md:aspect-auto md:min-h-[400px]"
+              >
+                <div>
+                  <span className="text-brand-green font-mono text-[10px] tracking-widest uppercase mb-6 block">
+                    {post.tag}
+                  </span>
+                  <h3 className="text-2xl font-heading font-black text-white uppercase tracking-tighter leading-tight group-hover:text-brand-green transition-colors mb-4 line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-[#CED0DF] font-mono text-xs uppercase leading-relaxed line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                </div>
+                
+                <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-6">
+                   <span className="font-mono text-[10px] text-white/40 uppercase">{post.date}</span>
+                   <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-brand-green group-hover:border-brand-green group-hover:text-black transition-all">
+                      <ArrowRight className="w-4 h-4" />
+                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
