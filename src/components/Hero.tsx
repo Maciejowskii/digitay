@@ -36,26 +36,25 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col gap-0 select-none pb-8"
+            className="flex flex-col gap-0 select-none"
           >
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase mb-4 md:mb-0">
+            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.85] tracking-tighter uppercase">
                Zamieniamy
             </h1>
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase mb-4 md:mb-0">
+            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.85] tracking-tighter uppercase">
                Wizje
             </h1>
             
-            <div className="relative flex flex-col md:flex-row md:items-baseline">
-              <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase shrink-0">
+            <div className="flex items-baseline gap-x-3 md:gap-x-6 whitespace-nowrap overflow-visible">
+              <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.9] tracking-tighter uppercase line-clamp-1">
                 W
               </h1>
-              {/* Special green text - approximating the font with italic + thin weight + primary color */}
-              <span className="text-[14vw] md:text-[10vw] lg:text-[160px] text-primary italic font-light tracking-tighter leading-none relative -mt-6 md:-mt-10 md:-ml-8 block z-20 pointer-events-none drop-shadow-[0_0_15px_rgba(25,163,84,0.3)] opacity-90 transition-all hover:opacity-100">
+              <span className="text-[13vw] md:text-[9vw] lg:text-[150px] text-primary italic font-extralight tracking-tighter leading-none inline-block transform -translate-y-[0.5vw] md:-translate-y-[15px] opacity-90">
                 Działające
               </span>
             </div>
             
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.8] tracking-tighter uppercase mt-4 md:mt-2">
+            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.9] tracking-tighter uppercase">
                Produkty
             </h1>
           </motion.div>
