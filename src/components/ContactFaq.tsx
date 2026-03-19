@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-const faqs = [
+const defaultFaqs = [
   {
     question: "ILE TRWA STWORZENIE APLIKACJI?",
     answer: "Czas realizacji zależy od skomplikowania projektu. Proste aplikacje mobilne lub webowe MVP tworzymy w 4-8 tygodni. Większe platformy od 3 do 6 miesięcy."
@@ -30,7 +30,12 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
-export default function ContactFaq() {
+interface ContactFaqProps {
+  customFaqs?: { question: string; answer: string }[];
+}
+
+export default function ContactFaq({ customFaqs }: ContactFaqProps) {
+  const activeFaqs = customFaqs || defaultFaqs;
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -88,7 +93,7 @@ export default function ContactFaq() {
           </div>
           
           <div className="flex flex-col flex-1 border-t border-white/10">
-            {faqs.map((faq, idx) => (
+            {activeFaqs.map((faq, idx) => (
               <div 
                 key={idx}
                 className="border-b border-white/10 group"

@@ -23,112 +23,158 @@ export default function ServicesBento() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-transparent rounded-none">
         
-        {/* Service 01 */}
+        {/* 01: Pozycjonowanie SEO */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="bg-transparent group relative p-8 md:p-12 min-h-[450px] flex flex-col justify-between hover:border-primary transition-colors duration-0 lg:col-span-2 overflow-hidden border border-white/10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[350px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10 lg:col-span-2"
         >
-          {/* Massive Structural Number */}
-          <div className="absolute -bottom-12 -right-12 text-[250px] md:text-[300px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">
-            01
-          </div>
-          
-          <div className="relative z-10 w-full mb-8">
-            <h3 className="text-3xl lg:text-5xl font-heading font-black text-white uppercase mb-4 tracking-tighter">Aplikacje Mobilne</h3>
-            <p className="text-muted text-sm max-w-md font-medium leading-relaxed">
-              Natywne i wieloplatformowe rozwiązania (iOS/Android). Tworzymy wydajne, bezkompromisowe oprogramowanie dla wymagających użytkowników.
+          <div className="absolute -bottom-6 -right-6 text-[180px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">01</div>
+          <div className="relative z-10">
+            <h3 className="text-3xl lg:text-5xl font-heading font-black text-white uppercase mb-4 tracking-tighter">Pozycjonowanie SEO</h3>
+            <p className="text-[#CED0DF] font-mono text-xs max-w-md uppercase leading-relaxed">
+              Strategia oparta o twarde dane. Dominacja w Google dzięki technicznym audytom i agresywnemu content marketingowi.
             </p>
           </div>
-          
-          {/* High-Fidelity UI Snippet Placeholder */}
-          <div className="relative z-10 w-full h-56 mt-auto border-t border-r border-white/10 bg-black/40 relative overflow-hidden flex items-end ml-12">
-             <div className="text-[10px] font-mono text-white/40 absolute top-4 left-4 tracking-widest bg-black px-2 py-1">UI_SNIPPET // MOBILE APP</div>
-             
-             {/* Mocked UI Area */}
-             <div className="w-[80%] h-[80%] bg-black border-t border-l border-r border-white/20 flex flex-col">
-               <div className="flex justify-between items-center px-4 py-3 border-b border-white/10">
-                 <div className="w-4 h-4 rounded-full border border-white/30" />
-                 <div className="w-16 h-2 bg-white/20 rounded-full" />
-                 <div className="w-4 h-4 rounded-sm border border-white/30" />
-               </div>
-               <div className="flex-1 p-4 flex flex-col gap-4">
-                 <div className="w-full h-24 bg-white/5 border border-white/10" />
-                 <div className="flex gap-4">
-                   <div className="w-1/2 h-16 bg-white/5 border border-white/10" />
-                   <div className="w-1/2 h-16 bg-white/5 border border-white/10" />
-                 </div>
-               </div>
+          <div className="mt-8 relative z-10 w-full h-32 border border-white/10 bg-black/40 flex items-center justify-center">
+             <div className="flex gap-2">
+                {[40, 70, 45, 90, 60].map((h, i) => (
+                  <div key={i} className="w-4 bg-brand-green/20 border border-brand-green/40" style={{ height: `${h}%` }} />
+                ))}
              </div>
           </div>
         </motion.div>
 
-        {/* Service 02 */}
+        {/* 02: Tworzenie Stron */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-transparent group relative p-8 md:p-12 min-h-[450px] flex flex-col justify-between hover:border-primary transition-colors duration-0 overflow-hidden border border-white/10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[350px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10"
         >
-          <div className="absolute -top-16 -right-16 text-[250px] md:text-[300px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">
-            02
-          </div>
-          
-          <div className="relative z-10 w-full mb-8">
-            <h3 className="text-3xl lg:text-5xl font-heading font-black text-white uppercase mb-4 break-words tracking-tighter">Sklepy <br/> e-Commerce</h3>
-            <p className="text-muted text-sm font-medium leading-relaxed">
-              Architektura konwersji. Sklepy zoptymalizowane do ułamków sekund pod kątem agresywnej sprzedaży.
+          <div className="absolute -top-6 -right-6 text-[150px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">02</div>
+          <div className="relative z-10">
+            <h3 className="text-3xl font-heading font-black text-white uppercase mb-2 tracking-tighter">Tworzenie Stron</h3>
+            <p className="text-[#CED0DF] font-mono text-[10px] uppercase leading-relaxed">
+              High-endowe wizytówki i landingi. Design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.
             </p>
           </div>
-
-          <div className="relative z-10 w-full h-56 mt-auto border-t border-l border-white/10 bg-black/40 flex items-center justify-center overflow-hidden mr-12 -ml-8">
-            <div className="text-[10px] font-mono text-white/40 absolute bottom-4 right-4 tracking-widest bg-black px-2 py-1">UI_SNIPPET // DASHBOARD</div>
-            
-            {/* Mocked UI Area */}
-            <div className="w-[90%] h-[90%] bg-black border border-white/20 flex p-3 gap-3">
-               <div className="w-12 h-full bg-white/5 border border-white/10 flex flex-col gap-2 p-2">
-                 <div className="w-full aspect-square bg-white/20" />
-                 <div className="w-full aspect-square bg-white/10" />
-                 <div className="w-full aspect-square bg-white/10" />
-               </div>
-               <div className="flex-1 h-full flex flex-col gap-3">
-                 <div className="w-1/2 h-3 bg-white/20" />
-                 <div className="w-full flex-1 bg-white/5 border border-white/10 p-2 flex items-end gap-2">
-                    <div className="w-1/4 h-1/2 bg-white/10" />
-                    <div className="w-1/4 h-3/4 bg-white/10" />
-                    <div className="w-1/4 h-full bg-primary/20 border border-primary/50" />
-                    <div className="w-1/4 h-1/4 bg-white/10" />
-                 </div>
-               </div>
-            </div>
+          <div className="w-full aspect-video border border-white/10 bg-white/5 mt-8 overflow-hidden relative">
+             <div className="absolute top-2 left-2 flex gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
+             </div>
+             <div className="w-[80%] h-full bg-white/5 ml-auto border-l border-white/10 p-2">
+                <div className="w-full h-2 bg-white/20 mb-2" />
+                <div className="w-2/3 h-2 bg-white/10" />
+             </div>
           </div>
         </motion.div>
 
-        {/* Service 03 */}
+        {/* 03: Sklepy Internetowe */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-transparent group relative p-8 md:p-12 lg:col-span-3 min-h-[250px] flex flex-col md:flex-row items-start md:items-center justify-between hover:border-primary transition-colors duration-0 overflow-hidden border border-white/10 gap-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[350px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10"
         >
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 md:left-20 text-[200px] md:text-[350px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">
-            03
-          </div>
-          
-          <div className="relative z-10 flex-1 max-w-3xl ml-auto md:text-right flex flex-col md:items-end">
-            <h3 className="text-3xl md:text-6xl font-heading font-black text-white uppercase mb-4 tracking-tighter">Pozycjonowanie SEO</h3>
-            <p className="text-muted text-sm font-medium leading-relaxed max-w-lg mb-8">
-              Strategia oparta o twarde dane. Techniczne audyty i dominacja w wynikach wyszukiwania. Zero magii, czysta inżynieria organicznego ruchu.
+          <div className="absolute -bottom-6 -left-6 text-[150px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">03</div>
+          <div className="relative z-10">
+            <h3 className="text-3xl font-heading font-black text-white uppercase mb-2 tracking-tighter">Sklepy <br/> Internetowe</h3>
+            <p className="text-[#CED0DF] font-mono text-[10px] uppercase leading-relaxed">
+              Architektura sprzedaży. Sklepy zoptymalizowane pod ułamki sekund i maksymalny koszyk zakupowy.
             </p>
-            <button className="inline-flex items-center gap-4 bg-white text-black px-10 py-5 uppercase text-sm font-bold tracking-widest hover:bg-primary transition-colors rounded-sm">
-               Szczegóły oferty
-               <ArrowRight className="w-5 h-5" />
-            </button>
           </div>
+        </motion.div>
+
+        {/* 04: Social Media */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[350px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10 lg:col-span-2"
+        >
+          <div className="absolute -top-6 -right-6 text-[180px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">04</div>
+          <div className="relative z-10">
+            <h3 className="text-3xl lg:text-5xl font-heading font-black text-white uppercase mb-4 tracking-tighter">Social Media</h3>
+            <p className="text-[#CED0DF] font-mono text-xs max-w-md uppercase leading-relaxed">
+              Budowanie społeczności zorientowanych na markę. Kreatywny content i strategie, które angażują.
+            </p>
+          </div>
+          <div className="flex gap-4 mt-8">
+             <div className="w-12 h-12 rounded-full border border-white/10 bg-white/5" />
+             <div className="flex-1 border-t border-white/10 mt-6" />
+          </div>
+        </motion.div>
+
+        {/* 05: Google Ads */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[300px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10"
+        >
+          <div className="absolute -bottom-6 -right-6 text-[150px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">05</div>
+          <h3 className="text-2xl font-heading font-black text-white uppercase mb-2 tracking-tighter">Google Ads</h3>
+          <p className="text-[#CED0DF] font-mono text-[10px] uppercase">Natychmiastowy ruch od klientów, którzy szukają Twoich usług tu i teraz.</p>
+        </motion.div>
+
+        {/* 06: Facebook Ads */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[300px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10"
+        >
+          <div className="absolute -top-6 -right-6 text-[150px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">06</div>
+          <h3 className="text-2xl font-heading font-black text-white uppercase mb-2 tracking-tighter">Facebook Ads</h3>
+          <p className="text-[#CED0DF] font-mono text-[10px] uppercase">Precyzyjne targetowanie i kreacje, obok których nikt nie przejdzie obojętnie.</p>
+        </motion.div>
+
+        {/* 07: Aplikacje Webowe */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[300px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10"
+        >
+          <div className="absolute -bottom-6 -left-6 text-[150px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">07</div>
+          <h3 className="text-2xl font-heading font-black text-white uppercase mb-2 tracking-tighter">Aplikacje Webowe</h3>
+          <p className="text-[#CED0DF] font-mono text-[10px] uppercase">Szyte na miarę systemy SaaS i platformy optymalizujące procesy w Twojej firmie.</p>
+        </motion.div>
+
+        {/* 08: Aplikacje Mobilne */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[350px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10 lg:col-span-2"
+        >
+          <div className="absolute -top-6 -left-6 text-[180px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">08</div>
+          <div className="relative z-10">
+            <h3 className="text-3xl lg:text-5xl font-heading font-black text-white uppercase mb-4 tracking-tighter">Aplikacje Mobilne</h3>
+            <p className="text-[#CED0DF] font-mono text-xs max-w-md uppercase leading-relaxed">
+              Natywne rozwiązania dla iOS i Android. Tworzymy oprogramowanie, które użytkownicy kochają mieć w kieszeni.
+            </p>
+          </div>
+          <div className="w-24 h-40 border border-white/20 mt-8 ml-auto overflow-hidden p-2">
+             <div className="w-full h-full bg-white/5 rounded-2xl" />
+          </div>
+        </motion.div>
+
+        {/* 09: Branding */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-transparent group relative p-8 md:p-10 min-h-[350px] flex flex-col justify-between hover:border-brand-green/30 transition-all border border-white/10"
+        >
+          <div className="absolute -bottom-6 -right-6 text-[150px] font-heading font-black text-white/5 leading-none pointer-events-none select-none tracking-tighter">09</div>
+          <h3 className="text-3xl font-heading font-black text-white uppercase mb-2 tracking-tighter">Branding</h3>
+          <p className="text-[#CED0DF] font-mono text-[10px] uppercase leading-relaxed">
+            Tożsamość wizualna, która buduje autorytet. Od logo po pełny design system.
+          </p>
         </motion.div>
         
       </div>
