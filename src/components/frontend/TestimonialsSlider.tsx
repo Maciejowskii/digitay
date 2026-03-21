@@ -1,124 +1,77 @@
 "use client";
 
-import { motion, useAnimationFrame, useMotionValue } from "framer-motion";
-import { useRef, useState } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
-type Testimonial = {
-  id: number;
-  authorName: string;
-  authorRole: string | null;
-  company: string | null;
-  content: string;
-  avatarUrl: string | null;
-  rating: number | null;
-};
-
-export const TestimonialsSlider = ({ testimonials }: { testimonials: Testimonial[] }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
-  
-  // Create a continuous array by multiplying items to fake infinity
-  const displayItems = [...testimonials, ...testimonials, ...testimonials];
-
-  useAnimationFrame((t, delta) => {
-    // Stop the ticker completely on hover, otherwise move by -1px per frame (approx 60px/s)
-    if (!isHovered) {
-      // Delta is usually ~16.6ms at 60fps
-      let moveBy = -0.05 * delta; 
-      
-      let newX = x.get() + moveBy;
-
-      // Approximate wrap logic: If we've scrolled past the first set of items
-      // We reset x to 0 seamlessly. (Assuming each card + gap is approx 400px x number of original items)
-      // This is a naive calculation for visual infinity without external bounds reading
-      const itemWidth = 380; // card w-80 (320px) + gap-8 (32px) = 352px + margins
-      const totalWidth = itemWidth * testimonials.length;
-      
-      if (newX <= -totalWidth) {
-        newX = newX + totalWidth;
-      }
-      
-      x.set(newX);
-    }
-  });
+export function TestimonialsSlider({ testimonials }: { testimonials: any[] }) {
+  // Duplicate array slightly to ensure we have enough items for a nice slider look
+  // even if there are only 3-4 testimonials
+  const displayItems = [...testimonials, ...testimonials];
 
   return (
-    <div className="relative overflow-hidden py-12" ref={containerRef}>
-      {/* Huge subtle quote marks in background */}
-      <div className="absolute top-0 left-10 text-[20rem] font-serif leading-none text-zinc-100 select-none z-0 mt-[-100px]">
-        &ldquo;
-      </div>
-      <div className="absolute bottom-0 right-10 text-[20rem] font-serif leading-none text-zinc-100 select-none z-0 mb-[-100px] rotate-180">
-        &ldquo;
-      </div>
+    <div className="relative w-full overflow-hidden py-12 -mx-4 px-4 md:-mx-12 md:px-12">
+      {/* Edge fades */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
       <motion.div
-        className="flex gap-8 cursor-grab active:cursor-grabbing w-max z-10 relative px-8"
-        style={{ x }}
-        drag="x"
-        dragConstraints={containerRef} // Restrict drag so it doesn't fly off screen
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
-        onPointerDown={() => setIsHovered(true)}
-        onPointerUp={() => setIsHovered(false)}
+        className="flex gap-6 w-max"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{
+          duration: 40,
+          ease: "linear",
+          repeat: Infinity,
+        }}
       >
-        {displayItems.map((testimonial, idx) => (
-          <motion.div
-            key={`${testimonial.id}-${idx}`}
-            className="w-80 md:w-96 flex-shrink-0 bg-white border border-zinc-100 p-8 rounded-3xl transition-all duration-500 ease-out"
-            whileHover={{ 
-              y: -8, 
-              boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
-            }}
+        {displayItems.map((item, idx) => (
+          <div
+            key={`${item.id}-${idx}`}
+            className="w-[320px] md:w-[450px] shrink-0 p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-primary/20 transition-all duration-500 group relative overflow-hidden"
           >
-            {/* Stars */}
+            {/* Top accent line */}
+            <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/0 to-transparent group-hover:via-primary/50 transition-all duration-500" />
+
+            {/* Rating */}
             <div className="flex gap-1 mb-6">
-              {Array.from({ length: testimonial.rating || 5 }).map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`w-4 h-4 ${
+                    i < (item.rating || 5)
+                      ? "text-primary fill-primary"
+                      : "text-white/10"
+                  }`}
+                />
               ))}
             </div>
 
             {/* Content */}
-            <p className="text-zinc-700 text-lg leading-relaxed mb-8 font-medium">
-              &quot;{testimonial.content}&quot;
+            <p className="text-white/70 text-base md:text-lg leading-relaxed mb-8 min-h-[120px]">
+              "{item.content}"
             </p>
 
-            {/* Author */}
+            {/* Author info */}
             <div className="flex items-center gap-4 mt-auto">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden bg-zinc-100 flex-shrink-0">
-                {testimonial.avatarUrl ? (
-                  <Image 
-                    src={testimonial.avatarUrl} 
-                    alt={testimonial.authorName}
-                    fill
-                    className="object-cover"
-                    sizes="48px"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-brand-green/20 text-brand-green font-bold text-lg">
-                    {testimonial.authorName.charAt(0)}
-                  </div>
-                )}
+              <div className="relative">
+                <div className="absolute -inset-1 rounded-full bg-primary/20 blur-sm scale-0 group-hover:scale-100 transition-transform duration-500" />
+                <img
+                  src={item.avatarUrl || `https://ui-avatars.com/api/?name=${item.authorName}&background=0A131F&color=19A354`}
+                  alt={item.authorName}
+                  className="w-12 h-12 rounded-full object-cover relative z-10 border border-white/10 group-hover:border-primary/50 transition-colors"
+                />
               </div>
-              <div>
-                <h4 className="font-bold text-zinc-900">{testimonial.authorName}</h4>
-                <p className="text-sm text-zinc-500">
-                  {testimonial.authorRole} {testimonial.company && <span className="text-brand-green font-medium">@ {testimonial.company}</span>}
+              <div className="text-left">
+                <p className="text-white font-medium text-sm">
+                  {item.authorName}
+                </p>
+                <p className="text-primary/70 text-xs">
+                  {item.authorRole} {item.company && ` • ${item.company}`}
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </motion.div>
-
-      {displayItems.length === 0 && (
-         <div className="text-center py-10 relative z-10 text-zinc-500">
-            Brak opinii do wyświetlenia.
-         </div>
-      )}
     </div>
   );
-};
+}
