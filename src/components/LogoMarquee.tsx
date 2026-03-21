@@ -44,39 +44,39 @@ export default function LogoMarquee() {
         >
           {duplicatedRow1.map((logo, index) => (
             <div key={`row1-${index}`} className="flex items-center">
-              <div className="px-8 md:px-12 cursor-default">
-                <span className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-transparent hover:text-white transition-colors duration-500 uppercase tracking-tighter"
+               <div className="px-8 md:px-12 cursor-default">
+                 <span className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-transparent hover:text-white transition-colors duration-500 uppercase tracking-tighter whitespace-nowrap"
                       style={{ WebkitTextStroke: "1px rgba(255,255,255,0.15)" }}>
-                  {logo}
-                </span>
-              </div>
-              <span className="text-primary/20 text-3xl mx-2 font-black">•</span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Row 2 - Right to Left */}
-      <div className="relative w-full overflow-hidden flex items-center">
-        <motion.div
-          className="flex items-center w-max"
-          animate={{ x: ["-33.33%", "0%"] }}
-          transition={{
-            duration: 45,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {duplicatedRow2.map((text, index) => (
-            <div key={`row2-${index}`} className="flex items-center">
-              <div className="px-8 md:px-12 cursor-default">
-                <span className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-white/5 hover:text-primary transition-colors duration-500 uppercase tracking-tighter">
-                  {text}
-                </span>
-              </div>
-              <span className="text-white/10 text-3xl mx-2 font-black">✦</span>
-            </div>
-          ))}
+                   {logo}
+                 </span>
+               </div>
+               <span className="text-primary/20 text-3xl mx-2 font-black">•</span>
+             </div>
+           ))}
+         </motion.div>
+       </div>
+ 
+       {/* Row 2 - Right to Left */}
+       <div className="relative w-full overflow-hidden flex items-center">
+         <motion.div
+           className="flex items-center w-max"
+           animate={{ x: ["-33.33%", "0%"] }}
+           transition={{
+             duration: 45,
+             repeat: Infinity,
+             ease: "linear",
+           }}
+         >
+           {duplicatedRow2.map((text, index) => (
+             <div key={`row2-${index}`} className="flex items-center">
+               <div className="px-8 md:px-12 cursor-default">
+                 <span className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-white/5 hover:text-primary transition-colors duration-500 uppercase tracking-tighter whitespace-nowrap">
+                   {text}
+                 </span>
+               </div>
+               <span className="text-white/10 text-3xl mx-2 font-black">✦</span>
+             </div>
+           ))}
         </motion.div>
       </div>
 
