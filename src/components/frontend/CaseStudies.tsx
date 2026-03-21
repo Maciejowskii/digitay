@@ -5,9 +5,8 @@ import { CaseStudiesGrid } from "./CaseStudiesGrid";
 
 export default async function CaseStudies() {
   let fetchedStudies: any[] = [];
-  
+
   try {
-    // Fetch data using Drizzle RSC
     fetchedStudies = await db
       .select()
       .from(caseStudies)
@@ -17,14 +16,14 @@ export default async function CaseStudies() {
     console.error("Failed to fetch case studies:", error);
   }
 
-  // To showcase UI immediately without user having to populate DB via local Dashboard initially, we mock fallback if DB is empty
   const mockFallback = [
     {
       id: 991,
       slug: "brand-x-growth",
       clientName: "TechFlow",
       title: "Skalowanie ruchu o 450% na nowym produkcie SaaS",
-      coverImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+      coverImage:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
       tags: ["SEO", "SaaS", "Content"],
     },
     {
@@ -32,28 +31,38 @@ export default async function CaseStudies() {
       slug: "ecommerce-redesign",
       clientName: "GreenStyle",
       title: "Kompletny Re-design sklepu e-commerce",
-      coverImage: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop",
+      coverImage:
+        "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop",
       tags: ["UI/UX", "E-commerce"],
-    }
+    },
+    {
+      id: 993,
+      slug: "mobile-app-launch",
+      clientName: "FitManager",
+      title: "Zaprojektowanie i launch aplikacji mobilnej",
+      coverImage:
+        "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=2574&auto=format&fit=crop",
+      tags: ["React Native", "Design"],
+    },
   ];
 
-  const dataToRender = fetchedStudies.length > 0 ? fetchedStudies : mockFallback;
+  const dataToRender =
+    fetchedStudies.length > 0 ? fetchedStudies : mockFallback;
 
   return (
-    <section className="py-24 relative bg-transparent border-t border-white/10">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="mb-16 md:mb-24 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div>
-            <span className="font-mono text-xs tracking-widest text-zinc-500 uppercase mb-4 block">
-              [ CASE STUDIES ]
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-heading font-black text-white tracking-tighter leading-none uppercase">
-               Ostatnie <br />
-               <span className="text-zinc-500 font-light italic">realizacje.</span>
-            </h2>
-          </div>
+    <section className="py-24 md:py-32 relative bg-background">
+      <div className="max-w-6xl mx-auto px-6 md:px-12">
+        <div className="mb-16 md:mb-20">
+          <span className="text-primary text-sm tracking-widest mb-8 block">
+            [ Realizacje ]
+          </span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black text-white tracking-tight leading-[1]">
+            Ostatnie
+            <br />
+            <span className="text-white/40 font-light italic">realizacje.</span>
+          </h2>
         </div>
-        
+
         <CaseStudiesGrid caseStudies={dataToRender as any} />
       </div>
     </section>

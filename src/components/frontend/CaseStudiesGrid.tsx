@@ -4,7 +4,6 @@ import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
 
 type CaseStudy = {
   id: number;
@@ -15,69 +14,54 @@ type CaseStudy = {
   tags: unknown;
 };
 
-// Blur placeholder for images
-const blurDataUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQyV2P4//8/AwAI/AL+X1oOigAAAABJRU5ErkJggg==";
+const blurDataUrl =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjbQg61aAAAADUlEQVQyV2P4//8/AwAI/AL+X1oOigAAAABJRU5ErkJggg==";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
+    transition: { staggerChildren: 0.2 },
   },
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 100, damping: 20 },
+    transition: { type: "spring", stiffness: 80, damping: 20 },
   },
 };
 
-// Magnetic Button implementation
-const MagneticButton = ({ children }: { children: React.ReactNode }) => {
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!buttonRef.current) return;
-    const { clientX, clientY } = e;
-    const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
-    const x = (clientX - (left + width / 2)) * 0.2;
-    const y = (clientY - (top + height / 2)) * 0.2;
-    setPosition({ x, y });
-  };
-
-  const handleMouseLeave = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  return (
-    <motion.div
-      ref={buttonRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none"
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-export const CaseStudiesGrid = ({ caseStudies }: { caseStudies: CaseStudy[] }) => {
-  // Safe parsing for tags if it's stored as JSON
+export const CaseStudiesGrid = ({
+  caseStudies,
+}: {
+  caseStudies: CaseStudy[];
+}) => {
   const getTags = (tagsRaw: unknown): string[] => {
     if (Array.isArray(tagsRaw)) return tagsRaw as string[];
-    if (typeof tagsRaw === 'string') {
-        try { return JSON.parse(tagsRaw); } catch { return []; }
+    if (typeof tagsRaw === "string") {
+      try {
+        return JSON.parse(tagsRaw);
+      } catch {
+        return [];
+      }
     }
     return [];
   };
+
+  if (caseStudies.length === 0) {
+    return (
+      <div className="py-20 text-center text-white/30 text-sm tracking-widest">
+        Brak realizacji do pokazania
+      </div>
+    );
+  }
+
+  // Masonry layout: first card large, next two side by side
+  const featured = caseStudies[0];
+  const secondary = caseStudies.slice(1, 3);
 
   return (
     <motion.div
@@ -85,61 +69,126 @@ export const CaseStudiesGrid = ({ caseStudies }: { caseStudies: CaseStudy[] }) =
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
-      className="grid grid-cols-1 md:grid-cols-2 gap-4"
+      className="flex flex-col gap-6"
     >
-      {caseStudies.map((study, idx) => (
-        <motion.div key={study.id} variants={itemVariants} className="group cursor-pointer">
-          <Link href={`/case-studies/${study.slug}`} className="block relative overflow-hidden bg-transparent border border-white/10 p-6 flex flex-col h-full min-h-[400px]">
-            
-            <div className="flex justify-between items-start mb-6">
-               <div className="text-[10px] font-mono text-zinc-500 tracking-widest uppercase">
-                 [ CASE // {String(idx + 1).padStart(2, '0')} ]
-               </div>
-               <ArrowUpRight className="w-5 h-5 text-zinc-600 group-hover:text-white transition-colors duration-300" />
+      {/* Featured large card */}
+      {featured && (
+        <motion.div variants={itemVariants} className="group">
+          <Link
+            href={`/case-study/${featured.slug}`}
+            className="block relative overflow-hidden rounded-2xl"
+          >
+            <div className="relative w-full aspect-[16/8] overflow-hidden rounded-2xl">
+              <Image
+                src={
+                  featured.coverImage ||
+                  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
+                }
+                alt={featured.title}
+                fill
+                sizes="100vw"
+                className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                placeholder="blur"
+                blurDataURL={blurDataUrl}
+                priority
+              />
             </div>
 
-            {/* Image container */}
-            <div className="relative w-full aspect-[16/9] mb-8 overflow-hidden border border-white/5 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-               <Image
-                 src={study.coverImage || "https://images.unsplash.com/photo-1618761714954-0b8cd0026356?q=80&w=2940&auto=format&fit=crop"}
-                 alt={study.title}
-                 fill
-                 sizes="(max-width: 768px) 100vw, 50vw"
-                 className="object-cover grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-105"
-                 placeholder="blur"
-                 blurDataURL={blurDataUrl}
-                 loading="lazy"
-               />
-            </div>
-
-            {/* Content pinned to bottom */}
-            <div className="mt-auto flex flex-col gap-4">
-              <h3 className="text-white text-2xl lg:text-3xl font-heading font-black tracking-tighter uppercase leading-none">
-                {study.title}
-              </h3>
-              
-              <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-2">
-                 <p className="text-zinc-400 font-mono text-xs uppercase tracking-widest">
-                   Zleceniodawca: <span className="text-white">{study.clientName}</span>
-                 </p>
-                 <div className="flex gap-2">
-                   {getTags(study.tags).slice(0, 2).map((tag, i) => (
-                     <span key={i} className="text-[9px] font-mono font-medium uppercase tracking-widest text-zinc-500 bg-white/5 px-2 py-1">
-                       {tag}
-                     </span>
-                   ))}
-                 </div>
+            <div className="mt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-heading font-bold text-white tracking-tight leading-tight">
+                  {featured.title}
+                </h3>
+                <div className="flex items-center gap-3 mt-3">
+                  {getTags(featured.tags)
+                    .slice(0, 3)
+                    .map((tag, i) => (
+                      <span
+                        key={i}
+                        className="text-xs text-white/40 tracking-wide"
+                      >
+                        {tag}
+                        {i < Math.min(getTags(featured.tags).length, 3) - 1 &&
+                          ","}
+                      </span>
+                    ))}
+                </div>
               </div>
+              <p className="text-white/50 text-sm max-w-sm">
+                Klient: {featured.clientName}
+              </p>
             </div>
           </Link>
         </motion.div>
-      ))}
-
-      {caseStudies.length === 0 && (
-         <div className="col-span-full py-20 text-center font-mono text-zinc-600 text-sm uppercase tracking-widest">
-            [ / / Brak Case Studies ]
-         </div>
       )}
+
+      {/* Secondary cards - side by side */}
+      {secondary.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {secondary.map((study) => (
+            <motion.div
+              key={study.id}
+              variants={itemVariants}
+              className="group"
+            >
+              <Link
+                href={`/case-study/${study.slug}`}
+                className="block relative overflow-hidden rounded-2xl"
+              >
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl">
+                  <Image
+                    src={
+                      study.coverImage ||
+                      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop"
+                    }
+                    alt={study.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    placeholder="blur"
+                    blurDataURL={blurDataUrl}
+                    loading="lazy"
+                  />
+                </div>
+
+                <div className="mt-5">
+                  <h3 className="text-xl md:text-2xl font-heading font-bold text-white tracking-tight leading-tight">
+                    {study.title}
+                  </h3>
+                  <div className="flex items-center gap-3 mt-2">
+                    {getTags(study.tags)
+                      .slice(0, 2)
+                      .map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-xs text-white/40 tracking-wide"
+                        >
+                          {tag}
+                          {i < Math.min(getTags(study.tags).length, 2) - 1 &&
+                            ","}
+                        </span>
+                      ))}
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* View all link */}
+      <motion.div
+        variants={itemVariants}
+        className="flex justify-center mt-8"
+      >
+        <Link
+          href="/case-study"
+          className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300"
+        >
+          Zobacz wszystkie realizacje
+          <ArrowUpRight className="w-4 h-4" />
+        </Link>
+      </motion.div>
     </motion.div>
   );
 };

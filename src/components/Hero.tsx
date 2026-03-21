@@ -1,98 +1,177 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { ArrowRightCircle } from "lucide-react";
-import Link from "next/link";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+
+// Each letter gets its own space-themed background image
+const LETTER_DATA = [
+  {
+    letter: "d",
+    image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=3408&auto=format&fit=crop", // shuttle launch
+  },
+  {
+    letter: "i",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=3472&auto=format&fit=crop", // earth from space at night
+  },
+  {
+    letter: "g",
+    image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=3427&auto=format&fit=crop", // nebula
+  },
+  {
+    letter: "i",
+    image: "https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?q=80&w=3470&auto=format&fit=crop", // astronaut spacewalk
+  },
+  {
+    letter: "t",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=3472&auto=format&fit=crop", // earth horizon from orbit
+  },
+  {
+    letter: "a",
+    image: "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=3413&auto=format&fit=crop", // milky way night sky
+  },
+  {
+    letter: "y",
+    image: "https://images.unsplash.com/photo-1457364887197-9150188c107b?q=80&w=3470&auto=format&fit=crop", // rocket trail in sky
+  },
+];
+
+const DEFAULT_IMAGE = LETTER_DATA[0].image; // shuttle launch as default
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeImage, setActiveImage] = useState(DEFAULT_IMAGE);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const brandY = useTransform(scrollYProgress, [0, 1], ["0%", "-40%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 py-32 overflow-hidden bg-background">
-      {/* 
-        ====================================================
-        GRID BACKGROUND - TECH BRUTALISM
-        ====================================================
-      */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)', backgroundSize: '4rem 4rem' }} 
-      />
+    <section
+      ref={containerRef}
+      className="relative w-full h-screen overflow-hidden"
+    >
+      {/* Background Images - crossfade on letter hover */}
+      <motion.div className="absolute inset-0 z-0" style={{ scale: imageScale }}>
+        {/* All images preloaded, only active one visible */}
+        {LETTER_DATA.map((item) => (
+          <img
+            key={item.image}
+            src={item.image}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+            style={{
+              objectPosition: "center 30%",
+              opacity: activeImage === item.image ? 1 : 0,
+            }}
+          />
+        ))}
+      </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        {/* Top Label */}
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex items-center gap-4 mb-20"
-        >
-          <span className="font-mono text-xs text-white/40 tracking-[0.2em] uppercase">
-             Digitay // Est. 2025
-          </span>
-          <div className="h-[1px] w-24 bg-white/10" />
-        </motion.div>
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background via-background/30 to-background/40" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-background/50 via-transparent to-background/30" />
 
-        <div className="relative">
-          {/* Main Heading Stacka */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col gap-0 select-none"
-          >
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.85] tracking-tighter uppercase">
-               Zamieniamy
-            </h1>
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.85] tracking-tighter uppercase">
-               Wizje
-            </h1>
-            
-            <div className="flex items-baseline gap-x-3 md:gap-x-6 whitespace-nowrap overflow-visible">
-              <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.9] tracking-tighter uppercase line-clamp-1">
-                W
-              </h1>
-              <span className="text-[13vw] md:text-[9vw] lg:text-[150px] text-primary italic font-extralight tracking-tighter leading-none inline-block transform -translate-y-[0.5vw] md:-translate-y-[15px] opacity-90">
-                Działające
-              </span>
-            </div>
-            
-            <h1 className="text-[12vw] md:text-[8vw] lg:text-[140px] font-heading font-black text-white leading-[0.9] tracking-tighter uppercase">
-               Produkty
-            </h1>
-          </motion.div>
+      {/* Tagline */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 z-10"
+      >
+        <p className="text-white/60 text-sm md:text-base font-light leading-relaxed max-w-[200px]">
+          Tworzymy strony,
+          <br />
+          które ludzie
+          <br />
+          zapamiętują.
+        </p>
+      </motion.div>
 
-          {/* Bottom row with description and CTA */}
-          <div className="mt-16 md:mt-24 flex flex-col md:flex-row md:items-end justify-between gap-12">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="max-w-sm"
-            >
-               <p className="text-sm md:text-base text-zinc-500 leading-relaxed font-medium uppercase tracking-tight">
-                  Surowa precyzja, inżynieria kodu i design nastawiony na najwyższą konwersję. Tworzymy narzędzia cyfrowe dla liderów rynku.
-               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <Link 
-                href="/case-study" 
-                className="inline-flex items-center gap-6 bg-primary text-black px-12 py-6 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] hover:bg-white transition-all duration-500 shadow-2xl group border-none"
-              >
-                Zobacz realizacje
-                <ArrowRightCircle className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
+      {/* Giant Brand Text at bottom - FULLY VISIBLE, no clipping */}
+      <motion.div
+        className="absolute bottom-4 md:bottom-8 left-0 right-0 z-10 pointer-events-auto select-none"
+        style={{ y: brandY }}
+      >
+        <div className="flex w-full justify-center items-end">
+          {LETTER_DATA.map((item, i) => (
+            <HeroLetter
+              key={i}
+              letter={item.letter}
+              index={i}
+              onHover={() => setActiveImage(item.image)}
+              onLeave={() => setActiveImage(DEFAULT_IMAGE)}
+            />
+          ))}
         </div>
-      </div>
-      
-      {/* Visual edge detail */}
-      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-1 pointer-events-none"
+      >
+        <span className="text-white/30 text-[10px] tracking-widest uppercase">
+          scroll
+        </span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="w-[1px] h-5 bg-gradient-to-b from-white/30 to-transparent"
+        />
+      </motion.div>
     </section>
+  );
+}
+
+function HeroLetter({
+  letter,
+  index,
+  onHover,
+  onLeave,
+}: {
+  letter: string;
+  index: number;
+  onHover: () => void;
+  onLeave: () => void;
+}) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: 80 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.8,
+        delay: 0.3 + index * 0.08,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        onHover();
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        onLeave();
+      }}
+      className="cursor-default transition-all duration-300 ease-out"
+      style={{
+        fontSize: "clamp(60px, 13vw, 240px)",
+        fontFamily: "var(--font-plus-jakarta)",
+        fontWeight: 900,
+        lineHeight: 1,
+        letterSpacing: "-0.04em",
+        color: isHovered ? "rgba(255,255,255,0.35)" : "#ffffff",
+        display: "inline-block",
+        textShadow: isHovered ? "0 0 60px rgba(25,163,84,0.25)" : "none",
+      }}
+    >
+      {letter}
+    </motion.span>
   );
 }
