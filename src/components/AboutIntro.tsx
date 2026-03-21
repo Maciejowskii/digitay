@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useSpring, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Rocket, Code, Palette, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
@@ -97,6 +97,8 @@ function BackgroundGlow() {
 
 export default function AboutIntro() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [rocketClicks, setRocketClicks] = useState(0);
+  const [showElon, setShowElon] = useState(false);
 
   return (
     <section
@@ -253,24 +255,40 @@ export default function AboutIntro() {
                   className="group relative p-8 md:p-12 rounded-3xl border border-white/5 bg-[#0A131F]/50 backdrop-blur-md overflow-hidden"
                 >
                   {/* Hover background glow */}
-                  <div className="absolute -inset-full bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl" />
+                  <div className="absolute -inset-full bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl pointer-events-none" />
 
-                  <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start">
-                    {/* Number & Icon block */}
-                    <div className="shrink-0 flex flex-col items-center gap-4">
-                      <span className="text-5xl md:text-6xl font-heading font-black text-white/5 group-hover:text-white/10 transition-colors">
-                        {pillar.id}
-                      </span>
-                      <div className="w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-colors duration-500">
+                  <div className="relative z-10 flex flex-col gap-6">
+                    {/* Header line: Icon + Title + Number */}
+                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+                      <div 
+                        className="shrink-0 w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-colors duration-500"
+                        onClick={() => {
+                          if (pillar.title === "Strategia") {
+                            const newCount = rocketClicks + 1;
+                            setRocketClicks(newCount);
+                            if (newCount === 5) {
+                              setShowElon(true);
+                              setRocketClicks(0);
+                              setTimeout(() => setShowElon(false), 15000);
+                            }
+                          }
+                        }}
+                        style={{ cursor: pillar.title === "Strategia" ? "pointer" : "default" }}
+                      >
                         <pillar.icon className="w-7 h-7 text-white/50 group-hover:text-primary transition-colors" />
                       </div>
+                      
+                      <h4 className="text-2xl md:text-3xl font-heading font-bold text-white tracking-tight flex-1">
+                        {pillar.title}
+                      </h4>
+                      
+                      <span className="text-5xl md:text-6xl font-heading font-black text-white/5 group-hover:text-white/10 transition-colors md:ml-auto select-none pointer-events-none self-start md:self-auto">
+                        {pillar.id}
+                      </span>
                     </div>
 
                     {/* Text block */}
                     <div>
-                      <h4 className="text-2xl md:text-3xl font-heading font-bold text-white mb-6 tracking-tight">
-                        {pillar.title}
-                      </h4>
                       <p className="text-white/50 text-base md:text-lg leading-relaxed group-hover:text-white/80 transition-colors duration-500">
                         {pillar.desc}
                       </p>
@@ -283,6 +301,43 @@ export default function AboutIntro() {
           </div>
         </div>
       </div>
+
+      {/* ─── EASTER EGG: ELON MUSK ─── */}
+      <AnimatePresence>
+        {showElon && (
+          <motion.div
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "100%", opacity: 0 }}
+            transition={{ type: "spring", damping: 15 }}
+            className="fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center pointer-events-none"
+          >
+            {/* Speech Bubble */}
+            <motion.div 
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              transition={{ delay: 0.5, type: "spring" }}
+              className="mb-6 relative bg-white text-black p-6 rounded-3xl max-w-sm shadow-2xl origin-bottom"
+            >
+              <p className="text-lg font-medium italic text-center">
+                "Nie mierz siebie tym, co osiągnąłeś, ale tym, co powinieneś osiągnąć ze swoimi możliwościami."
+              </p>
+              {/* Triangle for bubble */}
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 border-x-[12px] border-x-transparent border-t-[14px] border-t-white" />
+            </motion.div>
+
+            {/* Dancing Elon Image */}
+            <motion.img
+              src="/elon.jpg"
+              alt="Elon"
+              className="w-48 h-48 rounded-full border-8 border-primary object-cover shadow-2xl"
+              animate={{ rotate: [-10, 10, -10] }}
+              transition={{ repeat: Infinity, duration: 1, ease: "easeInOut" }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
