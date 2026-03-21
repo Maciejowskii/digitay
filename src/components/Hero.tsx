@@ -3,7 +3,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 
-// Each letter gets its own space-themed background image
 const LETTER_DATA = [
   {
     letter: "d",
@@ -46,15 +45,10 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Background image parallax
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-
-  // Brand text: moves UP, scales UP, and fades OUT on scroll
   const brandY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-80%"]);
   const brandScale = useTransform(scrollYProgress, [0, 0.5], [1, 2.5]);
   const brandOpacity = useTransform(scrollYProgress, [0, 0.35, 0.5], [1, 0.5, 0]);
-
-  // Tagline fades out on scroll too
   const taglineOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
   return (
@@ -62,9 +56,8 @@ export default function Hero() {
       ref={containerRef}
       className="relative w-full h-[130vh] overflow-hidden"
     >
-      {/* Sticky container for the hero viewport */}
       <div className="sticky top-0 w-full h-screen overflow-hidden">
-        {/* Background Images - crossfade on letter hover */}
+        {/* Background Images - smooth crossfade */}
         <motion.div className="absolute inset-0 z-0" style={{ scale: imageScale }}>
           {LETTER_DATA.map((item) => (
             <img
