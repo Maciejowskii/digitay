@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Globe, ShoppingCart, Target, Megaphone, Search } from "lucide-react";
 import Link from "next/link";
 import { MouseEvent } from "react";
 
@@ -14,6 +14,7 @@ const services = [
       "High-endowe wizytówki, landingi i strony korporacyjne. Design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
     color: "#19A354",
     href: "/uslugi/tworzenie-stron",
+    icon: Globe,
   },
   {
     id: "02",
@@ -23,6 +24,7 @@ const services = [
       "Sklepy zoptymalizowane pod sprzedaż. Od konfiguracji produktów po automaty odzyskujące porzucone koszyki.",
     color: "#22D06A",
     href: "/uslugi/sklepy-internetowe",
+    icon: ShoppingCart,
   },
   {
     id: "03",
@@ -32,6 +34,7 @@ const services = [
       "Precyzyjne kampanie Google Ads — Search, PMax, YouTube. Optymalizacja pod realny zwrot z inwestycji.",
     color: "#0D9488",
     href: "/uslugi/kampanie-google-ads",
+    icon: Target,
   },
   {
     id: "04",
@@ -41,6 +44,7 @@ const services = [
       "Kampanie na Facebooku i Instagramie. Prospecting, remarketing i skalowanie — scroll zamieniony w sprzedaż.",
     color: "#6366F1",
     href: "/uslugi/reklamy-facebook-ads",
+    icon: Megaphone,
   },
   {
     id: "05",
@@ -50,6 +54,7 @@ const services = [
       "Podejście data-driven. Skalowalne strategie SEO, które podnoszą widoczność i przyciągają ruch jakościowy.",
     color: "#10B981",
     href: "/uslugi/pozycjonowanie-seo",
+    icon: Search,
   },
 ];
 
@@ -58,17 +63,14 @@ const marqueeItems = [
   "Tworzenie Stron",
   "Sklepy Internetowe",
   "Kampanie Google Ads",
-  "Social Media",
-  "Google Ads",
   "Facebook Ads",
-  "Aplikacje Webowe",
-  "Aplikacje Mobilne",
-  "Branding",
   "UI/UX Design",
+  "Branding",
+  "E-commerce",
 ];
 
 // Glow card component
-function ServiceCard({ service, index }: { service: typeof services[0], index: number }) {
+function ServiceCard({ service, index, size = "default" }: { service: typeof services[0], index: number, size?: "large" | "default" }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -78,18 +80,20 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
     mouseY.set(clientY - top);
   }
 
+  const isLarge = size === "large";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
       onMouseMove={handleMouseMove}
-      className="group relative h-full rounded-2xl border border-white/5 bg-[#0A131F]/80 backdrop-blur-sm overflow-hidden min-h-[420px]"
+      className="group relative h-full rounded-3xl border border-white/5 bg-[#0A131F]/80 backdrop-blur-sm overflow-hidden"
     >
       {/* Dynamic Cursor Glow Background */}
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, ${service.color}15, transparent 80%)`,
         }}
@@ -97,7 +101,7 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
 
       {/* Dynamic Cursor Glow Border */}
       <motion.div
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`radial-gradient(300px circle at ${mouseX}px ${mouseY}px, ${service.color}50, transparent 80%)`,
           maskImage: "linear-gradient(black, black) content-box content-box, linear-gradient(black, black)",
@@ -106,51 +110,64 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
         }}
       />
 
-      {/* Top thin line */}
+      {/* Top accent line */}
       <div
         className="absolute top-0 left-0 w-full h-[2px] transition-all duration-500 scale-x-0 group-hover:scale-x-100 origin-left"
         style={{ backgroundColor: service.color }}
       />
 
-      <div className="relative p-8 md:p-10 flex flex-col justify-between h-full z-10">
-        <div>
-          <div className="flex justify-between items-start mb-8">
-            <h3 className="text-2xl md:text-3xl font-heading font-bold text-white tracking-tight group-hover:text-white transition-colors">
+      <Link href={service.href} className="block h-full">
+        <div className={`relative flex flex-col justify-between h-full z-10 ${isLarge ? 'p-10 md:p-14' : 'p-8 md:p-10'}`}>
+          <div>
+            {/* Header row: icon + number */}
+            <div className="flex justify-between items-start mb-8">
+              <div
+                className="w-14 h-14 rounded-2xl border border-white/10 bg-white/[0.05] flex items-center justify-center group-hover:border-white/20 transition-all duration-500"
+                style={{ ["--glow-color" as string]: service.color }}
+              >
+                <service.icon className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" style={{ filter: "drop-shadow(0 0 0px transparent)" }} />
+              </div>
+              <span className={`font-mono font-black text-white/[0.04] group-hover:text-white/[0.08] transition-colors pointer-events-none select-none ${isLarge ? 'text-7xl' : 'text-6xl'}`}>
+                {service.id}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h3 className={`font-heading font-black text-white tracking-tight group-hover:text-white transition-colors mb-4 ${isLarge ? 'text-3xl md:text-4xl' : 'text-2xl md:text-3xl'}`}>
               {service.title}
             </h3>
-            <span className="font-mono text-5xl font-black text-white/5 group-hover:text-white/10 transition-colors pointer-events-none select-none">
-              {service.id}
-            </span>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {service.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-[11px] text-white/40 border border-white/10 rounded-full px-3 py-1 group-hover:border-white/20 group-hover:text-white/60 transition-colors bg-white/[0.02]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Description */}
+            <p className={`text-white/50 leading-relaxed group-hover:text-white/70 transition-colors duration-300 ${isLarge ? 'text-base md:text-lg' : 'text-sm md:text-base'}`}>
+              {service.description}
+            </p>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            {service.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs text-white/40 border border-white/10 rounded-full px-3 py-1 group-hover:border-white/20 transition-colors bg-white/[0.02]"
-              >
-                {tag}
-              </span>
-            ))}
+          {/* CTA */}
+          <div className="flex items-center gap-3 mt-10 text-sm font-bold transition-colors duration-300" style={{ color: service.color }}>
+            Poznaj szczegóły
+            <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-white/20 transition-all">
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </div>
           </div>
-
-          <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-300">
-            {service.description}
-          </p>
         </div>
+      </Link>
 
-        <Link
-          href={service.href}
-          className="inline-flex items-center gap-2 text-primary text-sm font-medium mt-12 group-hover:gap-3 transition-all duration-300"
-        >
-          Dowiedz się więcej
-          <ArrowUpRight className="w-4 h-4" />
-        </Link>
-      </div>
-
-      {/* Subtle abstract background shape */}
+      {/* Background glow */}
       <div 
-        className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
+        className="absolute -bottom-20 -right-20 w-64 h-64 rounded-full blur-[80px] opacity-[0.07] group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none"
         style={{ backgroundColor: service.color }}
       />
     </motion.div>
@@ -203,7 +220,7 @@ export default function ServicesBento() {
         </div>
       </div>
 
-      {/* Scrolling Marquee - Made more dramatic */}
+      {/* Scrolling Marquee */}
       <div className="relative w-full overflow-hidden py-10 border-y border-white/5 bg-white/[0.01] mb-24 backdrop-blur-sm">
         <div className="flex w-max animate-marquee">
           {[...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, i) => (
@@ -219,11 +236,19 @@ export default function ServicesBento() {
         </div>
       </div>
 
-      {/* Service Columns with Glow Cards */}
+      {/* Service Cards — 2 + 3 Bento Layout */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
-          {services.map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} />
+        {/* Top row: 2 large cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
+          {services.slice(0, 2).map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} size="large" />
+          ))}
+        </div>
+
+        {/* Bottom row: 3 medium cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {services.slice(2).map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i + 2} />
           ))}
         </div>
       </div>

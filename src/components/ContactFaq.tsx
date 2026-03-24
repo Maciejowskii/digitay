@@ -10,19 +10,34 @@ import Link from "next/link";
 
 const defaultFaqs = [
   {
-    question: "Ile trwa stworzenie aplikacji?",
+    question: "Ile trwa stworzenie aplikacji lub strony?",
     answer:
-      "Czas realizacji zależy od skomplikowania projektu. Proste aplikacje mobilne lub webowe MVP tworzymy w 4-8 tygodni. Większe platformy od 3 do 6 miesięcy.",
+      "Czas realizacji zależy od skomplikowania projektu. Proste strony firmowe lub landing page'e tworzymy w 2-4 tygodnie. Sklepy internetowe i aplikacje mobilne / webowe (MVP) zajmują zazwyczaj od 4 do 12 tygodni.",
   },
   {
     question: "Jakie technologie wykorzystujecie?",
     answer:
-      "Pracujemy w oparciu o najnowocześniejsze stacki technologiczne: React, Next.js, Node.js dla web, oraz React Native / Flutter dla mobile. Bezpieczeństwo i skalowalność to nasz priorytet.",
+      "Pracujemy w oparciu o najnowocześniejsze stacki technologiczne: React, Next.js, Node.js dla web, oraz React Native / Flutter dla mobile. CMS najczęściej opieramy na rozwiązaniach Headless takich jak Sanity, Strapi czy WordPress (REST API). Bezpieczeństwo i skalowalność to nasz priorytet.",
   },
   {
-    question: "Czy pomagacie w pozycjonowaniu?",
+    question: "Czy pomagacie w pozycjonowaniu (SEO)?",
     answer:
-      "Tak, oferujemy kompleksowe działania SEO, od technicznych audytów, po optymalizację treści i budowanie linków, nastawione na realny zwrot z inwestycji (ROI).",
+      "Tak, oferujemy kompleksowe działania SEO — od technicznych audytów, przez optymalizację treści (On-Site), aż po strategiczny link building (Off-Site). Skupiamy się na realnym wzroście widoczności i ruchu, który konwertuje.",
+  },
+  {
+    question: "Od czego zaczyna się współpraca w Digitay?",
+    answer:
+      "Wszystko zaczyna się od bezpłatnej, niezobowiązującej konsultacji (call lub spotkanie online). Rozmawiamy o Twoim biznesie, wyzwaniach i celach, po czym w ciągu 48h przygotowujemy wstępny estymat lub fundament analityczny.",
+  },
+  {
+    question: "Jakie modele rozliczeń oferujecie?",
+    answer:
+      "Pracujemy głównie w dwóch modelach: Fixed-Price (stała opłata za konkretnie wyceniony zakres projektu) oraz Time & Material / Retainer (abonament na stałą optymalizację i marketing, np. SEO, kampanie Ads, miesięczny pakiet godzin).",
+  },
+  {
+    question: "Czy otrzymam wsparcie i gwarancję po stworzeniu projektu?",
+    answer:
+      "Oczywiście. Każdy wykonany przez nas projekt objęty jest gwarancją. Ponadto oferujemy pakiety utrzymaniowe (Hosting, Mentenance, SLA) — czuwamy nad bezpieczeństwem serwerów, robimy kopie zapasowe i aktualizujemy systemy.",
   },
 ];
 

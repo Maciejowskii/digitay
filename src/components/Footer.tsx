@@ -53,18 +53,18 @@ export default function Footer() {
             </h4>
             <ul className="flex flex-col gap-3">
               {[
-                "Strony WWW",
-                "Aplikacje Web",
-                "Aplikacje Mobile",
-                "SEO",
-                "UI/UX Design",
+                { name: "Strony Internetowe", href: "/uslugi/tworzenie-stron" },
+                { name: "Sklepy Internetowe", href: "/uslugi/sklepy-internetowe" },
+                { name: "Pozycjonowanie SEO", href: "/uslugi/pozycjonowanie-seo" },
+                { name: "Google Ads", href: "/uslugi/kampanie-google-ads" },
+                { name: "Facebook Ads", href: "/uslugi/reklamy-facebook-ads" },
               ].map((item) => (
-                <li key={item}>
+                <li key={item.name}>
                   <Link
-                    href="/uslugi"
+                    href={item.href}
                     className="text-white/50 hover:text-white transition-colors text-sm"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
