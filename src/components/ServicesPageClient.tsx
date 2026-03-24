@@ -3,8 +3,7 @@
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, ChevronDown, CheckCircle2, Zap, LayoutTemplate, GaugeCircle, Plus, Minus, ArrowDown } from "lucide-react";
-import ServicesBento from "@/components/ServicesBento";
+import { ArrowUpRight, ChevronDown, CheckCircle2, Zap, LayoutTemplate, GaugeCircle, Plus, Minus, ArrowDown, Globe, ShoppingCart, Search, Target, Megaphone } from "lucide-react";
 import { useState, useRef } from "react";
 
 // ─── Data ───
@@ -36,22 +35,44 @@ const DOMAINS = [
 const SERVICES = [
   {
     name: "Strony Internetowe",
-    shortDescription: "Wydajne, szybkie i zoptymalizowane pod SEO strony internetowe. Od efektownych wizytówek po rozbudowane portale korporacyjne. Każda strona to produkt, który ma jeden cel - konwertować.",
+    shortDescription: "Od efektownych wizytówek po rozbudowane portale. High-endowy design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
     features: ['Customowy Web Design', 'Next.js & React', 'Techniczne SEO', 'CMS Headless'],
-    slug: "strony-internetowe"
+    slug: "tworzenie-stron",
+    icon: Globe,
+    accent: "#19A354",
   },
   {
-    name: "Aplikacje Web & Mobile",
-    shortDescription: "Szyte na miarę systemy SaaS, platformy e-commerce i natywne aplikacje iOS/Android. Oprogramowanie, które użytkownicy kochają, a biznes potrzebuje do łatwego skalowania.",
-    features: ['Aplikacje PWA i Natywne', 'Złożone systemy CRM', 'Sklepy e-Commerce', 'API i Integracje'],
-    slug: "aplikacje"
+    name: "Sklepy Internetowe",
+    shortDescription: "E-commerce zoptymalizowany pod konwersję. Konfiguracja produktów, płatności, automaty porzuconych koszyków i pełen tracking.",
+    features: ['Konfiguracja Sklepu', 'Płatności & Dostawy', 'SEO E-commerce', 'Automaty & Integracje'],
+    slug: "sklepy-internetowe",
+    icon: ShoppingCart,
+    accent: "#22D06A",
   },
   {
-    name: "Marketing & Sprzedaż",
-    shortDescription: "Precyzyjne kampanie reklamowe, innowacyjna strategia SEO i content marketing. Napędzamy ruch, który zamienia się w realny przychód i dominację w wynikach wyszukiwania.",
-    features: ['Kampanie Ads', 'Pozycjonowanie', 'Leady B2B', 'Optymalizacja Konwersji'],
-    slug: "marketing"
-  }
+    name: "Pozycjonowanie SEO",
+    shortDescription: "Podejście data-driven. Skalowalne strategie SEO, które podnoszą widoczność i przyciągają ruch, który konwertuje.",
+    features: ['Audyt Kompletny', 'Link Building', 'Optymalizacja On-Site', 'Content Strategy'],
+    slug: "pozycjonowanie-seo",
+    icon: Search,
+    accent: "#10B981",
+  },
+  {
+    name: "Kampanie Google Ads",
+    shortDescription: "Search, PMax, YouTube — precyzyjne targetowanie i ciągła optymalizacja pod realny zwrot z inwestycji reklamowej.",
+    features: ['Search & PMax', 'Remarketing', 'Testy A/B', 'Raportowanie ROAS'],
+    slug: "kampanie-google-ads",
+    icon: Target,
+    accent: "#0D9488",
+  },
+  {
+    name: "Reklamy Facebook Ads",
+    shortDescription: "Kampanie na Facebooku i Instagramie. Prospecting, remarketing i skalowanie — scroll zamieniony w sprzedaż.",
+    features: ['Prospecting', 'Remarketing', 'Kreacje & Wideo', 'Skalowanie ROAS'],
+    slug: "reklamy-facebook-ads",
+    icon: Megaphone,
+    accent: "#6366F1",
+  },
 ];
 
 const FAQS = [
@@ -70,86 +91,6 @@ const FAQS = [
 ];
 
 // ─── Sub-components ───
-
-function ServiceAccordion({ service, index, expanded, setExpanded }: { service: any, index: number, expanded: number | null, setExpanded: (val: number | null) => void }) {
-  const isExpanded = expanded === index;
-
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.1 }}
-      className={`border-b border-white/5 overflow-hidden transition-colors duration-500 ${isExpanded ? "bg-white/[0.02]" : "hover:bg-white/[0.01]"}`}
-    >
-      <button 
-        onClick={() => setExpanded(isExpanded ? null : index)}
-        className="w-full flex items-center justify-between py-6 md:py-8 px-4 md:px-8 group text-left"
-      >
-        <div className="flex items-center gap-6 md:gap-12">
-          <span className={`font-mono text-sm md:text-base transition-colors duration-300 ${isExpanded ? 'text-primary' : 'text-white/20 group-hover:text-white/40'}`}>
-            {String(index + 1).padStart(2, '0')}
-          </span>
-          <h3 className={`text-2xl md:text-4xl lg:text-5xl font-heading font-black tracking-tight uppercase transition-all duration-300 ${isExpanded ? 'text-white translate-x-2 md:translate-x-4' : 'text-white/70 group-hover:text-white group-hover:translate-x-2'}`}>
-            {service.name}
-          </h3>
-        </div>
-        <div className="flex items-center gap-6">
-          <span className="hidden md:inline-flex font-mono text-[10px] md:text-xs text-white/30 border border-white/10 px-3 py-1.5 rounded-full group-hover:border-primary/20 group-hover:text-white/60 transition-colors">
-            Więcej
-          </span>
-          <div className={`w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 ${isExpanded ? 'bg-primary border-primary text-white rotate-180' : 'bg-transparent text-white/50 group-hover:bg-white/5'}`}>
-            <ChevronDown className="w-5 h-5" />
-          </div>
-        </div>
-      </button>
-
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
-          >
-            <div className="px-4 md:px-8 pb-8 pt-4 lg:ml-20 flex flex-col md:flex-row gap-8 lg:gap-16 items-start">
-              {/* Opis krótki */}
-              <div className="flex-1">
-                <p className="text-white/50 text-base md:text-lg leading-relaxed mb-6">
-                  {service.shortDescription}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-                  {service.features.map((feature: string) => (
-                    <div key={feature} className="flex items-center gap-2 text-white/60 text-sm">
-                      <CheckCircle2 className="w-4 h-4 text-primary" />
-                      {feature}
-                    </div>
-                  ))}
-                </div>
-                <Link 
-                  href="/kontakt"
-                  className="inline-flex items-center gap-2 bg-white text-background px-6 py-3 rounded-full font-bold text-sm lg:text-base hover:bg-white/90 transition-colors group"
-                >
-                  Zapytaj o szczegóły
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
-              </div>
-
-              {/* Box graficzny */}
-              <div className="w-full md:w-1/3 aspect-video md:aspect-[4/3] rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 p-6 flex flex-col justify-end relative overflow-hidden group/box hidden sm:flex">
-                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none" />
-                <div className="absolute right-0 top-0 w-32 h-32 bg-primary/20 blur-3xl pointer-events-none rounded-full" />
-                
-                <h4 className="text-xl font-heading font-bold text-white mb-2 relative z-10">{service.name}</h4>
-                <p className="font-mono text-xl text-primary font-black relative z-10">Premium</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
 
 function FaqItem({ faq, index }: { faq: { q: string; a: string }; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -199,8 +140,6 @@ function FaqItem({ faq, index }: { faq: { q: string; a: string }; index: number 
 // ─── Main Page Client ───
 
 export default function ServicesPageClient() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
-
   // Parallax Hero
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -223,7 +162,7 @@ export default function ServicesPageClient() {
     <div className="bg-background text-white selection:bg-primary/30 selection:text-white pb-24 overflow-hidden">
       
       {/* ═══════════════════════════════════════════════
-          INNOVATIVE PARALLAX HERO
+          PARALLAX HERO
       ═══════════════════════════════════════════════ */}
       <section
         ref={heroRef}
@@ -298,7 +237,7 @@ export default function ServicesPageClient() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          DEEP CONTENT / DOMAINS (Sticky Approach)
+          DLACZEGO MY — Sticky Layout
       ═══════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-background border-t border-white/5 relative z-20">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -355,38 +294,127 @@ export default function ServicesPageClient() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          BENTO GRID INTEGRATION (Existing ServicesBento)
+          SERVICES GRID — Główna sekcja usług
       ═══════════════════════════════════════════════ */}
-      <div className="border-y border-white/5 relative z-20">
-        <ServicesBento />
-      </div>
-
-      {/* ═══════════════════════════════════════════════
-          ACCORDION LIST (Skorowidz)
-      ═══════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative z-20 bg-background border-t border-white/5">
+      <section className="py-24 md:py-32 relative z-20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           
-          <div className="flex flex-col md:flex-row justify-between md:items-end mb-16 md:mb-20 gap-8">
-            <div>
-              <span className="font-mono text-xs md:text-sm tracking-[0.2em] text-primary uppercase mb-6 block">
-                [ SKOROWIDZ TECHNOLOGICZNY ]
-              </span>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-heading font-black text-white uppercase tracking-tighter leading-[0.9]">
-                PEŁEN PRZEKRÓJ <br/> KOMPETENCJI.
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 md:mb-24"
+          >
+            <span className="text-primary text-sm tracking-widest uppercase font-bold mb-6 block">
+              Co robimy
+            </span>
+            <div className="flex flex-col md:flex-row justify-between md:items-end gap-6">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black tracking-tighter leading-[0.9]">
+                Nasze <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30 italic font-light">usługi.</span>
               </h2>
+              <p className="text-white/40 text-lg max-w-md leading-relaxed">
+                Każda usługa to osobny ekosystem — od strategii po wdrożenie i optymalizację. Kliknij, by poznać szczegóły i cenniki.
+              </p>
             </div>
+          </motion.div>
+
+          {/* Top row: 2 large cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {SERVICES.slice(0, 2).map((service, idx) => (
+              <motion.div
+                key={service.slug}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: idx * 0.1, duration: 0.6 }}
+              >
+                <Link
+                  href={`/uslugi/${service.slug}`}
+                  className="block group relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8 md:p-12 hover:border-primary/20 hover:bg-white/[0.05] transition-all duration-500 h-full"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute right-8 top-8 text-8xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.04] transition-colors select-none pointer-events-none">
+                    {String(idx + 1).padStart(2, '0')}
+                  </div>
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="w-16 h-16 rounded-2xl border border-white/10 bg-white/[0.05] flex items-center justify-center mb-8 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
+                      <service.icon className="w-7 h-7 text-white/70 group-hover:text-primary transition-colors" />
+                    </div>
+
+                    <h3 className="text-3xl md:text-4xl font-heading font-black tracking-tight text-white mb-4 group-hover:text-primary transition-colors duration-300">
+                      {service.name}
+                    </h3>
+                    <p className="text-white/50 text-base md:text-lg leading-relaxed mb-8 flex-grow">
+                      {service.shortDescription}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {service.features.map((f) => (
+                        <span key={f} className="px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-white/50 text-xs font-medium group-hover:border-primary/20 group-hover:text-white/70 transition-colors">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-3 text-white/60 group-hover:text-primary transition-colors font-bold text-sm">
+                      Poznaj szczegóły i cennik
+                      <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-all">
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
 
-          <div className="border-t border-white/10">
-            {SERVICES.map((service, idx) => (
-              <ServiceAccordion 
-                key={service.slug} 
-                service={service} 
-                index={idx}
-                expanded={expandedIndex}
-                setExpanded={setExpandedIndex}
-              />
+          {/* Bottom row: 3 medium cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {SERVICES.slice(2).map((service, idx) => (
+              <motion.div
+                key={service.slug}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: (idx + 2) * 0.1, duration: 0.6 }}
+              >
+                <Link
+                  href={`/uslugi/${service.slug}`}
+                  className="block group relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8 md:p-10 hover:border-primary/20 hover:bg-white/[0.05] transition-all duration-500 h-full"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute right-6 top-6 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.04] transition-colors select-none pointer-events-none">
+                    {String(idx + 3).padStart(2, '0')}
+                  </div>
+
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="w-14 h-14 rounded-2xl border border-white/10 bg-white/[0.05] flex items-center justify-center mb-6 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
+                      <service.icon className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors" />
+                    </div>
+
+                    <h3 className="text-2xl md:text-3xl font-heading font-black tracking-tight text-white mb-3 group-hover:text-primary transition-colors duration-300">
+                      {service.name}
+                    </h3>
+                    <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6 flex-grow">
+                      {service.shortDescription}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {service.features.map((f) => (
+                        <span key={f} className="px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-white/50 text-[11px] font-medium group-hover:border-primary/20 group-hover:text-white/70 transition-colors">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-3 text-white/60 group-hover:text-primary transition-colors font-bold text-sm">
+                      Cennik i szczegóły
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -403,8 +431,8 @@ export default function ServicesPageClient() {
             viewport={{ once: true }}
             className="flex items-center gap-4 mb-16"
           >
-            <span className="text-primary font-heading font-bold text-sm tracking-widest">04.</span>
-            <span className="text-white/40 text-sm tracking-widest uppercase">FAQ</span>
+            <span className="text-primary font-heading font-bold text-sm tracking-widest">FAQ</span>
+            <span className="text-white/40 text-sm tracking-widest uppercase">Najczęstsze pytania</span>
             <div className="flex-1 h-[1px] bg-white/5" />
           </motion.div>
 

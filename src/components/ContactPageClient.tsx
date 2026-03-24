@@ -69,13 +69,13 @@ export default function ContactPageClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start relative">
             
             {/* Lewa kolumna: Zaufanie i Adresy */}
-            <motion.div 
+              <motion.div 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex flex-col relative z-20"
+              className="flex flex-col relative z-20 min-w-0"
             >
-              <h1 className="text-5xl lg:text-7xl font-heading font-black tracking-tighter mb-6 leading-[0.9]">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-heading font-black tracking-tighter mb-6 leading-[0.9] whitespace-nowrap">
                 POROZMAWIAJMY
                 <span className="text-primary">.</span>
               </h1>

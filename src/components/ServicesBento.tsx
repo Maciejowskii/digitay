@@ -13,25 +13,43 @@ const services = [
     description:
       "High-endowe wizytówki, landingi i strony korporacyjne. Design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
     color: "#19A354",
-    href: "/uslugi",
+    href: "/uslugi/tworzenie-stron",
   },
   {
     id: "02",
-    title: "Aplikacje Web & Mobile",
-    tags: ["react native", "node.js", "typescript"],
+    title: "Sklepy Internetowe",
+    tags: ["e-commerce", "płatności", "konwersja"],
     description:
-      "Szyte na miarę systemy SaaS, platformy e-commerce i natywne aplikacje iOS/Android. Oprogramowanie, które użytkownicy kochają.",
+      "Sklepy zoptymalizowane pod sprzedaż. Od konfiguracji produktów po automaty odzyskujące porzucone koszyki.",
     color: "#22D06A",
-    href: "/uslugi",
+    href: "/uslugi/sklepy-internetowe",
   },
   {
     id: "03",
-    title: "Marketing & Reklama",
-    tags: ["google ads", "meta ads", "seo", "social"],
+    title: "Kampanie Google Ads",
+    tags: ["search", "pmax", "youtube"],
     description:
-      "Precyzyjne kampanie reklamowe, strategia SEO i social media. Napędzamy ruch, który konwertuje na realny przychód.",
-    color: "#15803D",
-    href: "/uslugi",
+      "Precyzyjne kampanie Google Ads — Search, PMax, YouTube. Optymalizacja pod realny zwrot z inwestycji.",
+    color: "#0D9488",
+    href: "/uslugi/kampanie-google-ads",
+  },
+  {
+    id: "04",
+    title: "Reklamy Facebook Ads",
+    tags: ["meta ads", "instagram", "remarketing"],
+    description:
+      "Kampanie na Facebooku i Instagramie. Prospecting, remarketing i skalowanie — scroll zamieniony w sprzedaż.",
+    color: "#6366F1",
+    href: "/uslugi/reklamy-facebook-ads",
+  },
+  {
+    id: "05",
+    title: "Pozycjonowanie SEO",
+    tags: ["audyty", "link building", "optymalizacja"],
+    description:
+      "Podejście data-driven. Skalowalne strategie SEO, które podnoszą widoczność i przyciągają ruch jakościowy.",
+    color: "#10B981",
+    href: "/uslugi/pozycjonowanie-seo",
   },
 ];
 
@@ -39,6 +57,7 @@ const marqueeItems = [
   "Pozycjonowanie SEO",
   "Tworzenie Stron",
   "Sklepy Internetowe",
+  "Kampanie Google Ads",
   "Social Media",
   "Google Ads",
   "Facebook Ads",
@@ -202,7 +221,7 @@ export default function ServicesBento() {
 
       {/* Service Columns with Glow Cards */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8">
           {services.map((service, i) => (
             <ServiceCard key={service.title} service={service} index={i} />
           ))}
