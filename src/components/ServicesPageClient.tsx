@@ -330,6 +330,7 @@ export default function ServicesPageClient() {
               >
                 <Link
                   href={`/uslugi/${service.slug}`}
+                  onClick={() => window.scrollTo(0, 0)}
                   className="block group relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8 md:p-12 hover:border-primary/20 hover:bg-white/[0.05] transition-all duration-500 h-full"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -381,6 +382,7 @@ export default function ServicesPageClient() {
               >
                 <Link
                   href={`/uslugi/${service.slug}`}
+                  onClick={() => window.scrollTo(0, 0)}
                   className="block group relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8 md:p-10 hover:border-primary/20 hover:bg-white/[0.05] transition-all duration-500 h-full"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />

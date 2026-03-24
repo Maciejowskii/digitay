@@ -116,7 +116,7 @@ function ServiceCard({ service, index, size = "default" }: { service: typeof ser
         style={{ backgroundColor: service.color }}
       />
 
-      <Link href={service.href} className="block h-full">
+      <Link href={service.href} onClick={() => window.scrollTo(0, 0)} className="block h-full">
         <div className={`relative flex flex-col justify-between h-full z-10 ${isLarge ? 'p-10 md:p-14' : 'p-8 md:p-10'}`}>
           <div>
             {/* Header row: icon + number */}

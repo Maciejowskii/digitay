@@ -41,6 +41,8 @@ export const metadata: Metadata = {
   }
 };
 
+import ScrollToTop from "@/components/ScrollToTop";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -49,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="pl" className="dark scroll-smooth">
       <body className={`${inter.variable} ${plusJakartaSans.variable} font-body bg-background text-foreground min-h-screen selection:bg-primary/30 selection:text-white`}>
+        <ScrollToTop />
         {children}
       </body>
     </html>
