@@ -42,7 +42,7 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
         </div>
         
         <Link 
-          href="/admin/blog/nowy"
+          href="/admin/blog/new"
           className="inline-flex items-center justify-center gap-2 bg-zinc-900 text-white px-5 py-2.5 rounded-none font-bold uppercase tracking-widest text-xs hover:bg-zinc-800 transition-colors shadow-sm"
         >
           <Plus className="w-4 h-4" />

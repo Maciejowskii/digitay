@@ -5,42 +5,15 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const mockPosts = [
-  {
-    slug: "seo-w-saas",
-    title: "Jak SEO wspiera skalowanie nowoczesnych SaaSów?",
-    excerpt: "Analizujemy kluczowe czynniki technicznego SEO, które pozwalają aplikacjom Next.js dominować w wynikach wyszukiwania.",
-    tag: "STRATEGIA // SEO",
-    date: "14 MAR 2024",
-    image: "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=2670&auto=format&fit=crop"
-  },
-  {
-    slug: "nextjs16-ecommerce",
-    title: "Dlaczego Next.js 16 to game-changer dla E-commerce?",
-    excerpt: "Poznaj zalety Turbopacka i nowej architektury komponentów w kontekście sklepów o dużej skali.",
-    tag: "TECHNOLOGIA // WEB",
-    date: "10 MAR 2024",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2670&auto=format&fit=crop"
-  },
-  {
-    slug: "tech-brutalism",
-    title: "Psychologia koloru w designie Tech Brutalism",
-    excerpt: "Jak używać kontrastów i odważnych barw, aby budować autorytet innowacyjnej marki technologicznej.",
-    tag: "DESIGN // UI",
-    date: "05 MAR 2024",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1000&auto=format&fit=crop"
-  },
-  {
-    slug: "ai-w-biznesie",
-    title: "Wdrażanie AI w tradycyjnym biznesie. Od czego zacząć?",
-    excerpt: "Sztuczna inteligencja to nie tylko ChatGPT. Oto 5 procesów, które możesz zautomatyzować w swojej firmie już dziś używając modeli LLM.",
-    tag: "AI // BIZNES",
-    date: "28 LUT 2024",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2565&auto=format&fit=crop"
-  }
-];
-
-export default function BlogPageClient() {
+export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: any[] }) {
+  const displayPosts = initialPosts.length > 0 ? initialPosts.map(p => ({
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.excerpt,
+    tag: "AI // BIZNES", // tymczasowo, bo nie mamy kategorii w schemacie DB, a design tego wymaga
+    date: p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('pl-PL', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase() : "",
+    image: p.coverImage || "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=2670&auto=format&fit=crop"
+  })) : [];
   return (
     <div className="bg-background text-white selection:bg-primary/30 selection:text-white min-h-screen overflow-hidden">
       
@@ -90,7 +63,13 @@ export default function BlogPageClient() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 md:gap-8 auto-rows-[450px]">
             
-            {mockPosts.map((post, idx) => {
+            {displayPosts.length === 0 && (
+              <div className="col-span-1 md:col-span-2 lg:col-span-6 flex items-center justify-center p-12 lg:p-24 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
+                <p className="text-white/50 text-xl md:text-2xl font-light text-center">Brak wygenerowanych lub opublikowanych artykułów. Zaglądnij tu później!</p>
+              </div>
+            )}
+
+            {displayPosts.map((post: any, idx: number) => {
               // Pierwszy post jest wyróżniony (Featured)
               const isFeatured = idx === 0;
               // Drugi post zajmuje 3 kolumny (Pół siatki w dużym ekranie)

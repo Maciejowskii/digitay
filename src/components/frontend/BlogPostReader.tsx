@@ -65,12 +65,15 @@ function ShareButton({ icon: Icon, onClick, colorClass }: { icon: any, onClick?:
   );
 }
 
+// ... continuing from previous
 export const BlogPostReader = ({ post }: { post: BlogPost }) => {
   const { scrollYProgress } = useScroll();
   
   // Parallax setup for the cover image
   const coverYParams = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const coverOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
+  const displayAuthor = post.author === "Digitay AI" || !post.author ? "Maciej Tyra" : post.author;
 
   return (
     <div className="bg-transparent min-h-screen">
@@ -83,7 +86,7 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
       />
 
       {/* Basic Navigation Return */}
-      <div className="absolute top-10 left-6 md:left-12 z-40">
+      <div className="absolute top-32 lg:top-40 left-6 md:left-12 z-40">
         <Link href="/blog" className="flex items-center gap-2 text-white bg-black/50 border border-white/10 hover:bg-primary hover:text-black backdrop-blur-md px-4 py-2 rounded-none font-mono tracking-widest uppercase transition-colors text-xs">
            <ArrowLeft className="w-4 h-4" />
            Powrót do Wpisów
@@ -110,7 +113,7 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/40 to-transparent z-10" />
         </motion.div>
 
-        <div className="relative z-20 container max-w-4xl mx-auto px-6 pb-20 md:pb-24">
+        <div className="relative z-20 container max-w-5xl mx-auto px-6 pb-20 md:pb-24">
           <motion.div 
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -119,7 +122,7 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
             <div className="flex flex-wrap items-center gap-4 text-zinc-300 font-medium text-sm md:text-base mb-6">
               <span className="flex items-center gap-2">
                 <User className="w-4 h-4" />
-                {post.author || "Zespół Digitay"}
+                {displayAuthor}
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               <span className="flex items-center gap-2">
@@ -138,16 +141,11 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
         Content Body (Tailwind Typography Reader) 
       */}
       <div className="relative bg-transparent border-t border-white/10 z-30">
-        <div className="max-w-prose mx-auto px-6 py-20 md:py-32">
+        <div className="max-w-4xl mx-auto px-6 py-20 md:py-32">
           
           {/* Prose Content Container */}
           <article 
-             className="prose prose-invert prose-lg md:prose-xl max-w-none 
-                        prose-headings:font-heading prose-headings:font-black prose-headings:tracking-tighter prose-headings:uppercase 
-                        prose-p:leading-relaxed prose-p:text-zinc-400
-                        prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80
-                        prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:bg-white/5 prose-blockquote:p-6 prose-blockquote:rounded-none prose-blockquote:not-italic prose-blockquote:text-zinc-300 prose-blockquote:font-mono
-                        prose-img:rounded-none prose-img:shadow-2xl prose-img:border prose-img:border-white/10"
+             className="prose prose-invert prose-lg md:prose-xl max-w-none prose-headings:font-heading prose-headings:font-black prose-headings:tracking-tighter prose-headings:uppercase prose-p:leading-relaxed prose-p:text-zinc-400 prose-a:text-primary prose-a:no-underline hover:prose-a:text-primary/80 prose-blockquote:border-l-2 prose-blockquote:border-primary prose-blockquote:bg-white/5 prose-blockquote:p-6 prose-blockquote:rounded-none prose-blockquote:not-italic prose-blockquote:text-zinc-300 prose-blockquote:font-mono prose-img:rounded-none prose-img:shadow-2xl prose-img:border prose-img:border-white/10"
              dangerouslySetInnerHTML={{ __html: post.content }} 
           />
 
@@ -158,12 +156,17 @@ export const BlogPostReader = ({ post }: { post: BlogPost }) => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-5">
               <div className="w-16 h-16 rounded-sm bg-white/5 flex items-center justify-center text-xl font-bold text-primary flex-shrink-0 border border-white/10">
-                 {post.author ? post.author.charAt(0) : "D"}
+                 {displayAuthor.charAt(0)}
               </div>
               <div>
                 <p className="text-xs font-mono text-primary uppercase tracking-widest mb-1">[ AUTOR ]</p>
-                <h4 className="text-xl font-heading font-black uppercase text-white">{post.author || "Zespół Digitay"}</h4>
-                <p className="text-zinc-500 font-medium">Specjalista ds. digital</p>
+                <h4 className="text-xl font-heading font-black uppercase text-white">{displayAuthor}</h4>
+                <p className="text-zinc-500 font-medium whitespace-pre-line">
+                  {displayAuthor === "Maciej Tyra" ? "CTO | Dyrektor ds. Technologii" : 
+                   displayAuthor === "Jakub Wolert" ? "CEO" : 
+                   displayAuthor === "Kacper Wieraszka" ? "Ekspert ds. digitalizacji" : 
+                   "Ekspert ds. digitalizacji"}
+                </p>
               </div>
             </div>
 

@@ -18,27 +18,15 @@ import {
 // Nav items definition
 const navItems = [
   { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
-  {
-    name: "Usługi",
-    icon: Briefcase,
-    subItems: [
-      { name: "SEO", href: "/admin/services/seo" },
-      { name: "Google Ads", href: "/admin/services/google-ads" },
-      { name: "Strony WWW", href: "/admin/services/websites" },
-    ],
-  },
-  { name: "Blog", href: "/admin/blog", icon: FileText },
-  { name: "Klienci", href: "/admin/clients", icon: Users },
+  { name: "Blogi", href: "/admin/blog", icon: FileText },
+  { name: "Nowy Wpis (AI)", href: "/admin/blog/new", icon: LayoutDashboard },
   { name: "Ustawienia", href: "/admin/settings", icon: Settings },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname() || "";
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-
-  const isServicesActive = pathname.startsWith("/admin/services");
 
   return (
     <aside className="w-64 h-full bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col justify-between py-6 px-4 border border-zinc-100 overflow-y-auto">
@@ -56,96 +44,31 @@ export default function Sidebar() {
         {/* Navigation */}
         <nav className="flex flex-col gap-1">
           {navItems.map((item) => {
-            const isActive =
-              item.href === pathname ||
-              (item.subItems && isServicesActive && item.name === "Usługi" && item.href === undefined);
+            const isActive = item.href === pathname;
 
             return (
               <div key={item.name} className="relative">
-                {item.subItems ? (
-                  <>
-                    <button
-                      onClick={() => setServicesOpen(!servicesOpen)}
-                      onMouseEnter={() => setHoveredPath(item.name)}
-                      onMouseLeave={() => setHoveredPath(null)}
-                      className={`relative w-full flex items-center justify-between px-4 py-3 cursor-pointer rounded-xl transition-colors z-10 ${
-                        isActive || servicesOpen ? "text-indigo-600 font-medium" : "text-zinc-600 hover:text-zinc-900"
-                      }`}
-                    >
-                      <div className="flex items-center gap-3">
-                        <item.icon className={`w-5 h-5 ${isActive || servicesOpen ? "text-indigo-600" : "text-zinc-400"}`} />
-                        <span>{item.name}</span>
-                      </div>
-                      <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          servicesOpen ? "rotate-180 text-indigo-600" : "text-zinc-400"
-                        }`}
-                      />
-                    </button>
-                    {hoveredPath === item.name && (
-                        <motion.div
-                          layoutId="activeNav"
-                          className="absolute inset-0 bg-zinc-100/80 rounded-xl pointer-events-none"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.15, ease: "easeOut" }}
-                        />
-                      )}
-
-                    {/* Submenu Accordion */}
-                    <AnimatePresence>
-                      {servicesOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <ul className="flex flex-col gap-1 pl-11 pr-2 py-2">
-                            {item.subItems.map((subItem) => (
-                              <li key={subItem.href}>
-                                <Link
-                                  href={subItem.href}
-                                  className={`block py-2 px-3 rounded-lg text-sm transition-colors ${
-                                    pathname === subItem.href
-                                      ? "bg-indigo-50 text-indigo-700 font-medium"
-                                      : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
-                                  }`}
-                                >
-                                  {subItem.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </>
-                ) : (
-                  <Link
-                    href={item.href!}
-                    onMouseEnter={() => setHoveredPath(item.name)}
-                    onMouseLeave={() => setHoveredPath(null)}
-                    className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-colors z-10 ${
-                      isActive ? "text-indigo-600 font-medium bg-indigo-50/50" : "text-zinc-600 hover:text-zinc-900"
-                    }`}
-                  >
-                    <item.icon className={`w-5 h-5 ${isActive ? "text-indigo-600" : "text-zinc-400"}`} />
-                    <span className="relative z-10">{item.name}</span>
-                    {hoveredPath === item.name && !isActive && (
-                      <motion.div
-                        layoutId="activeNav"
-                        className="absolute inset-0 bg-zinc-100/80 rounded-xl pointer-events-none"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.15, ease: "easeOut" }}
-                      />
-                    )}
-                  </Link>
-                )}
+                <Link
+                  href={item.href!}
+                  onMouseEnter={() => setHoveredPath(item.name)}
+                  onMouseLeave={() => setHoveredPath(null)}
+                  className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-colors z-10 ${
+                    isActive ? "text-indigo-600 font-medium bg-indigo-50/50" : "text-zinc-600 hover:text-zinc-900"
+                  }`}
+                >
+                  <item.icon className={`w-5 h-5 ${isActive ? "text-indigo-600" : "text-zinc-400"}`} />
+                  <span className="relative z-10">{item.name}</span>
+                  {hoveredPath === item.name && !isActive && (
+                    <motion.div
+                      layoutId="activeNav"
+                      className="absolute inset-0 bg-zinc-100/80 rounded-xl pointer-events-none"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                    />
+                  )}
+                </Link>
               </div>
             );
           })}
