@@ -3,34 +3,12 @@
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, ChevronDown, CheckCircle2, Zap, LayoutTemplate, GaugeCircle, Plus, Minus, ArrowDown, Globe, ShoppingCart, Search, Target, Megaphone } from "lucide-react";
+import { ArrowUpRight, ChevronDown, CheckCircle2, Plus, Minus, ArrowDown, Globe, ShoppingCart, Search, Target, Megaphone } from "lucide-react";
 import { useState, useRef } from "react";
 
 // ─── Data ───
 
-const DOMAINS = [
-  {
-    id: "01",
-    icon: GaugeCircle,
-    title: "Performance First",
-    subtitle: "Prędkość jako waluta",
-    desc: "Z każdą sekundą ładowania strony tracisz klientów. Architektury, które wdrażamy ładują się błyskawicznie, uzyskując 100/100 punktów Google Lighthouse. Nie znosisz wolno działającego internetu? Twoi klienci też nie.",
-  },
-  {
-    id: "02",
-    icon: LayoutTemplate,
-    title: "Premium Design",
-    subtitle: "Rygor wizualny",
-    desc: "Zanim napiszemy linijkę kodu, tworzymy prototypy, które zachwycają. Estetyka na poziomie marek premium połączona z twardą logiką konwersji (UX/UI). Nie robimy szablonów. Każdy projekt to unikalne cyfrowe doświadczenie.",
-  },
-  {
-    id: "03",
-    icon: Zap,
-    title: "Szyte na Miarę",
-    subtitle: "Zrozumienie biznesu",
-    desc: "Odrzucamy obciążające systemy. Piszemy aplikacje rozwiązujące Twoje konkretne wąskie gardła. Twój system powinien dopasowywać się do Ciebie, a nie Ty do systemu.",
-  }
-];
+
 
 const SERVICES = [
   {
@@ -236,62 +214,7 @@ export default function ServicesPageClient() {
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          DLACZEGO MY — Sticky Layout
-      ═══════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-background border-t border-white/5 relative z-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
-            
-            {/* Sticky Header Side */}
-            <div className="lg:col-span-5 relative">
-              <div className="lg:sticky lg:top-40">
-                <span className="text-primary text-sm tracking-widest uppercase font-bold mb-6 block">
-                  Nasze Podejście
-                </span>
-                <h2 className="text-4xl md:text-6xl font-heading font-black tracking-tighter leading-[1] mb-8">
-                  Dlaczego <br/> wymiatają?
-                </h2>
-                <p className="text-white/40 text-lg md:text-xl leading-relaxed max-w-md">
-                  W dobie przeciętności, genialna szybkość i design wyróżnią Cię natychmiast. Porzucamy uciążliwe szablony na rzecz natywnych, dopieszczonych systemów.
-                </p>
-              </div>
-            </div>
 
-            {/* Scrolling Expertise Cards */}
-            <div className="lg:col-span-7 flex flex-col gap-8 md:gap-12 pt-8 lg:pt-0">
-              {DOMAINS.map((domain) => (
-                <motion.div
-                  key={domain.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7 }}
-                  className="p-8 md:p-12 rounded-3xl border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-primary/5 transition-all group relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                  
-                  <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors pointer-events-none select-none">
-                    {domain.id}
-                  </div>
-
-                  <div className="w-16 h-16 rounded-2xl border border-white/10 bg-white/[0.05] flex items-center justify-center mb-8 group-hover:scale-110 group-hover:border-primary/30 group-hover:bg-primary/10 transition-all duration-500 relative z-10">
-                    <domain.icon className="w-8 h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(25,163,84,0.5)]" />
-                  </div>
-
-                  <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 relative z-10">{domain.title}</h3>
-                  <span className="text-primary tracking-widest uppercase text-xs md:text-sm font-bold block mb-6 relative z-10">{domain.subtitle}</span>
-                  
-                  <p className="text-white/50 text-lg leading-relaxed group-hover:text-white/70 transition-colors relative z-10">
-                    {domain.desc}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════
           SERVICES GRID — Główna sekcja usług
