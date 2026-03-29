@@ -47,7 +47,12 @@ export const caseStudies = pgTable("case_studies", {
   id: serial("id").primaryKey(),
   slug: varchar("slug", { length: 255 }).notNull().unique(),
   clientName: varchar("client_name", { length: 255 }).notNull(),
+  clientLogo: text("client_logo"), // Path to client logo image
+  clientUrl: text("client_url"), // Client website URL
+  brandColor: varchar("brand_color", { length: 50 }), // Client brand color hex
   title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"), // Short description for cards/listings
+  category: varchar("category", { length: 100 }), // Web Development, Design, Marketing, Mobile
   challenge: text("challenge"),
   solution: text("solution"),
   results: json("results"), // Allow storing structured results like { "Growth": "+150%", "Time": "3 months" }

@@ -1,16 +1,17 @@
 import { db } from "@/db";
 import { caseStudies } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, ne } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CaseStudyDetailClient from "@/components/CaseStudyDetailClient";
 
 // Generate dynamic metadata for SEO based on the Case Study
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   
   const [caseStudy] = await db
-    .select({ title: caseStudies.title, clientName: caseStudies.clientName, coverImage: caseStudies.coverImage })
+    .select({ title: caseStudies.title, clientName: caseStudies.clientName, coverImage: caseStudies.coverImage, description: caseStudies.description })
     .from(caseStudies)
     .where(eq(caseStudies.slug, resolvedParams.slug))
     .limit(1);
@@ -21,10 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${caseStudy.title} | Case Studies Digitay`,
-    description: `Sprawdź jak pomogliśmy firmie ${caseStudy.clientName} osiągnąć mierzalne wyniki.`,
+    description: caseStudy.description || `Sprawdź jak pomogliśmy firmie ${caseStudy.clientName} osiągnąć mierzalne wyniki.`,
     openGraph: {
       title: `${caseStudy.title} - Sukces ${caseStudy.clientName} | Digitay`,
-      description: `Sprawdź pełne studium przypadku współpracy z ${caseStudy.clientName}.`,
+      description: caseStudy.description || `Sprawdź pełne studium przypadku współpracy z ${caseStudy.clientName}.`,
       url: `/case-study/${resolvedParams.slug}`,
       images: caseStudy.coverImage ? [
         {
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     twitter: {
        card: "summary_large_image",
        title: `${caseStudy.title} | Digitay`,
-       description: `Jak pomogliśmy firmie ${caseStudy.clientName}`,
+       description: caseStudy.description || `Jak pomogliśmy firmie ${caseStudy.clientName}`,
        images: caseStudy.coverImage ? [caseStudy.coverImage] : undefined,
     }
   };
@@ -57,20 +58,29 @@ export default async function SingleCaseStudyPage({ params }: { params: Promise<
     notFound();
   }
 
+  // Get next case study for navigation
+  const [nextStudy] = await db
+    .select({ slug: caseStudies.slug, title: caseStudies.title, clientName: caseStudies.clientName })
+    .from(caseStudies)
+    .where(ne(caseStudies.slug, resolvedParams.slug))
+    .limit(1);
+
+  // Serialize dates for client component
+  const serializedStudy = {
+    ...caseStudy,
+    tags: caseStudy.tags as string[] | null,
+    results: caseStudy.results as Record<string, string> | null,
+    createdAt: caseStudy.createdAt,
+  };
+
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-32 pb-24 text-white p-8 max-w-4xl mx-auto flex flex-col items-center justify-center">
-         <h1 className="text-4xl font-bold mb-4">{caseStudy.title}</h1>
-         <p className="text-zinc-400 mb-8">Klient: {caseStudy.clientName}</p>
-         {caseStudy.coverImage && (
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={caseStudy.coverImage} className="w-full aspect-video object-cover rounded-xl mb-8" alt="Cover"/>
-            </>
-         )}
-         <div className="prose prose-invert max-w-none w-full" dangerouslySetInnerHTML={{ __html: caseStudy.challenge || "" }} />
-         <div className="prose prose-invert max-w-none w-full border-t border-zinc-800 pt-8 mt-8" dangerouslySetInnerHTML={{ __html: caseStudy.solution || "" }} />
+      <main className="min-h-screen">
+        <CaseStudyDetailClient
+          caseStudy={serializedStudy}
+          nextCaseStudy={nextStudy || null}
+        />
       </main>
       <Footer />
     </>

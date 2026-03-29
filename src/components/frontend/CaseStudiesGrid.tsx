@@ -10,6 +10,7 @@ type CaseStudy = {
   slug: string;
   clientName: string;
   title: string;
+  description?: string | null;
   coverImage: string | null;
   tags: unknown;
 };
@@ -131,6 +132,11 @@ function CaseStudyRow({
               {study.title}
             </h3>
 
+            {study.description && (
+              <p className="text-white/40 text-sm leading-relaxed line-clamp-2 mt-3 max-w-xl">
+                {study.description}
+              </p>
+            )}
             {tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4">
                 {tags.slice(0, 4).map((tag, i) => (

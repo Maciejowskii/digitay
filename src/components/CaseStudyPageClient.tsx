@@ -13,10 +13,10 @@ type CaseStudy = {
   slug: string;
   clientName: string;
   title: string;
-  description?: string;
+  description?: string | null;
   coverImage: string | null;
   tags: unknown;
-  category?: string;
+  category?: string | null;
 };
 
 const blurDataUrl =
