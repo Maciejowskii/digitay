@@ -13,7 +13,7 @@ export default auth((req) => {
 
   // Redirect logged-in users away from /login page
   if (isAuthPage && isLoggedIn) {
-    return NextResponse.redirect(new URL("/admin/case-studies", req.nextUrl));
+    return NextResponse.redirect(new URL("/admin", req.nextUrl));
   }
 
   return NextResponse.next();

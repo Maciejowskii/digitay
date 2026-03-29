@@ -6,7 +6,7 @@ export async function loginAction(formData: FormData) {
   try {
     await signIn("credentials", {
       ...Object.fromEntries(formData),
-      redirectTo: "/admin/case-studies",
+      redirectTo: "/admin",
     });
   } catch (error) {
     if ((error as any).type === "CredentialsSignin") {

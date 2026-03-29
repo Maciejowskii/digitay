@@ -6,14 +6,13 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
-  Briefcase,
   FileText,
-  Users,
   Settings,
   ChevronDown,
   LogOut,
   User as UserIcon,
 } from "lucide-react";
+import { logoutAction } from "@/app/admin/actions";
 
 // Nav items definition
 const navItems = [
@@ -27,6 +26,12 @@ export default function Sidebar() {
   const pathname = usePathname() || "";
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    await logoutAction();
+  };
 
   return (
     <aside className="w-64 h-full bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col justify-between py-6 px-4 border border-zinc-100 overflow-y-auto">
@@ -111,9 +116,13 @@ export default function Sidebar() {
                Mój Profil
              </button>
              <div className="h-px bg-zinc-100 my-1 mx-4" />
-             <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors">
+             <button
+               onClick={handleLogout}
+               disabled={isLoggingOut}
+               className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+             >
                <LogOut className="w-4 h-4" />
-               Wyloguj
+               {isLoggingOut ? "Wylogowywanie..." : "Wyloguj"}
              </button>
            </motion.div>
           )}
