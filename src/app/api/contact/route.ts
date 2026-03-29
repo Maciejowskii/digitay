@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     // Attempt to send email
     const data = await resend.emails.send({
       from: "Digitay Formularz <onboarding@resend.dev>", // Replace with a verified domain moving forward e.g hello@digitay.pl
-      to: process.env.ADMIN_EMAIL || "maciej.tyra@gmail.com", // Fallback to your likely email based on path
+      to: process.env.ADMIN_EMAIL || "kontakt@digitay.pl", // Fallback to your primary contact email
       subject: `[NOWY LEAD] ${name} - Digitay.pl`,
       html: htmlContent,
       replyTo: phone.includes('@') ? phone : undefined,
