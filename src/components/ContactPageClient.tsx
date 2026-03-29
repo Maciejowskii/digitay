@@ -99,9 +99,14 @@ export default function ContactPageClient() {
                   <p className="text-xs font-mono uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
                     <Phone className="w-4 h-4" /> Zadzwoń do nas
                   </p>
-                  <a href="tel:+48123456789" className="text-xl md:text-3xl font-medium text-white/90 hover:text-primary transition-colors">
-                    +48 123 456 789
-                  </a>
+                  <div className="flex flex-col gap-2">
+                    <a href="tel:+48733172145" className="text-xl md:text-3xl font-medium text-white/90 hover:text-primary transition-colors">
+                      +48 733 172 145
+                    </a>
+                    <a href="tel:+48535645322" className="text-xl md:text-3xl font-medium text-white/90 hover:text-primary transition-colors">
+                      +48 535 645 322
+                    </a>
+                  </div>
                 </div>
 
                 <div className="group">
@@ -109,7 +114,7 @@ export default function ContactPageClient() {
                     <MapPin className="w-4 h-4" /> Odwiedź biuro
                   </p>
                   <p className="text-lg text-white/70 leading-relaxed">
-                    ul. Cybernetyki 10<br/>02-677 Warszawa
+                    ul. Cyfrowa 2-8<br/>71-441 Szczecin, Poland
                   </p>
                 </div>
               </div>
