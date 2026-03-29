@@ -278,6 +278,75 @@ async function seed() {
   `;
 
   console.log("  ✓ Inserted: Kosmetolog Rosanna case study");
+
+  // Insert Bling & Bliss case study
+  await client`
+    INSERT INTO case_studies (
+      slug,
+      client_name,
+      client_logo,
+      client_url,
+      brand_color,
+      title,
+      description,
+      category,
+      challenge,
+      solution,
+      results,
+      cover_image,
+      tags,
+      is_published,
+      created_at,
+      updated_at
+    ) VALUES (
+      'blingbliss-pozycjonowanie-wizytowki-google',
+      'Bling&Bliss',
+      '/images/case-studies/blingblislogo.jpeg',
+      'https://booksy.com/pl-pl/288944_bling-bliss-aleksandra-szawarejko-stargard-piercing-beauty-estetyka_medycyna-estetyczna_19389_stargard-szczecinski',
+      '#D4AF37',
+      'Optymalizacja wizytówki Google i pozycjonowanie lokalne salonu Bling&Bliss',
+      'Szczegółowa optymalizacja wizytówki Google Business Profile dla gabinetu piercingu i zabiegów estetycznych z ukierunkowaniem na kluczowe frazy lokalne.',
+      'Marketing',
+      ${`<div class="case-challenge">
+<h3>Wyzwanie i cel</h3>
+<p>Wizytówka salonu <strong>Bling&amp;Bliss</strong> w Stargardzie wymagała lepszej widoczności w wyszukiwaniach lokalnych, w tym na frazy takie jak: <em>piercing Stargard</em>, <em>mezoterapia igłowa Stargard</em> czy <em>przedłużanie rzęs Stargard</em>.</p>
+<p>Oryginalny opis był atrakcyjny wizualnie, ale <strong>brakowało w nim precyzyjnych słów kluczowych</strong>, odpowiedniej struktury pod pozycjonowanie oraz zwięzłości.</p>
+<p>Nadrzędnym celem było zwiększenie zapytań o konkretne, zyskowne usługi: specjalistyczny piercing, mezoterapię igłową, oczyszczanie wodorowe oraz zabiegi na brwi i rzęsy.</p>
+</div>`},
+      ${`<div class="case-solution">
+<h3>Wdrożona strategia</h3>
+
+<h4>1. Analiza i przepisanie treści</h4>
+<p>Przeprowadziliśmy szczegółową analizę historii zapytań klientów oraz screenów usług. Nowy opis wizytówki to w 100% naturalnie brzmiący, ludzki tekst, w który precyzyjnie wpleciono frazy kluczowe <strong>bez efektu sztucznego upychania (keyword stuffing)</strong>.</p>
+<p>Zrezygnowaliśmy z nadmiernego, utrudniającego odbiór formatowania i dziesiątek emotikon – wprowadzając czysty, zwięzły opisy budujący wizerunek profesjonalnego salonu.</p>
+
+<h4>2. Nowa struktura pod SEO</h4>
+<p>Wprowadziliśmy czytelną architekturę informacji w opisie:</p>
+<ul>
+<li>Spersonalizowane i angażujące wprowadzenie</li>
+<li>Dokładna lista świadczonych usług dla budowania autorytetu w Google</li>
+<li>Wyeksponowane korzyści: sterylność, bezpieczeństwo, precyzja i naturalny <em>efekt glow</em></li>
+<li>Jasne lokalne wezwanie do działania (CTA) promujące adres.</li>
+</ul>
+
+<h4>3. Błyskawiczne wdrożenie</h4>
+<p>Po bardzo sprawnej, zaledwie 15-minutowej iteracji i akceptacji z klientem — zoptymalizowany opis o długości poniżej 650 znaków został natychmiast opublikowany w profilu firmy.</p>
+</div>`},
+      ${JSON.stringify({
+        "Czas iteracji": "15 minut",
+        "Szacowane zapytania": "+20-30%",
+        "Zgodność SEO": "Wdrożona",
+        "Emotki": "Wykluczone"
+      })},
+      'https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80',
+      ${JSON.stringify(["Wizytówka Google", "Lokalne SEO", "Marketing", "Beauty", "Copywriting"])},
+      true,
+      NOW(),
+      NOW()
+    )
+  `;
+
+  console.log("  ✓ Inserted: Bling & Bliss case study");
   console.log("\n✅ Seeding complete!");
 
   await client.end();

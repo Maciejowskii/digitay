@@ -111,7 +111,16 @@ export default function Footer() {
               © {new Date().getFullYear()} Digitay. Wszelkie prawa zastrzeżone.
             </p>
             <p className="text-white/15">
-              digital partner // since 2025
+              digital partner // since 2022 //{" "}
+              <a
+                href="https://www.linkedin.com/in/maciejtyra/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary/60 transition-colors"
+                title="Maciej Tyra - Author"
+              >
+                code & design by Maciej Tyra
+              </a>
             </p>
           </div>
           <div className="flex gap-6 text-white/30">
