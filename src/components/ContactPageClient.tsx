@@ -90,8 +90,8 @@ export default function ContactPageClient() {
                   <p className="text-xs font-mono uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
                     <Mail className="w-4 h-4" /> Napisz bezpośrednio
                   </p>
-                  <a href="mailto:hello@digitay.pl" className="text-xl md:text-3xl font-medium text-white/90 hover:text-primary transition-colors">
-                    hello@digitay.pl
+                  <a href="mailto:kontakt@digitay.pl" className="text-xl md:text-3xl font-medium text-white/90 hover:text-primary transition-colors">
+                    kontakt@digitay.pl
                   </a>
                 </div>
 
