@@ -288,68 +288,61 @@ export default function WebDevClientPage() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          PROCESS (Sticky Story)
+          PROCESS (Compact Timeline)
       ═══════════════════════════════════════════════ */}
-      <section className="py-24 md:py-40 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:sticky lg:top-40"
-            >
-              <span className="text-primary text-sm tracking-widest uppercase font-bold mb-6 block">
-                Zza kulis
-              </span>
-              <h2 className="text-4xl md:text-6xl font-heading font-black tracking-tight leading-[1.1] mb-8">
-                Od briefu do <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30">
-                  działającej strony
-                </span>
-              </h2>
-              <p className="text-white/40 text-lg max-w-sm leading-relaxed mb-8">
-                Sprawdzony 4-etapowy proces, który eliminuje domysły i zapewnia przewidywalny rezultat.
-              </p>
-              
-              <Link
-                href="/kontakt"
-                className="group inline-flex items-center gap-4 text-white font-medium text-lg hover:text-primary transition-colors"
+      <section className="py-24 relative z-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 md:mb-20 text-center"
+          >
+            <span className="text-primary text-sm tracking-widest uppercase font-bold mb-4 block">
+              Zza kulis
+            </span>
+            <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tight mb-6">
+              Od briefu do <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30 italic font-light">działającej strony</span>
+            </h2>
+            <p className="text-white/50 text-lg max-w-2xl mx-auto leading-relaxed">
+              Sprawdzony 4-etapowy proces projektowy. Pracujemy zwinnie, bez niespodzianek, dowożąc założony rezultat w umówionym czasie.
+            </p>
+          </motion.div>
+
+          {/* Timeline Grid */}
+          <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {processSteps.map((step, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="relative z-10 p-8 rounded-3xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.03] hover:border-primary/20 transition-all duration-500 overflow-hidden group hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/[0.05]"
               >
-                <div className="w-14 h-14 rounded-full bg-white/[0.05] border border-white/10 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-colors">
-                  <ArrowUpRight className="w-5 h-5 text-white group-hover:text-primary" />
+                {/* Top highlight bar */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary/0 via-primary/40 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
+                {/* Watermark Number */}
+                <div className="absolute right-6 top-6 text-6xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors pointer-events-none select-none">
+                  {step.num}
                 </div>
-                Rozpocznij projekt
-              </Link>
-            </motion.div>
-
-            <div className="flex flex-col gap-8 md:gap-12 lg:pt-12 mt-8 lg:mt-0">
-              {processSteps.map((step, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6 }}
-                  className="p-8 md:p-10 rounded-3xl border border-white/5 bg-white/[0.01] backdrop-blur-sm relative overflow-hidden group hover:border-primary/20 hover:bg-white/[0.03] transition-all duration-500"
-                >
-                  <div className="absolute top-8 right-8 text-6xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">
-                    {step.num}
-                  </div>
-                  
-                  <div className="w-14 h-14 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-center mb-8 relative z-10 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all">
-                    <step.icon className="w-6 h-6 text-white/70 group-hover:text-primary" />
+                
+                <div className="flex flex-col items-start text-left relative z-10">
+                  <div className="w-14 h-14 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-500 mb-6">
+                    <step.icon className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors" />
                   </div>
 
-                  <h3 className="text-2xl font-heading font-bold text-white mb-4 relative z-10 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-heading font-bold text-white mb-3 group-hover:text-primary transition-colors">
                     {step.title}
                   </h3>
-                  <p className="text-white/50 text-lg leading-relaxed relative z-10">
+                  <p className="text-white/50 text-sm leading-relaxed">
                     {step.desc}
                   </p>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
