@@ -174,12 +174,12 @@ export default function CaseStudyDetailClient({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="py-10 md:py-14 px-4 md:px-8 text-center group"
+                  className="py-8 md:py-12 px-2 sm:px-4 md:px-6 text-center group flex flex-col items-center justify-start h-full min-w-0"
                 >
-                  <div className="text-3xl md:text-5xl font-heading font-black text-white tracking-tight group-hover:text-primary transition-colors duration-500 mb-2">
-                    {value}
+                  <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl font-heading font-black text-white tracking-tight group-hover:text-primary transition-colors duration-500 mb-3 w-full break-words leading-tight flex-1 flex items-center justify-center min-w-0">
+                    {typeof value === 'string' ? value.replace(/-/g, '\u2011') : value}
                   </div>
-                  <div className="text-white/40 text-xs md:text-sm uppercase tracking-widest font-medium">
+                  <div className="text-white/40 text-[10px] sm:text-xs md:text-sm uppercase tracking-widest font-medium w-full text-balance leading-snug px-1">
                     {label}
                   </div>
                 </motion.div>
