@@ -51,9 +51,12 @@ type ContactFormValues = z.infer<typeof contactSchema>;
 
 interface ContactFaqProps {
   customFaqs?: { question: string; answer: string }[];
+  hideFaq?: boolean;
+  hideForm?: boolean;
+  id?: string;
 }
 
-export default function ContactFaq({ customFaqs }: ContactFaqProps) {
+export default function ContactFaq({ customFaqs, hideFaq, hideForm, id = "contact" }: ContactFaqProps) {
   const activeFaqs = customFaqs || defaultFaqs;
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -99,11 +102,12 @@ export default function ContactFaq({ customFaqs }: ContactFaqProps) {
   };
 
   return (
-    <section id="contact" className="relative bg-background overflow-hidden">
+    <section id={id} className={`relative bg-background overflow-hidden ${hideForm ? 'pt-20' : ''}`}>
       {/* CTA Banner - inspired by reference "Need something built?" */}
-      <div className="py-24 md:py-32 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      {!hideForm && (
+        <div className="py-24 md:py-32 border-t border-white/5">
+          <div className="max-w-6xl mx-auto px-6 md:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
             {/* Left: CTA */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -236,10 +240,12 @@ export default function ContactFaq({ customFaqs }: ContactFaqProps) {
           </div>
         </div>
       </div>
+      )}
 
       {/* FAQ Section */}
-      <div className="py-20 border-t border-white/5">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
+      {!hideFaq && (
+        <div className="py-20 border-t border-white/5">
+          <div className="max-w-4xl mx-auto px-6 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -295,6 +301,7 @@ export default function ContactFaq({ customFaqs }: ContactFaqProps) {
           </div>
         </div>
       </div>
+      )}
     </section>
   );
 }

@@ -8,6 +8,7 @@ import ServicesBento from "@/components/ServicesBento";
 import Testimonials from "@/components/frontend/Testimonials";
 import ContactFaq from "@/components/ContactFaq";
 import Footer from "@/components/Footer";
+import HomeContactForm from "@/components/HomeContactForm";
 
 export default function Home() {
   return (
@@ -15,12 +16,13 @@ export default function Home() {
       <Navbar />
       <Hero />
       <AboutIntro />
+      <HomeContactForm />
       <LogoMarquee />
       <CaseStudies />
       <Manifesto />
       <ServicesBento />
       <Testimonials />
-      <ContactFaq />
+      <ContactFaq hideForm />
       <Footer />
     </main>
   );

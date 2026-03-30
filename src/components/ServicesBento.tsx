@@ -201,9 +201,9 @@ export default function ServicesBento() {
               transition={{ duration: 0.8 }}
               className="text-4xl md:text-5xl lg:text-7xl font-heading font-black text-white leading-[1] tracking-tight"
             >
-              Nasz chleb
+              Sprawdź nasze
               <br />
-              <span className="text-white/40 font-light italic">powszedni</span>
+              <span className="text-white/40 font-light italic">usługi</span>
             </motion.h2>
           </div>
 

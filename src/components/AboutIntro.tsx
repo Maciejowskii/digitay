@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView, useSpring, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Rocket, Code, Palette, TrendingUp } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 
@@ -13,32 +13,7 @@ const STATS = [
   { number: 12, suffix: "", label: "Ekspertów w zespole" },
 ];
 
-const PILLARS = [
-  {
-    id: "01",
-    icon: Rocket,
-    title: "Strategia",
-    desc: "Zanim napiszemy linijkę kodu, dokładnie rozumiemy Twój biznes. Analizujemy rynek, robimy research konkurencji i mapujemy potrzeby Twoich przyszłych użytkowników. To fundament pod produkt, który ma odnieść rynkowy sukces.",
-  },
-  {
-    id: "02",
-    icon: Palette,
-    title: "Design",
-    desc: "Projektujemy interfejsy z obsesją na punkcie detali. Dbamy o to, by wyglądały spektakularnie, ale przede wszystkim były intuicyjne i prowadziły użytkownika prosto do celu. Każdy pixel ma swoje zadanie.",
-  },
-  {
-    id: "03",
-    icon: Code,
-    title: "Development",
-    desc: "Budujemy skalowalne, bezpieczne i błyskawicznie szybkie aplikacje używając najnowocześniejszego stacku technologicznego. Piszemy czysty kod, który Twoi przyszli deweloperzy pokochają.",
-  },
-  {
-    id: "04",
-    icon: TrendingUp,
-    title: "Wzrost",
-    desc: "Launch to dopiero początek. Zapewniamy kompleksowe wsparcie powdrożeniowe, dbamy o SEO, optymalizujemy konwersję i prowadzimy kampanie, by Twój produkt rósł z miesiąca na miesiąc.",
-  },
-];
+
 
 // Counter that animates from 0 to target
 function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
@@ -97,8 +72,6 @@ function BackgroundGlow() {
 
 export default function AboutIntro() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [rocketClicks, setRocketClicks] = useState(0);
-  const [showElon, setShowElon] = useState(false);
 
   return (
     <section
@@ -156,8 +129,7 @@ export default function AboutIntro() {
           >
             Nie jesteśmy kolejną agencją, która "robi strony". Jesteśmy
             technologicznym partnerem, z którym zbudujesz nowy standard na
-            swoim rynku. Od strategii, przez ultra-nowoczesny design, po 
-            niezawodny kod.
+            swoim rynku. Od strategii, przez ultra-nowoczesny design, po dostarczanie klientów do twojej firmy.
           </motion.p>
 
           {/* CTA buttons */}
@@ -172,13 +144,13 @@ export default function AboutIntro() {
               href="/o-nas"
               className="group relative inline-flex items-center gap-3 bg-white text-background px-8 py-4 rounded-full font-bold hover:bg-white/90 transition-all duration-300"
             >
-              Dowiedz się więcej o nas
+              Zobacz Case Study
             </Link>
             <Link
               href="/kontakt"
               className="inline-flex items-center gap-2 border border-white/10 text-white/80 px-8 py-4 rounded-full font-medium hover:border-white/30 hover:text-white hover:bg-white/5 transition-all duration-300"
             >
-              Porozmawiajmy o projekcie
+              Umów Konsultację
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -212,132 +184,6 @@ export default function AboutIntro() {
           </div>
         </div>
       </div>
-
-      {/* ─── PART 3: Sticky Pillars Layout ─── */}
-      <div className="py-24 md:py-48 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          
-          <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
-            
-            {/* Left side: Sticky Header */}
-            <div className="lg:w-1/3">
-              <div className="sticky top-32">
-                <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white tracking-tight mb-6"
-                >
-                  Proces<span className="text-primary">.</span>
-                </motion.h3>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="text-white/50 text-lg"
-                >
-                  Nasz system pracy gwarantuje, że nie przepalamy ani godziny.
-                  Dostarczamy ultra-jakość na każdym etapie.
-                </motion.p>
-              </div>
-            </div>
-
-            {/* Right side: Scrolling Cards */}
-            <div className="lg:w-2/3 flex flex-col gap-8 md:gap-12">
-              {PILLARS.map((pillar, i) => (
-                <motion.div
-                  key={pillar.title}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.7 }}
-                  className="group relative p-8 md:p-12 rounded-3xl border border-white/5 bg-[#0A131F]/50 backdrop-blur-md overflow-hidden"
-                >
-                  {/* Hover background glow */}
-                  <div className="absolute -inset-full bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-2xl pointer-events-none" />
-
-                  <div className="relative z-10 flex flex-col gap-6">
-                    {/* Header line: Icon + Title + Number */}
-                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
-                      <div 
-                        className="shrink-0 w-16 h-16 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-colors duration-500"
-                        onClick={() => {
-                          if (pillar.title === "Strategia") {
-                            const newCount = rocketClicks + 1;
-                            setRocketClicks(newCount);
-                            if (newCount === 5) {
-                              setShowElon(true);
-                              setRocketClicks(0);
-                              setTimeout(() => setShowElon(false), 15000);
-                            }
-                          }
-                        }}
-                        style={{ cursor: pillar.title === "Strategia" ? "pointer" : "default" }}
-                      >
-                        <pillar.icon className="w-7 h-7 text-white/50 group-hover:text-primary transition-colors" />
-                      </div>
-                      
-                      <h4 className="text-2xl md:text-3xl font-heading font-bold text-white tracking-tight flex-1">
-                        {pillar.title}
-                      </h4>
-                      
-                      <span className="text-5xl md:text-6xl font-heading font-black text-white/5 group-hover:text-white/10 transition-colors md:ml-auto select-none pointer-events-none self-start md:self-auto">
-                        {pillar.id}
-                      </span>
-                    </div>
-
-                    {/* Text block */}
-                    <div>
-                      <p className="text-white/50 text-base md:text-lg leading-relaxed group-hover:text-white/80 transition-colors duration-500">
-                        {pillar.desc}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      {/* ─── EASTER EGG: ELON MUSK ─── */}
-      <AnimatePresence>
-        {showElon && (
-          <motion.div
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: "100%", opacity: 0 }}
-            transition={{ type: "spring", damping: 15 }}
-            className="fixed bottom-0 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center pointer-events-none"
-          >
-            {/* Speech Bubble */}
-            <motion.div 
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              transition={{ delay: 0.5, type: "spring" }}
-              className="mb-6 relative bg-white text-black p-6 rounded-3xl max-w-sm shadow-2xl origin-bottom"
-            >
-              <p className="text-lg font-medium italic text-center">
-                "Nie mierz siebie tym, co osiągnąłeś, ale tym, co powinieneś osiągnąć ze swoimi możliwościami."
-              </p>
-              {/* Triangle for bubble */}
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 border-x-[12px] border-x-transparent border-t-[14px] border-t-white" />
-            </motion.div>
-
-            {/* Dancing Elon Image */}
-            <motion.img
-              src="/elon.jpg"
-              alt="Elon"
-              className="w-48 h-48 rounded-full border-8 border-primary object-cover shadow-2xl"
-              animate={{ rotate: [-10, 10, -10] }}
-              transition={{ repeat: Infinity, duration: 1, ease: "easeInOut" }}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

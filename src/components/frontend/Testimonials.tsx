@@ -47,7 +47,7 @@ export default async function Testimonials() {
         "Kampanie Google Ads wreszcie zaczęły na siebie zarabiać. Świetny kontakt z zespołem Digitay, wszystkie zmiany wprowadzane są błyskawicznie.",
       avatarUrl:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=256&auto=format&fit=crop",
-      rating: 4,
+      rating: 5,
     },
     {
       id: 994,
@@ -77,10 +77,10 @@ export default async function Testimonials() {
               [ Co mówią klienci ]
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-white tracking-tight leading-[1.1]">
-              Nie wierz nam
+              Nie wierz nam na słowo
               <br />
               <span className="text-white/40 italic font-light">
-                na słowo.
+                - sprawdź nasze opinie
               </span>
             </h2>
           </div>

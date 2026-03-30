@@ -29,9 +29,9 @@ export default async function CaseStudies() {
             [ Realizacje ]
           </span>
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black text-white tracking-tight leading-[1]">
-            Ostatnie
+            Sukcesy naszych
             <br />
-            <span className="text-white/40 font-light italic">realizacje.</span>
+            <span className="text-white/40 font-light italic">Klientów.</span>
           </h2>
         </div>
 

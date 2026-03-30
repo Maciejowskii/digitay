@@ -19,7 +19,7 @@ export default function Manifesto() {
   const PHRASES = [
     { text: "Bez ściemy.", highlight: false },
     { text: "Bez lania wody.", highlight: false },
-    { text: "Same ", highlight: false, noSpace: true },
+    { text: "Same ", highlight: false, noSpace: false },
     { text: "konkrety.", highlight: true }
   ];
 
@@ -117,7 +117,7 @@ export default function Manifesto() {
               <span className="absolute inset-[1px] rounded-full bg-background" />
             </span>
             <span className="relative z-10 flex items-center gap-3">
-              Współpracujmy
+              Umów Konsultacje
               <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </span>
           </Link>

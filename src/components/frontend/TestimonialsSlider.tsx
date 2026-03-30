@@ -36,11 +36,7 @@ export function TestimonialsSlider({ testimonials }: { testimonials: any[] }) {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-4 h-4 ${
-                    i < (item.rating || 5)
-                      ? "text-primary fill-primary"
-                      : "text-white/10"
-                  }`}
+                  className="w-4 h-4 text-primary fill-primary"
                 />
               ))}
             </div>
@@ -65,7 +61,12 @@ export function TestimonialsSlider({ testimonials }: { testimonials: any[] }) {
                   {item.authorName}
                 </p>
                 <p className="text-primary/70 text-xs">
-                  {item.authorRole} {item.company && ` • ${item.company}`}
+                  {(() => {
+                    const role = item.authorRole || "";
+                    const comp = item.company ? `, ${item.company}` : "";
+                    const combined = `${role}${comp}`;
+                    return combined.replace(/\s*[-–—•]\s*/g, ', ').replace(/,\s*,/g, ',');
+                  })()}
                 </p>
               </div>
             </div>

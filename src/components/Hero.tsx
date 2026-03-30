@@ -85,12 +85,12 @@ export default function Hero() {
           style={{ opacity: taglineOpacity }}
           className="absolute left-8 md:left-16 top-[45%] -translate-y-1/2 z-10"
         >
-          <p className="text-white/60 text-sm md:text-base font-light leading-relaxed max-w-[200px]">
-            Tworzymy strony,
+          <p className="text-white/80 text-xl md:text-3xl font-light leading-[1.4] max-w-sm md:max-w-lg">
+            Działania w sieci,
             <br />
-            które ludzie
+            które przyniosą twojej firmie
             <br />
-            zapamiętują.
+            klientów i widoczność
           </p>
         </motion.div>
 
