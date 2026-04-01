@@ -113,7 +113,7 @@ export default function Footer() {
             <p className="text-white/15">
               digital partner // since 2022 //{" "}
               <a
-                href="https://www.linkedin.com/in/maciejtyra/"
+                href="https://maciejtyra.dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-primary/60 transition-colors"
