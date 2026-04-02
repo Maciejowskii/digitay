@@ -15,9 +15,7 @@ export default function Footer() {
               digitay<span className="text-primary">.</span>
             </Link>
             <p className="text-white/40 text-sm leading-relaxed max-w-xs">
-              Cyfrowa agencja i software house.
-              <br />
-              Analiza, design, development i wdrożenie.
+              Cyfrowa agencja marketingowa specjalizująca się w małych i średnich firmach.
             </p>
           </div>
 

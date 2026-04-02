@@ -3,9 +3,9 @@ import Footer from "@/components/Footer";
 import AboutPageClient from "@/components/AboutPageClient";
 
 export const metadata = {
-  title: "O nas | Digitay – Software House & Agencja Kreatywna",
+  title: "O nas | Digitay – Cyfrowa Agencja Marketingowa",
   description:
-    "Poznaj zespół Digitay. Wyspecjalizowany software house łączący inżynierski rygor z bezkompromisowym designem. Budujemy produkty cyfrowe przyszłości.",
+    "Poznaj zespół Digitay. Cyfrowa agencja marketingowa specjalizująca się w małych i średnich firmach. Budujemy produkty cyfrowe przyszłości.",
 };
 
 export default function AboutPage() {

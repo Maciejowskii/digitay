@@ -173,7 +173,7 @@ export default function AboutPageClient() {
             style={{ opacity: textOpacity }}
             className="mt-16 text-white/50 text-base md:text-xl max-w-xl text-center leading-relaxed"
           >
-            Wyspecjalizowany software house. Łączymy inżynieryjny rygor z bezkompromisowym designem, tworząc maszyny do skalowania Twojego biznesu.
+            Cyfrowa agencja marketingowa. Specjalizujemy się w obsłudze małych i średnich firm, tworząc maszyny do skalowania Twojego biznesu.
           </motion.p>
         </div>
 
@@ -248,7 +248,7 @@ export default function AboutPageClient() {
               className="lg:col-span-7 pt-4 lg:pt-12"
             >
               <p className="text-2xl md:text-3xl font-heading font-medium text-white/90 leading-tight mb-8">
-                Digitay to wyspecjalizowany software house, w którym technologia nie jest celem samym w sobie, lecz narzędziem do budowania mierzalnej przewagi rynkowej.
+                Digitay to cyfrowa agencja marketingowa, w której technologia nie jest celem samym w sobie, lecz narzędziem do budowania mierzalnej przewagi rynkowej.
               </p>
               <div className="space-y-6 text-white/50 text-lg leading-relaxed">
                 <p>

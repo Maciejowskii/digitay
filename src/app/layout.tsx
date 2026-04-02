@@ -16,28 +16,33 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://digitay.pl";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Digitay | Zamieniamy pomysły w działające produkty",
-  description: "Cyfrowa agencja i software house. Analiza, design, development i wdrożenie. Skup się na wizji, my zajmiemy się realizacją.",
+  title: "Digitay | Cyfrowa Agencja Marketingowa dla MŚP",
+  description: "Eksperckie tworzenie stron, sklepów i kampanii reklamowych (Ads/SEO). Pomagamy małym i średnim firmom rosnąć dzięki danym i designowi.",
   openGraph: {
     type: "website",
     locale: "pl_PL",
     url: SITE_URL,
     siteName: "Digitay",
-    title: "Digitay | Zamieniamy pomysły w działające produkty",
-    description: "Cyfrowa agencja i software house. Analiza, design, development i wdrożenie.",
+    title: "Digitay | Twoja przewaga w cyfrowym świecie",
+    description: "Profesjonalne strony WWW, e-commerce i skuteczny marketing. Sprawdź, jak Digitay wspiera rozwój Twojego biznesu.",
     images: [
       {
-         url: "/opengraph-image.png", // Dodamy ten obrazek do /public w przyszlosci dla default state
+         url: "/opengraph-image.png",
          width: 1200,
          height: 630,
-         alt: "Digitay Open Graph Image",
+         alt: "Digitay - Cyfrowa Agencja Marketingowa",
       }
     ]
   },
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
   twitter: {
     card: "summary_large_image",
-    title: "Digitay | Zamieniamy pomysły w działające produkty",
-    description: "Cyfrowa agencja i software house. Analiza, design, development i wdrożenie.",
+    title: "Digitay | Cyfrowa Agencja Marketingowa",
+    description: "Skuteczne kampanie i nowoczesne strony internetowe dla sektora MŚP.",
+    images: ["/opengraph-image.png"],
   }
 };
 
