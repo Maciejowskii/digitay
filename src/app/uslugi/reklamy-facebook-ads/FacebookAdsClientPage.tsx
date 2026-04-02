@@ -77,7 +77,7 @@ export default function FacebookAdsClientPage() {
         >
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/40 via-background/60 to-background" />
           <Image
-            src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2674&auto=format&fit=crop"
+            src="/images/uslugi/meta_ads_hero_bg.png"
             alt="Facebook Ads Background"
             fill
             className="object-cover opacity-30 select-none grayscale mix-blend-luminosity brightness-150 contrast-125"

@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CITIES } from "@/data/cities";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import LocalEcommerceClientPage from "../LocalSklepyInternetoweClientPage";
 
 interface Props {
@@ -34,5 +36,11 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  return <LocalEcommerceClientPage city={city} />;
+  return (
+    <>
+      <Navbar />
+      <LocalEcommerceClientPage city={city} />
+      <Footer />
+    </>
+  );
 }

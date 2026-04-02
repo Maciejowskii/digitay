@@ -26,10 +26,10 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "100%", label: "Mierzalność wyników" },
-  { value: "<24h", label: "Czas na pierwsze efekty" },
-  { value: "24/7", label: "Twoja oferta widoczna zawsze" },
-  { value: "Xx", label: "Zwrot z inwestycji (ROAS)" },
+  { value: "3.2x", label: "Średni ROAS kampanii" },
+  { value: "-42%", label: "Redukcja kosztu konwersji" },
+  { value: "200+", label: "Zarządzanych kampanii" },
+  { value: "<8h", label: "Czas reakcji (Pakiet Pro)" },
 ];
 
 const faqsData = [
@@ -234,41 +234,42 @@ export default function LocalGoogleAdsClientPage({ city }: LocalGoogleAdsClientP
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] flex flex-col">
+            <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] flex flex-col group hover:bg-white/[0.05] transition-all">
+               <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">01</div>
                <span className="text-xs uppercase tracking-widest text-white/40 mb-2">Basic</span>
-               <div className="text-3xl font-heading font-black text-white mb-4">900 zł <span className="text-sm text-white/30">/ mies.</span></div>
-               <p className="text-sm text-white/50 mb-6 font-medium">Budżet do 5 000 zł</p>
+               <div className="text-3xl font-heading font-black text-white mb-4">753 zł <span className="text-sm text-white/30">/ mies.</span></div>
                <ul className="space-y-3 mb-8 flex-grow text-sm">
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Setup kampanii</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> 2 kampanie (Search / Display)</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Podstawowy landing page (opcja)</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Miesięczny raport</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Setup i konfiguracja konta</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> 1 kampania + remarketing</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Kreacje: 4/mies.</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Raport miesięczny</li>
                </ul>
                <Link href="/kontakt" className="w-full py-4 rounded-full border border-white/10 text-center font-bold hover:bg-white/5 transition-all text-sm">Wybierz pakiet</Link>
             </div>
             
-            <div className="p-8 rounded-3xl border border-primary/30 bg-primary/5 flex flex-col scale-105 shadow-2xl shadow-primary/10">
-               <span className="text-xs uppercase tracking-widest text-primary mb-2 font-bold">Growth</span>
-               <div className="text-3xl font-heading font-black text-white mb-4">1 500 zł <span className="text-sm text-white/30">/ mies.</span></div>
-               <p className="text-sm text-white/50 mb-6 font-medium">Budżet do 15 000 zł</p>
+            <div className="p-8 rounded-3xl border border-primary/30 bg-primary/5 flex flex-col scale-105 shadow-2xl shadow-primary/10 relative overflow-hidden">
+               <div className="absolute right-8 top-8 text-7xl font-heading font-black text-primary/[0.05] select-none">02</div>
+               <div className="absolute top-0 right-0 p-3 bg-primary text-white text-[10px] font-bold uppercase tracking-tighter">Popularne</div>
+               <span className="text-xs uppercase tracking-widest text-primary mb-2 font-bold">Optima</span>
+               <div className="text-3xl font-heading font-black text-white mb-4">1 231 zł <span className="text-sm text-white/30">/ mies.</span></div>
                <ul className="space-y-3 mb-8 flex-grow text-sm">
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Setup + Audyt konta</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Nielimitowane kampanie</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Remarketing dynamiczny</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Optymalizacja konwersji</li>
+                 <li className="flex items-center gap-2 font-bold"><Check className="w-4 h-4 text-primary" /> Wszystko w Basic</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> 2 kampanie (prospecting + remaketing)</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Kreacje: 8/mies. + iteracje</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Raport co 2 tygodnie</li>
                </ul>
                <Link href="/kontakt" className="w-full py-4 rounded-full bg-primary text-white text-center font-bold hover:bg-primary/90 transition-all text-sm">Wybierz pakiet</Link>
             </div>
 
-            <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] flex flex-col">
+            <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] flex flex-col group hover:bg-white/[0.05] transition-all">
+               <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">03</div>
                <span className="text-xs uppercase tracking-widest text-white/40 mb-2">Pro</span>
-               <div className="text-3xl font-heading font-black text-white mb-4">2 500+ zł <span className="text-sm text-white/30">/ mies.</span></div>
-               <p className="text-sm text-white/50 mb-6 font-medium">Budżet pow. 15 000 zł</p>
+               <div className="text-3xl font-heading font-black text-white mb-4">1 799 zł <span className="text-sm text-white/30">/ mies.</span></div>
                <ul className="space-y-3 mb-8 flex-grow text-sm">
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Dedykowany opiekun</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Pełny marketing 360</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Zaawansowana analityka</li>
-                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Strategia długoterminowa</li>
+                 <li className="flex items-center gap-2 font-bold"><Check className="w-4 h-4 text-primary" /> Wszystko w Optima</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Do 3 kampanii + segmentacja</li>
+                 <li className="flex items-center gap-2"><Check className="w-4 h-4 text-primary" /> Kreacje: 12 RSA/mies.</li>
+                 <li className="flex items-center gap-2 font-bold text-primary"><Check className="w-4 h-4 text-primary " /> SLA odpowiedzi 8h</li>
                </ul>
                <Link href="/kontakt" className="w-full py-4 rounded-full border border-white/10 text-center font-bold hover:bg-white/5 transition-all text-sm">Wybierz pakiet</Link>
             </div>

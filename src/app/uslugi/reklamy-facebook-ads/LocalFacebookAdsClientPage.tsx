@@ -26,10 +26,10 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "X.X", label: "Średni zwrot (ROAS)" },
-  { value: "50%+", label: "Tańszy lead niż u konkurencji" },
-  { value: "24/7", label: "Twoja marka widoczna stale" },
-  { value: "100%", label: "Własność Twoich danych" },
+  { value: "2.8x", label: "Średni zwrot (ROAS)" },
+  { value: "-38%", label: "Redukcja kosztu za lead" },
+  { value: "150+", label: "Kampanii w regionie" },
+  { value: "24h", label: "Czas reakcji na anomalie" },
 ];
 
 const faqsData = [
@@ -84,7 +84,7 @@ export default function LocalFacebookAdsClientPage({ city }: LocalFacebookAdsCli
         >
           <div className="absolute inset-0 z-10 bg-gradient-to-b from-background/40 via-background/60 to-background" />
           <Image
-            src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2674&auto=format&fit=crop"
+            src="/images/uslugi/meta_ads_hero_bg.png"
             alt={`Reklamy Facebook ADS ${city.name}`}
             fill
             className="object-cover opacity-30 select-none grayscale mix-blend-luminosity brightness-150 contrast-125"

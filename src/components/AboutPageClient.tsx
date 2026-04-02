@@ -64,29 +64,6 @@ const VALUES = [
   },
 ];
 
-const TEAM = [
-  {
-    name: "Jan Kowalski", // TODO: podmień dane 
-    role: "CEO & Founder",
-    desc: "Wizjoner technologii i strateg biznesowy. Łączy światy IT i sprzedaży, by dostarczać nie tylko kod, ale maszyny do zarabiania pieniędzy.",
-    initials: "CEO",
-    gradient: "from-blue-500/20 to-indigo-500/5",
-  },
-  {
-    name: "Anna Nowak", // TODO: podmień dane
-    role: "CTO",
-    desc: "Główny inżynier projektujący niezawodne, skalowalne architektury systemowe. Skomplikowane problemy techniczne rozwiązuje przed śniadaniem.",
-    initials: "CTO",
-    gradient: "from-primary/20 to-emerald-500/5",
-  },
-  {
-    name: "Piotr Wiśniewski", // TODO: podmień dane
-    role: "Dyrektor Sprzedaży",
-    desc: "Ekspert od relacji i marketingu B2B. Z nim znajdziesz optymalną ścieżkę skalowania swojego produktu na rynkach międzynarodowych.",
-    initials: "DIR",
-    gradient: "from-amber-500/20 to-orange-500/5",
-  },
-];
 
 // ─── Animated Counter ───
 function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
@@ -196,7 +173,7 @@ export default function AboutPageClient() {
             style={{ opacity: textOpacity }}
             className="mt-16 text-white/50 text-base md:text-xl max-w-xl text-center leading-relaxed"
           >
-            Butikowy software house. Łączymy inżynieryjny rygor z bezkompromisowym designem, tworząc maszyny do skalowania Twojego biznesu.
+            Wyspecjalizowany software house. Łączymy inżynieryjny rygor z bezkompromisowym designem, tworząc maszyny do skalowania Twojego biznesu.
           </motion.p>
         </div>
 
@@ -239,78 +216,60 @@ export default function AboutPageClient() {
       </section>
 
       {/* ═══════════════════════════════════════════════
-          BOARD MEMBERS (ZARZĄD) - NEW!
+          NASZA FILOZOFIA - NEW!
       ═══════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative">
-        <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <section className="py-24 md:py-40 relative">
+        <div className="absolute top-1/2 left-0 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] pointer-events-none opacity-50" />
         
         <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-16 md:mb-24 text-center md:text-left flex flex-col md:flex-row gap-8 items-end justify-between"
-          >
-            <div>
-              <span className="text-primary text-sm tracking-widest uppercase font-bold mb-4 block">
-                Zarząd & Założyciele
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-5"
+            >
+              <span className="text-primary text-sm tracking-widest uppercase font-bold mb-6 block">
+                Nasza Filozofia
               </span>
-              <h2 className="text-4xl md:text-6xl font-heading font-black tracking-tight">
-                Kierunek <span className="text-white/30 italic font-light">Digitay</span>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black tracking-tight leading-[1.1]">
+                Inżynieria <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30 italic font-light">
+                  Spotyka Design.
+                </span>
               </h2>
-            </div>
-            <p className="mt-6 text-white/50 text-lg max-w-md md:mx-0 mx-auto text-left">
-              Liderzy, którzy wyznaczają standardy cyfrowej doskonałości. Połączenie wiedzy biznesowej, i innowacyjnej technologii.
-            </p>
-          </motion.div>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TEAM.map((member, i) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, delay: i * 0.15 }}
-                className="group relative rounded-3xl overflow-hidden bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500 hover:-translate-y-2"
-              >
-                {/* Image Placeholder / Avatar Container */}
-                <div className={`aspect-square w-full relative bg-gradient-to-br ${member.gradient} p-8 flex flex-col justify-end overflow-hidden`}>
-                  {/* Big initials background */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl font-heading font-black text-white/[0.03] select-none pointer-events-none group-hover:scale-110 transition-transform duration-700 group-hover:text-white/[0.06]">
-                    {member.initials}
-                  </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="lg:col-span-7 pt-4 lg:pt-12"
+            >
+              <p className="text-2xl md:text-3xl font-heading font-medium text-white/90 leading-tight mb-8">
+                Digitay to wyspecjalizowany software house, w którym technologia nie jest celem samym w sobie, lecz narzędziem do budowania mierzalnej przewagi rynkowej.
+              </p>
+              <div className="space-y-6 text-white/50 text-lg leading-relaxed">
+                <p>
+                  W świecie przesyconym generycznymi rozwiązaniami, stajemy po stronie jakości. Łączymy inżynierski rygor z bezkompromisowym designem, tworząc produkty cyfrowe, które nie tylko działają bezbłędnie, ale przede wszystkim zachwycają i konwertują.
+                </p>
+                <p>
+                  Nasze podejście opiera się na głębokim zrozumieniu celów biznesowych. Każda linia kodu, każdy pixel i każda animacja są projektowane z myślą o jednym celu: skalowaniu Twojego biznesu i budowaniu trwałej wartości w oczach Twoich klientów.
+                </p>
+              </div>
 
-                  <div className="relative z-10">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10 text-xs font-bold tracking-wider uppercase text-white/90 mb-2">
-                      {member.role}
-                    </span>
-                  </div>
+              <div className="mt-12 flex items-center gap-6 p-8 rounded-3xl border border-white/5 bg-white/[0.02] relative overflow-hidden group">
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center shrink-0">
+                  <Target className="w-6 h-6 text-primary" />
                 </div>
-
-                {/* Content */}
-                <div className="p-8 relative">
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  <h3 className="text-2xl font-heading font-bold text-white mb-3 relative z-10">
-                    {member.name}
-                  </h3>
-                  <p className="text-white/50 text-sm leading-relaxed mb-8 h-[80px] relative z-10">
-                    {member.desc}
-                  </p>
-
-                  <div className="flex gap-3 relative z-10">
-                    <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                    <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all">
-                      <Mail className="w-4 h-4" />
-                    </a>
-                  </div>
+                <div>
+                  <h4 className="text-white font-bold mb-1">Mierzalne uderzenie</h4>
+                  <p className="text-white/40 text-sm">Nie obiecujemy cudów. Dostarczamy dane i wyniki, które mówią same za siebie.</p>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

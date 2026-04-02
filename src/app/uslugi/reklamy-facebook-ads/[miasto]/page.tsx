@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CITIES } from "@/data/cities";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import LocalFacebookAdsClientPage from "../LocalFacebookAdsClientPage";
 
 interface Props {
@@ -34,5 +36,11 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  return <LocalFacebookAdsClientPage city={city} />;
+  return (
+    <>
+      <Navbar />
+      <LocalFacebookAdsClientPage city={city} />
+      <Footer />
+    </>
+  );
 }

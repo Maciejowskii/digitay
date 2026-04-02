@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CITIES } from "@/data/cities";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import LocalGoogleAdsClientPage from "../LocalGoogleAdsClientPage";
 
 interface Props {
@@ -34,5 +36,11 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  return <LocalGoogleAdsClientPage city={city} />;
+  return (
+    <>
+      <Navbar />
+      <LocalGoogleAdsClientPage city={city} />
+      <Footer />
+    </>
+  );
 }

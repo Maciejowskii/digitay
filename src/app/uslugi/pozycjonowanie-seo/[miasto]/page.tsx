@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CITIES } from "@/data/cities";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import LocalSEOClientPage from "../LocalSEOClientPage";
 
 interface Props {
@@ -34,5 +36,11 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
-  return <LocalSEOClientPage city={city} />;
+  return (
+    <>
+      <Navbar />
+      <LocalSEOClientPage city={city} />
+      <Footer />
+    </>
+  );
 }

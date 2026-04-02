@@ -27,9 +27,9 @@ const processSteps = [
 
 const stats = [
   { value: "50+", label: "Wdrożonych e-commerce" },
-  { value: "X.X%", label: "Wzrost konwersji (średnio)" },
-  { value: "24/7", label: "Twój sklep nigdy nie śpi" },
-  { value: "100%", label: "Wsparcie techniczne" },
+  { value: "3.2x", label: "Średni wzrost konwersji" },
+  { value: "<3s", label: "Czas ładowania strony" },
+  { value: "99.9%", label: "Uptime platformy" },
 ];
 
 const faqsData = [
@@ -221,9 +221,9 @@ export default function LocalEcommerceClientPage({ city }: LocalEcommerceClientP
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Pakiety Ecommerce */}
             <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] flex flex-col group hover:bg-white/[0.05] transition-all">
-               <span className="text-xs uppercase tracking-widest text-white/40 mb-2">Commerce Basic</span>
+               <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">01</div>
+               <span className="text-xs uppercase tracking-widest text-white/40 mb-2">Basic</span>
                <div className="text-3xl font-heading font-black text-white mb-4">4 500 zł <span className="text-sm text-white/30">Jednorazowo</span></div>
                <ul className="space-y-3 mb-8 flex-grow text-sm">
                  <li className="flex items-center gap-2 text-white/50"><Check className="w-4 h-4 text-primary shrink-0" /> Do 20 produktów</li>
@@ -235,11 +235,12 @@ export default function LocalEcommerceClientPage({ city }: LocalEcommerceClientP
             </div>
             
             <div className="p-8 rounded-3xl border border-primary/30 bg-primary/5 flex flex-col scale-105 shadow-2xl shadow-primary/10 relative overflow-hidden">
+               <div className="absolute right-8 top-8 text-7xl font-heading font-black text-primary/[0.05] select-none">02</div>
                <div className="absolute top-0 right-0 p-3 bg-primary text-white text-[10px] font-bold uppercase tracking-tighter">Najchętniej wybierany</div>
-               <span className="text-xs uppercase tracking-widest text-primary mb-2 font-bold">Commerce Pro</span>
+               <span className="text-xs uppercase tracking-widest text-primary mb-2 font-bold">Optima</span>
                <div className="text-3xl font-heading font-black text-white mb-4">10 900 zł <span className="text-sm text-white/30">Jednorazowo</span></div>
                <ul className="space-y-3 mb-8 flex-grow text-sm">
-                 <li className="flex items-center gap-2 text-white/60"><Check className="w-4 h-4 text-primary shrink-0" /> Wszystko w Basic</li>
+                 <li className="flex items-center gap-2 text-white/60 font-bold"><Check className="w-4 h-4 text-primary shrink-0" /> Wszystko w Basic</li>
                  <li className="flex items-center gap-2 text-white/60"><Check className="w-4 h-4 text-primary shrink-0" /> Nielimitowane produkty</li>
                  <li className="flex items-center gap-2 text-white/60"><Check className="w-4 h-4 text-primary shrink-0" /> Zaawansowane filtry i UX</li>
                  <li className="flex items-center gap-2 text-white/60"><Check className="w-4 h-4 text-primary shrink-0" /> Remarketing i odzyskiwanie koszyka</li>
@@ -248,13 +249,14 @@ export default function LocalEcommerceClientPage({ city }: LocalEcommerceClientP
             </div>
 
             <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] flex flex-col group hover:bg-white/[0.05] transition-all">
-               <span className="text-xs uppercase tracking-widest text-white/40 mb-2">Commerce Enterprise</span>
-               <div className="text-3xl font-heading font-black text-white mb-4">20 900+ zł <span className="text-sm text-white/30">Jednorazowo</span></div>
+               <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">03</div>
+               <span className="text-xs uppercase tracking-widest text-white/40 mb-2">Pro</span>
+               <div className="text-3xl font-heading font-black text-white mb-4">20 999 zł <span className="text-sm text-white/30">Jednorazowo</span></div>
                <ul className="space-y-3 mb-8 flex-grow text-sm">
+                 <li className="flex items-center gap-2 text-white/50 font-bold"><Check className="w-4 h-4 text-primary shrink-0" /> Wszystko w Optima</li>
                  <li className="flex items-center gap-2 text-white/50"><Check className="w-4 h-4 text-primary shrink-0" /> Pełne integracje ERP/WMS</li>
                  <li className="flex items-center gap-2 text-white/50"><Check className="w-4 h-4 text-primary shrink-0" /> Unikalny design e-commerce</li>
-                 <li className="flex items-center gap-2 text-white/50"><Check className="w-4 h-4 text-primary shrink-0" /> Wsparcie techniczne 24/7</li>
-                 <li className="flex items-center gap-2 text-white/50"><Check className="w-4 h-4 text-primary shrink-0" /> Strategia wzrostu e-commerce</li>
+                 <li className="flex items-center gap-2 text-white/50 font-bold text-primary"><Check className="w-4 h-4 text-primary " /> Wsparcie 180 dni po starcie</li>
                </ul>
                <Link href="/kontakt" className="w-full py-4 rounded-full border border-white/10 text-center font-bold hover:bg-white/5 transition-all text-sm">Wybierz pakiet</Link>
             </div>
