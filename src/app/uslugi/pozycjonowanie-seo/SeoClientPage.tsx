@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { ArrowRight, ArrowDown, ArrowUpRight, Plus, Check, X, Search, BarChart, Target, FileText, Link2, Settings, Eye, Globe, Gauge, Shield } from "lucide-react";
 import Link from "next/link";
+import HomeContactForm from "@/components/HomeContactForm";
+import LocalReachSection from "@/components/LocalReachSection";
 
 // --- Animations ---
 const staggerContainer: Variants = {
@@ -553,6 +555,12 @@ export default function SeoClientPage() {
            </div>
         </div>
       </section>
+
+      {/* CONTACT FORM */}
+      <HomeContactForm />
+
+      {/* LOCAL REACH SECTION */}
+      <LocalReachSection serviceName="Pozycjonowanie SEO" baseSlug="pozycjonowanie-seo" />
 
       {/* ═══════════════════════════════════════════════
           MEGA CTA (matching /o-nas)

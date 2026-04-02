@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Plus, Check, X, ShoppingCart, CreditCard, Truck, Search, BarChart, Plug, PenTool, ShieldCheck, Layers, Tag, Filter, Package } from "lucide-react";
 import Link from "next/link";
+import HomeContactForm from "@/components/HomeContactForm";
+import LocalReachSection from "@/components/LocalReachSection";
 
 // --- Data ---
 const serviceFeatures = [
@@ -543,6 +545,12 @@ export default function EcommerceClientPage() {
            </div>
         </div>
       </section>
+
+      {/* CONTACT FORM */}
+      <HomeContactForm />
+
+      {/* LOCAL REACH SECTION */}
+      <LocalReachSection serviceName="Sklepy Internetowe" baseSlug="sklepy-internetowe" />
 
       {/* ═══════════════════════════════════════════════
           CTA

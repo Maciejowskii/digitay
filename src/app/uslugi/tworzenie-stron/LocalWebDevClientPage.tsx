@@ -3,9 +3,10 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Plus, Check, Palette, Code, Smartphone, Search, BarChart, Plug, ShieldCheck, Layers, PenTool, Zap } from "lucide-react";
+import { ArrowDown, ArrowUpRight, ArrowRight, Plus, Check, Palette, Code, Smartphone, Search, BarChart, Plug, ShieldCheck, Layers, PenTool, Zap } from "lucide-react";
 import Link from "next/link";
 import LocalReachSection from "@/components/LocalReachSection";
+import HomeContactForm from "@/components/HomeContactForm";
 
 // --- Data ---
 const serviceFeatures = [
@@ -47,6 +48,7 @@ interface LocalWebDevClientPageProps {
     name: string;
     slug: string;
     inCity: string;
+    fromCity: string;
   };
 }
 
@@ -134,7 +136,7 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
             style={{ opacity: textOpacity }}
             className="mt-16 text-white/50 text-base md:text-xl max-w-xl text-center leading-relaxed"
           >
-            Nowoczesne strony internetowe dla firm {city.inCity}. Budujemy platformy cyfrowe, które nie tylko wyglądają premium — ale przede wszystkim konwertują i skalują Twój biznes lokalny i ogólnopolski.
+            Nowoczesne strony internetowe dla firm {city.fromCity}. Budujemy platformy cyfrowe, które nie tylko wyglądają premium — ale przede wszystkim konwertują i skalują Twój biznes.
           </motion.p>
         </div>
 
@@ -161,10 +163,10 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
                   Lokalna Przewaga {city.name}
                 </span>
                 <h2 className="text-4xl md:text-6xl font-heading font-black tracking-tighter leading-[1] mb-8">
-                  Strony, które podbijają <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30 italic font-light">rynek {city.name}.</span>
+                  Strony, które podbijają <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/30 italic font-light">Twoją branżę.</span>
                 </h2>
                 <p className="text-white/40 text-lg md:text-xl leading-relaxed max-w-md">
-                  Digitay to wsparcie technologiczne dla biznesów {city.inCity}. Łączymy nowoczesny design z głęboką optymalizacją pod lokalne wyszukiwania.
+                  Digitay to wsparcie technologiczne dla biznesów {city.fromCity}. Łączymy nowoczesny design z głęboką optymalizacją pod lokalne wyszukiwania.
                 </p>
               </div>
             </div>
@@ -180,7 +182,7 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors pointer-events-none select-none">01</div>
                 <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 relative z-10">Lokalne SEO & Widoczność</h3>
-                <span className="text-primary tracking-widest uppercase text-xs md:text-sm font-bold block mb-6 relative z-10">Dominuj {city.inCity}</span>
+                <span className="text-primary tracking-widest uppercase text-xs md:text-sm font-bold block mb-6 relative z-10">Dominuj w {city.name}</span>
                 <p className="text-white/50 text-lg leading-relaxed group-hover:text-white/70 transition-colors relative z-10">
                   Twoja nowa strona jest projektowana z myślą o <strong className="text-white/80">lokalnych frazach kluczowych</strong>. Optymalizujemy architekturę pod kątem użytkowników {city.inCity}, dbając o szybkość ładowania i pełną integrację z wizytówką Google Maps.
                 </p>
@@ -198,7 +200,7 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
                 <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 relative z-10">Design Premium & Autentyczność</h3>
                 <span className="text-primary tracking-widest uppercase text-xs md:text-sm font-bold block mb-6 relative z-10">Wyróżnij się {city.inCity}</span>
                 <p className="text-white/50 text-lg leading-relaxed group-hover:text-white/70 transition-colors relative z-10">
-                  {city.name} to rynek, który wymaga najwyższej jakości. Tworzymy <strong className="text-white/80">unikalne projekty graficzne</strong>, które budują zaufanie i autorytet Twojej marki w regionie. Żadnych gotowych szablonów — tylko customowy design.
+                  Twój lokalny rynek wymaga najwyższej jakości. Tworzymy <strong className="text-white/80">unikalne projekty graficzne</strong>, które budują zaufanie i autorytet Twojej marki w regionie. Żadnych gotowych szablonów — tylko customowy design.
                 </p>
               </motion.div>
 
@@ -214,7 +216,7 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
                 <h3 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 relative z-10">Pełne Wsparcie Techniczne</h3>
                 <span className="text-primary tracking-widest uppercase text-xs md:text-sm font-bold block mb-6 relative z-10">Partner cyfrowy {city.inCity}</span>
                 <p className="text-white/50 text-lg leading-relaxed group-hover:text-white/70 transition-colors relative z-10">
-                  Dla nas współpraca nie kończy się na publikacji strony. Zapewniamy <strong className="text-white/80">monitoring, aktualizacje i pomoc</strong> przy skalowaniu Twoich kampanii Google/FB Ads na rynku {city.name} i nie tylko.
+                  Dla nas współpraca nie kończy się na publikacji strony. Zapewniamy <strong className="text-white/80">monitoring, aktualizacje i pomoc</strong> przy skalowaniu Twoich kampanii Google/FB Ads na Twoim rynku.
                 </p>
               </motion.div>
             </div>
@@ -294,15 +296,15 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
                      <AnimatePresence>
                         {isOpen && (
                            <motion.div
-                               initial={{ height: 0, opacity: 0 }}
-                               animate={{ height: "auto", opacity: 1 }}
-                               exit={{ height: 0, opacity: 0 }}
-                               transition={{ duration: 0.3 }}
-                               className="overflow-hidden"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden"
                            >
                                <p className="text-white/40 text-base md:text-lg leading-relaxed pb-8 pt-2 max-w-3xl">
                                   {faq.a}
-                               </p>
+                                </p>
                            </motion.div>
                         )}
                      </AnimatePresence>
@@ -312,6 +314,179 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
            </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════
+          PRICING
+      ═══════════════════════════════════════════════ */}
+      <section id="oferta" className="py-24 md:py-32 relative border-t border-white/5 bg-black/20 z-20">
+        <div className="max-w-6xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16 md:mb-24 text-center"
+          >
+            <span className="text-primary text-sm tracking-widest uppercase font-bold mb-4 block">
+              Pakiety {city.name}
+            </span>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight">
+              Cennik Usług Webowych.
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="group relative rounded-3xl overflow-hidden bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500 hover:-translate-y-2 p-8 md:p-10 flex flex-col"
+            >
+              <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">01</div>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-wider uppercase text-white/60 mb-6 w-fit">Basic</span>
+              <div className="flex items-end gap-2 mb-2">
+                <span className="text-5xl md:text-6xl font-heading font-black text-white">3 900</span>
+                <span className="text-xl font-bold mb-1 text-white/40">zł</span>
+              </div>
+              <span className="text-xs text-white/30 uppercase tracking-widest mb-8 block">Jednorazowo</span>
+              <ul className="space-y-3 mb-10 flex-grow text-sm">
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Liczba podstron: <strong className="text-white">5</strong></span></li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Responsywność pod każde urządzenie</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Formularze na stronie</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Podstawy SEO techniczne</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Podstawowa analityka</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Rundy poprawek: <strong className="text-white">2</strong></span></li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Wsparcie po wdrożeniu</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Integracje</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Copywriting w ramach zakresu</li>
+              </ul>
+              <Link href="/kontakt" className="group/btn inline-flex items-center justify-center gap-3 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-white/10 hover:border-white/20 transition-all">
+                Wybierz pakiet
+                <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="group relative rounded-3xl overflow-hidden bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 hover:border-primary/40 transition-all duration-500 hover:-translate-y-2 p-8 md:p-10 flex flex-col"
+            >
+              <div className="absolute right-8 top-8 text-7xl font-heading font-black text-primary/[0.05] select-none">02</div>
+              <div className="absolute right-0 bottom-0 opacity-10 blur-3xl group-hover:opacity-30 transition-opacity duration-500 bg-primary w-64 h-64 rounded-full" />
+              <div className="flex items-center gap-3 mb-6">
+                <span className="inline-block px-4 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-xs font-bold tracking-wider uppercase text-primary w-fit">Optima</span>
+                <span className="inline-block px-3 py-1 rounded-full bg-primary text-white text-[10px] font-bold uppercase tracking-wider">Popularne</span>
+              </div>
+              <div className="flex items-end gap-2 mb-2">
+                <span className="text-5xl md:text-6xl font-heading font-black text-white">9 700</span>
+                <span className="text-xl font-bold mb-1 text-white/40">zł</span>
+              </div>
+              <span className="text-xs text-white/30 uppercase tracking-widest mb-8 block">Jednorazowo</span>
+              <ul className="space-y-3 mb-10 flex-grow text-sm">
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Liczba podstron: <strong className="text-white">7</strong></span></li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Responsywność pod każde urządzenie</li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Formularze + CTA + sekcje domykające</li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> SEO techniczne + optymalizacja wydajności</li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Analityka + zdarzenia konwersji</li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Rundy poprawek: <strong className="text-white">3</strong></span></li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Wsparcie po wdrożeniu — <strong className="text-white">30 dni</strong></span></li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Integracje (Make, Zapier, Ads, GTM)</li>
+                <li className="flex items-start gap-3 text-white/60"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Copywriting w ramach zakresu</li>
+              </ul>
+              <Link href="/kontakt" className="group/btn relative inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-primary/90 transition-all hover:shadow-[0_0_40px_rgba(25,163,84,0.3)] overflow-hidden">
+                <span className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
+                <span className="relative z-10 flex items-center gap-2">
+                  Wybierz pakiet
+                  <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </span>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="group relative rounded-3xl overflow-hidden bg-white/[0.02] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500 hover:-translate-y-2 p-8 md:p-10 flex flex-col"
+            >
+              <div className="absolute right-8 top-8 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.05] transition-colors select-none">03</div>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-bold tracking-wider uppercase text-white/60 mb-6 w-fit">Pro</span>
+              <div className="flex items-end gap-2 mb-2">
+                <span className="text-5xl md:text-6xl font-heading font-black text-white">19 000</span>
+                <span className="text-xl font-bold mb-1 text-white/40">zł</span>
+              </div>
+              <span className="text-xs text-white/30 uppercase tracking-widest mb-8 block">Jednorazowo</span>
+              <ul className="space-y-3 mb-10 flex-grow text-sm">
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Liczba podstron: <strong className="text-white">20</strong></span></li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Responsywność pod każde urządzenie</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Formularze + CTA + sekcje domykające</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> SEO techniczne + pełny audyt wydajności</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Analityka + konwersje + systemy reklamowe</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Rundy poprawek: <strong className="text-white">5</strong></span></li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> <span>Wsparcie po wdrożeniu — <strong className="text-white">90 dni</strong></span></li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Integracje (Make, Zapier, Ads, GTM)</li>
+                <li className="flex items-start gap-3 text-white/50"><Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> Copywriting w ramach zakresu</li>
+              </ul>
+              <Link href="/kontakt" className="group/btn inline-flex items-center justify-center gap-3 bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full font-bold text-sm hover:bg-white/10 hover:border-white/20 transition-all">
+                Wybierz pakiet
+                <ArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════
+          CITY DETAILED DESCRIPTION (SEO)
+      ═══════════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 bg-background relative z-20">
+        <div className="max-w-4xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="prose prose-invert prose-lg max-w-none"
+          >
+            <h2 className="text-3xl md:text-5xl font-heading font-black tracking-tight text-white mb-8 leading-[1.1]">
+              Profesjonalne projektowanie stron <br/>
+              <span className="text-primary">dla firm {city.fromCity}.</span>
+            </h2>
+            
+            <p className="text-white/60 leading-relaxed mb-6">
+              Szukasz profesjonalnego wsparcia w zakresie <strong>tworzenia stron internetowych {city.inCity}</strong>? Digitay to Twój lokalny partner technologiczny, który pomoże Ci zbudować silną obecność online. W dzisiejszych czasach samo posiadanie strony to za mało – Twoja wizytówka w sieci musi być szybka, responsywna i zoptymalizowana pod kątem konwersji, szczególnie na tak konkurencyjnym rynku jak {city.name}.
+            </p>
+
+            <p className="text-white/60 leading-relaxed mb-6">
+              Nasze podejście do <strong>projektowania stron www {city.inCity}</strong> opiera się na głębokim zrozumieniu lokalnego biznesu. Niezależnie od tego, czy prowadzisz małą firmę usługową, czy zarządzasz większym przedsiębiorstwem, dostarczamy rozwiązania skrojone na miarę Twoich potrzeb. Wykorzystujemy najnowocześniejsze technologie, takie jak React i Next.js, aby zapewnić błyskawiczne ładowanie i bezbłędne działanie na każdym urządzeniu. 
+            </p>
+
+            <div className="my-12 p-8 rounded-3xl border border-white/5 bg-white/[0.02] relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl -z-10" />
+               <h3 className="text-xl font-heading font-bold text-white mb-4 italic">Skuteczność potwierdzona wynikami</h3>
+               <p className="text-white/50 text-sm md:text-base italic leading-relaxed">
+                 „Strona stworzona przez Digitay {city.inCity} nie tylko wygląda nowocześnie, ale przede wszystkim zaczęła realnie generować leady. Lokalni klienci bez problemu odnajdują nasze usługi w sieci.”
+               </p>
+            </div>
+
+            <p className="text-white/60 leading-relaxed mb-6">
+              Decydując się na <strong>stronę internetową od Digitay</strong>, zyskujesz nie tylko estetyczny design, ale przede wszystkim narzędzie sprzedażowe. Optymalizujemy każdą sekcję pod kątem SEO, aby Twoja firma była łatwo odnajdywana przez potencjalnych klientów {city.fromCity}. Nasz proces obejmuje pełne wsparcie – od analizy konkurencji w regionie, przez projektowanie UX/UI, aż po finalne wdrożenie i monitoring postępów.
+            </p>
+
+            <p className="text-white/60 leading-relaxed mb-12">
+              Dlaczego warto wybrać nas do <strong>stworzenia strony {city.inCity}</strong>? Ponieważ łączymy pasję do technologii z praktycznym podejściem biznesowym. Wiemy, jak ważne jest zaufanie lokalnych odbiorców, dlatego nasze projekty budują autorytet Twojej marki od pierwszej sekundy kontaktu. Skontaktuj się z nami już dziś i zobacz, jak możemy wspólnie rozwinąć Twoją firmę dzięki nowoczesnym rozwiązaniom webowym.
+            </p>
+
+            <Link href="/kontakt" className="inline-flex items-center gap-2 text-primary font-bold hover:gap-4 transition-all group">
+               Rozpocznij projekt {city.inCity}
+               <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CONTACT FORM */}
+      <HomeContactForm />
 
       {/* LOCAL REACH SECTION */}
       <LocalReachSection serviceName="Tworzenie Stron Internetowych" baseSlug="tworzenie-stron" />
@@ -327,7 +502,7 @@ export default function LocalWebDevClientPage({ city }: LocalWebDevClientPagePro
             Stwórzmy stronę, która wyprzedzi konkurencję {city.inCity}. Skaluj swój biznes z Digitay.
           </p>
           <Link href="/kontakt" className="bg-primary text-white px-12 py-6 rounded-full font-bold text-lg hover:bg-primary/90 transition-all hover:shadow-[0_0_40px_rgba(25,163,84,0.3)] inline-flex items-center gap-3">
-             Darmowa wycena dla firm {city.inCity}
+             Darmowa wycena {city.inCity}
              <ArrowUpRight className="w-5 h-5" />
           </Link>
         </div>

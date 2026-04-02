@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Plus, Check, X, Target, TrendingUp, BarChart, Settings, Eye, Zap, Users, Repeat, Image as ImageIcon, Video, MessageCircle, Share2, Layers } from "lucide-react";
 import Link from "next/link";
+import HomeContactForm from "@/components/HomeContactForm";
+import LocalReachSection from "@/components/LocalReachSection";
 
 // --- Data ---
 const serviceFeatures = [
@@ -527,6 +529,12 @@ export default function FacebookAdsClientPage() {
            </div>
         </div>
       </section>
+
+      {/* CONTACT FORM */}
+      <HomeContactForm />
+
+      {/* LOCAL REACH SECTION */}
+      <LocalReachSection serviceName="Reklamy Facebook ADS" baseSlug="reklamy-facebook-ads" />
 
       {/* CTA */}
       <section className="py-32 relative border-t border-white/5 overflow-hidden flex items-center justify-center">

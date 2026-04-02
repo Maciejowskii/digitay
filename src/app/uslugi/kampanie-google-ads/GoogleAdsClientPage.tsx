@@ -5,6 +5,8 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowDown, ArrowUpRight, Plus, Check, X, Target, TrendingUp, BarChart, Settings, Eye, Zap, Users, FileText, MousePointerClick, DollarSign, Megaphone, LineChart } from "lucide-react";
 import Link from "next/link";
+import HomeContactForm from "@/components/HomeContactForm";
+import LocalReachSection from "@/components/LocalReachSection";
 
 // --- Data ---
 const serviceFeatures = [
@@ -528,6 +530,12 @@ export default function GoogleAdsClientPage() {
            </div>
         </div>
       </section>
+
+      {/* CONTACT FORM */}
+      <HomeContactForm />
+
+      {/* LOCAL REACH SECTION */}
+      <LocalReachSection serviceName="Kampanie Google ADS" baseSlug="kampanie-google-ads" />
 
       {/* CTA */}
       <section className="py-32 relative border-t border-white/5 overflow-hidden flex items-center justify-center">

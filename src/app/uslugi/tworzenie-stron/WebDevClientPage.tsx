@@ -6,6 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useSpring, Variants }
 import { ArrowRight, ArrowDown, ArrowUpRight, Plus, Check, X, Code, Palette, Smartphone, Gauge, Search, BarChart, Plug, ShieldCheck, Layers, PenTool, Zap, Globe } from "lucide-react";
 import Link from "next/link";
 import LocalReachSection from "@/components/LocalReachSection";
+import HomeContactForm from "@/components/HomeContactForm";
 
 // --- Data ---
 const serviceFeatures = [
@@ -544,6 +545,9 @@ export default function WebDevClientPage() {
            </div>
         </div>
       </section>
+
+      {/* CONTACT FORM */}
+      <HomeContactForm />
 
       {/* LOCAL REACH SECTION */}
       <LocalReachSection serviceName="Tworzenie Stron Internetowych" baseSlug="tworzenie-stron" />
