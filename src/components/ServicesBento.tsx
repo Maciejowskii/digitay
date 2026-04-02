@@ -1,30 +1,30 @@
 "use client";
 
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
-import { ArrowUpRight, Globe, ShoppingCart, Target, Megaphone, Search } from "lucide-react";
+import { ArrowUpRight, Globe, ShoppingCart, Target, Megaphone, Search, MapPin } from "lucide-react";
 import Link from "next/link";
 import { MouseEvent } from "react";
 
 const services = [
   {
     id: "01",
-    title: "Strony Internetowe",
-    tags: ["next.js", "react", "gsap", "seo"],
+    title: "Marketing Lokalny",
+    tags: ["google maps", "wizytówki", "opinie"],
     description:
-      "High-endowe wizytówki, landingi i strony korporacyjne. Design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
-    color: "#19A354",
-    href: "/uslugi/tworzenie-stron",
-    icon: Globe,
+      "Bądź widoczny tam, gdzie szukają Cię sąsiedzi. Kompleksowe zarządzanie Profilem Firmy w Google i budowanie reputacji.",
+    color: "#14B8A6",
+    href: "/uslugi/marketing-lokalny",
+    icon: MapPin,
   },
   {
     id: "02",
-    title: "Sklepy Internetowe",
-    tags: ["e-commerce", "płatności", "konwersja"],
+    title: "Pozycjonowanie SEO",
+    tags: ["audyty", "link building", "optymalizacja"],
     description:
-      "Sklepy zoptymalizowane pod sprzedaż. Od konfiguracji produktów po automaty odzyskujące porzucone koszyki.",
-    color: "#22D06A",
-    href: "/uslugi/sklepy-internetowe",
-    icon: ShoppingCart,
+      "Podejście data-driven. Skalowalne strategie SEO, które podnoszą widoczność i przyciągają ruch jakościowy.",
+    color: "#10B981",
+    href: "/uslugi/pozycjonowanie-seo",
+    icon: Search,
   },
   {
     id: "03",
@@ -48,25 +48,37 @@ const services = [
   },
   {
     id: "05",
-    title: "Pozycjonowanie SEO",
-    tags: ["audyty", "link building", "optymalizacja"],
+    title: "Strony Internetowe",
+    tags: ["next.js", "react", "gsap", "seo"],
     description:
-      "Podejście data-driven. Skalowalne strategie SEO, które podnoszą widoczność i przyciągają ruch jakościowy.",
-    color: "#10B981",
-    href: "/uslugi/pozycjonowanie-seo",
-    icon: Search,
+      "High-endowe wizytówki, landingi i strony korporacyjne. Design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
+    color: "#19A354",
+    href: "/uslugi/tworzenie-stron",
+    icon: Globe,
+  },
+  {
+    id: "06",
+    title: "Sklepy Internetowe",
+    tags: ["e-commerce", "płatności", "konwersja"],
+    description:
+      "Sklepy zoptymalizowane pod sprzedaż. Od konfiguracji produktów po automaty odzyskujące porzucone koszyki.",
+    color: "#22D06A",
+    href: "/uslugi/sklepy-internetowe",
+    icon: ShoppingCart,
   },
 ];
 
 const marqueeItems = [
+  "Marketing Lokalny",
   "Pozycjonowanie SEO",
-  "Tworzenie Stron",
-  "Sklepy Internetowe",
   "Kampanie Google Ads",
   "Facebook Ads",
+  "Tworzenie Stron",
+  "Sklepy Internetowe",
   "UI/UX Design",
   "Branding",
   "E-commerce",
+  "Wizytówki Google",
 ];
 
 // Glow card component
@@ -236,19 +248,11 @@ export default function ServicesBento() {
         </div>
       </div>
 
-      {/* Service Cards — 2 + 3 Bento Layout */}
+      {/* Service Cards — Balanced 3-column Layout */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        {/* Top row: 2 large cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
-          {services.slice(0, 2).map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} size="large" />
-          ))}
-        </div>
-
-        {/* Bottom row: 3 medium cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {services.slice(2).map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i + 2} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {services.map((service, i) => (
+            <ServiceCard key={service.title} service={service} index={i} />
           ))}
         </div>
       </div>

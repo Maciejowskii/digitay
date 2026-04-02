@@ -3,8 +3,9 @@
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, ChevronDown, CheckCircle2, Plus, Minus, ArrowDown, Globe, ShoppingCart, Search, Target, Megaphone } from "lucide-react";
+import { ArrowUpRight, ChevronDown, CheckCircle2, Plus, Minus, ArrowDown, Globe, ShoppingCart, Search, Target, Megaphone, MapPin } from "lucide-react";
 import { useState, useRef } from "react";
+import HomeContactForm from "@/components/HomeContactForm";
 
 // ─── Data ───
 
@@ -12,20 +13,12 @@ import { useState, useRef } from "react";
 
 const SERVICES = [
   {
-    name: "Strony Internetowe",
-    shortDescription: "Od efektownych wizytówek po rozbudowane portale. High-endowy design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
-    features: ['Customowy Web Design', 'Next.js & React', 'Techniczne SEO', 'CMS Headless'],
-    slug: "tworzenie-stron",
-    icon: Globe,
-    accent: "#19A354",
-  },
-  {
-    name: "Sklepy Internetowe",
-    shortDescription: "E-commerce zoptymalizowany pod konwersję. Konfiguracja produktów, płatności, automaty porzuconych koszyków i pełen tracking.",
-    features: ['Konfiguracja Sklepu', 'Płatności & Dostawy', 'SEO E-commerce', 'Automaty & Integracje'],
-    slug: "sklepy-internetowe",
-    icon: ShoppingCart,
-    accent: "#22D06A",
+    name: "Marketing Lokalny",
+    shortDescription: "Bądź pierwszym wyborem w Twojej okolicy. Kompleksowe zarządzanie widocznością lokalną i wizytówkami Google.",
+    features: ['Profil Firmy Google', 'System Opinii', 'Local SEO', 'Analityka Ruchu'],
+    slug: "marketing-lokalny",
+    icon: MapPin,
+    accent: "#14B8A6",
   },
   {
     name: "Pozycjonowanie SEO",
@@ -50,6 +43,22 @@ const SERVICES = [
     slug: "reklamy-facebook-ads",
     icon: Megaphone,
     accent: "#6366F1",
+  },
+  {
+    name: "Strony Internetowe",
+    shortDescription: "Od efektownych wizytówek po rozbudowane portale. High-endowy design, który hipnotyzuje i konwertuje od pierwszego kliknięcia.",
+    features: ['Customowy Web Design', 'Next.js & React', 'Techniczne SEO', 'CMS Headless'],
+    slug: "tworzenie-stron",
+    icon: Globe,
+    accent: "#19A354",
+  },
+  {
+    name: "Sklepy Internetowe",
+    shortDescription: "E-commerce zoptymalizowany pod konwersję. Konfiguracja produktów, płatności, automaty porzuconych koszyków i pełen tracking.",
+    features: ['Konfiguracja Sklepu', 'Płatności & Dostawy', 'SEO E-commerce', 'Automaty & Integracje'],
+    slug: "sklepy-internetowe",
+    icon: ShoppingCart,
+    accent: "#22D06A",
   },
 ];
 
@@ -213,6 +222,9 @@ export default function ServicesPageClient() {
           <ArrowDown className="w-4 h-4" />
         </motion.div>
       </section>
+      
+      {/* CONTACT FORM */}
+      <HomeContactForm />
 
 
 
@@ -241,9 +253,9 @@ export default function ServicesPageClient() {
             </div>
           </motion.div>
 
-          {/* Top row: 2 large cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            {SERVICES.slice(0, 2).map((service, idx) => (
+          {/* Services Grid — Balanced 3-column Layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {SERVICES.map((service, idx) => (
               <motion.div
                 key={service.slug}
                 initial={{ opacity: 0, y: 40 }}
@@ -254,63 +266,11 @@ export default function ServicesPageClient() {
                 <Link
                   href={`/uslugi/${service.slug}`}
                   onClick={() => window.scrollTo(0, 0)}
-                  className="block group relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8 md:p-12 hover:border-primary/20 hover:bg-white/[0.05] transition-all duration-500 h-full"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                  <div className="absolute right-8 top-8 text-8xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.04] transition-colors select-none pointer-events-none">
-                    {String(idx + 1).padStart(2, '0')}
-                  </div>
-
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-16 h-16 rounded-2xl border border-white/10 bg-white/[0.05] flex items-center justify-center mb-8 group-hover:bg-primary/10 group-hover:border-primary/20 transition-all duration-500">
-                      <service.icon className="w-7 h-7 text-white/70 group-hover:text-primary transition-colors" />
-                    </div>
-
-                    <h3 className="text-3xl md:text-4xl font-heading font-black tracking-tight text-white mb-4 group-hover:text-primary transition-colors duration-300">
-                      {service.name}
-                    </h3>
-                    <p className="text-white/50 text-base md:text-lg leading-relaxed mb-8 flex-grow">
-                      {service.shortDescription}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {service.features.map((f) => (
-                        <span key={f} className="px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-white/50 text-xs font-medium group-hover:border-primary/20 group-hover:text-white/70 transition-colors">
-                          {f}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center gap-3 text-white/60 group-hover:text-primary transition-colors font-bold text-sm">
-                      Poznaj szczegóły i cennik
-                      <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary/30 group-hover:bg-primary/10 transition-all">
-                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Bottom row: 3 medium cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {SERVICES.slice(2).map((service, idx) => (
-              <motion.div
-                key={service.slug}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: (idx + 2) * 0.1, duration: 0.6 }}
-              >
-                <Link
-                  href={`/uslugi/${service.slug}`}
-                  onClick={() => window.scrollTo(0, 0)}
                   className="block group relative rounded-3xl overflow-hidden border border-white/5 bg-gradient-to-br from-white/[0.03] to-white/[0.01] p-8 md:p-10 hover:border-primary/20 hover:bg-white/[0.05] transition-all duration-500 h-full"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   <div className="absolute right-6 top-6 text-7xl font-heading font-black text-white/[0.02] group-hover:text-primary/[0.04] transition-colors select-none pointer-events-none">
-                    {String(idx + 3).padStart(2, '0')}
+                    {String(idx + 1).padStart(2, '0')}
                   </div>
 
                   <div className="relative z-10 flex flex-col h-full">
@@ -333,7 +293,7 @@ export default function ServicesPageClient() {
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-3 text-white/60 group-hover:text-primary transition-colors font-bold text-sm">
+                    <div className="flex items-center gap-3 text-white/60 group-hover:text-primary transition-colors font-bold text-sm mt-auto">
                       Cennik i szczegóły
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
