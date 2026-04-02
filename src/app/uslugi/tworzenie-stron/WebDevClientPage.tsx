@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, Variants } from "framer-motion";
 import { ArrowRight, ArrowDown, ArrowUpRight, Plus, Check, X, Code, Palette, Smartphone, Gauge, Search, BarChart, Plug, ShieldCheck, Layers, PenTool, Zap, Globe } from "lucide-react";
 import Link from "next/link";
+import LocalReachSection from "@/components/LocalReachSection";
 
 // --- Data ---
 const serviceFeatures = [
@@ -543,6 +544,9 @@ export default function WebDevClientPage() {
            </div>
         </div>
       </section>
+
+      {/* LOCAL REACH SECTION */}
+      <LocalReachSection serviceName="Tworzenie Stron Internetowych" baseSlug="tworzenie-stron" />
 
       {/* ═══════════════════════════════════════════════
           CTA
