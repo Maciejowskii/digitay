@@ -347,6 +347,70 @@ async function seed() {
   `;
 
   console.log("  ✓ Inserted: Bling & Bliss case study");
+
+  // Insert Similimum case study
+  await client`
+    INSERT INTO case_studies (
+      slug,
+      client_name,
+      client_logo,
+      client_url,
+      brand_color,
+      title,
+      description,
+      category,
+      challenge,
+      solution,
+      results,
+      cover_image,
+      tags,
+      is_published,
+      created_at,
+      updated_at
+    ) VALUES (
+      'similimum-spektakularny-wzrost-seo',
+      'Similimum',
+      '/images/case-studies/similimum.png',
+      NULL,
+      '#10B981',
+      'Skokowy wzrost widoczności organicznej: Zwiększenie kliknięć z Google o 739%',
+      'Podsumowanie działań SEO za jeden bardzo mocny miesiąc. Strona zanotowała kilkukrotny wzrost w liczbie kliknięć i wyświetleń, potwierdzając skuteczność wprowadzonych poprawek technicznych i treściowych.',
+      'SEO',
+      ${`<div class="case-challenge">
+<h3>Punkt wyjścia i cele</h3>
+<p>W poprzednim miesiącu strona osiągała niski poziom ruchu organicznego — zaliczała 23 kliknięcia oraz zaledwie 57 wyświetleń z poziomu bezpłatnych wyników organicznych wyszukiwarki.</p>
+<p>Głównym wyzwaniem było uwolnienie potencjału strony, wyeliminowanie blokad technicznych w procesie indeksacji Google oraz budowa wyższego autorytetu po to, by strona stabilnie zdobywała szczyty fraz lokalnych i rynkowych.</p>
+</div>`},
+      ${`<div class="case-solution">
+<h3>Rozwiązanie i wdrażane działania (marzec 2026)</h3>
+
+<h4>1. Rozbudowa treści wspierających widoczność ograniczoną</h4>
+<p>Kluczowym działaniem była optymalizacja dotychczasowych treści i rozbudowa strony o nowe, wyczerpujące tematy materiały, wspierające ekspozycję algorytmiczną. Dalsze działania SEO zostały mocno ukierunkowane na budowanie tematyczności wokół głównych słów kluczowych.</p>
+
+<h4>2. Aspekty techniczne i GSC (Google Search Console)</h4>
+<p>Opanowaliśmy dużą warstwę trudności technicznych zgłoszonych od klientki. Wdrożyliśmy precyzyjną sitemapę (mapę witryny) do Google Search Console. Zmiana ta była krytyczna i pozwoliła robotom Google w pełni <em>„zrozumieć”</em> strukturę domeny oraz przyspieszyć cykle indeksacji kluczowych podstron.</p>
+
+<h4>3. Linkbuilding (Zewnętrzny Autorytet)</h4>
+<p>Pozyskaliśmy na start 3 jakościowe linki zewnętrzne prowadzące do domeny. Te merytoryczne publikacje silnie wsparły zaufanie (<em>Trust Rank</em>) i ogólny autorytet strony z punktu widzenia pozycjonowania off-site.</p>
+
+<h3>Wnioski z podjętych kroków</h3>
+<p>Tak kompleksowa i sprawnie poprowadzona akcja skutkowała tym, że <strong>marzec okazał się wyjątkowo silnym miesiącem pod kątem SEO</strong>. Realnie wdrożone poprawki on-site (strona samej w sobie) i off-site (linki) przełożyły się na lawinowy wzrost widoczności – kliknięcia w zaledwie jednym cyklu miesięcznym wzrosły skokowo wielokrotnie. Taki wynik to fantastyczna odpowiedź algorytmów Google na nowe standardy witryny!</p>
+</div>`},
+      ${JSON.stringify({
+        "Kliknięcia z Google": "+739,1% (193)",
+        "Wyświetlenia z Google": "+593,0% (395)",
+        "Współczynnik CTR": "48,9% (+8,5p.p)",
+        "Średnia pozycja": "4,2 (Stabilna)"
+      })},
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80',
+      ${JSON.stringify(["SEO Optyamlizacja", "Analiza GSC", "Linkbuilding", "Techniczne SEO", "Content"] )},
+      true,
+      NOW(),
+      NOW()
+    )
+  `;
+
+  console.log("  ✓ Inserted: Similimum case study");
   console.log("\n✅ Seeding complete!");
 
   await client.end();
