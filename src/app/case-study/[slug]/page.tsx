@@ -27,20 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `${caseStudy.title} - Sukces ${caseStudy.clientName} | Digitay`,
       description: caseStudy.description || `Sprawdź pełne studium przypadku współpracy z ${caseStudy.clientName}.`,
       url: `/case-study/${resolvedParams.slug}`,
-      images: caseStudy.coverImage ? [
-        {
-          url: caseStudy.coverImage,
-          width: 1200,
-          height: 630,
-          alt: `Case study dla ${caseStudy.clientName}`,
-        }
-      ] : undefined,
     },
     twitter: {
-       card: "summary_large_image",
+       card: "summary",
        title: `${caseStudy.title} | Digitay`,
        description: caseStudy.description || `Jak pomogliśmy firmie ${caseStudy.clientName}`,
-       images: caseStudy.coverImage ? [caseStudy.coverImage] : undefined,
     }
   };
 }

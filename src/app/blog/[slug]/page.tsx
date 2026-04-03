@@ -28,21 +28,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: `${post.title} | Digitay Blog`,
       description: post.excerpt || `Czytaj najnowszy artykuł na blogu Digitay.`,
       url: `/blog/${resolvedParams.slug}`,
-      // Dodamy coverImage do OG jeśli istnieje w bazie
-      images: post.coverImage ? [
-        {
-          url: post.coverImage,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        }
-      ] : undefined,
     },
     twitter: {
-       card: "summary_large_image",
+       card: "summary",
        title: `${post.title} | Digitay`,
        description: post.excerpt || `Czytaj najnowszy artykuł na blogu Digitay.`,
-       images: post.coverImage ? [post.coverImage] : undefined,
     }
   };
 }
