@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Edit2, Trash2, Calendar, User, Loader2 } from "lucide-react";
+import { Plus, Edit2, Trash2, Calendar, User, Loader2, ExternalLink } from "lucide-react";
 import { deletePost } from "@/actions/blog";
 import { useTransition } from "react";
 import { format } from "date-fns";
@@ -123,9 +123,17 @@ export default function BlogClient({ posts }: { posts: BlogPost[] }) {
 
               {/* Actions */}
               <div className="col-span-4 md:col-span-3 flex justify-end items-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
+                <button
+                  onClick={() => window.open(`/blog/${post.slug}`, '_blank')}
+                  className="p-2 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors border border-transparent hover:border-zinc-300"
+                  title="Podgląd posta"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </button>
                 <Link 
                   href={`/admin/blog/edytuj/${post.id}`}
                   className="p-2 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors border border-transparent hover:border-zinc-300"
+                  title="Edytuj post"
                 >
                   <Edit2 className="w-4 h-4" />
                 </Link>

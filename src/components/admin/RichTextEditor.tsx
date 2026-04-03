@@ -34,7 +34,7 @@ const MenuBar = ({ editor }: { editor: any }) => {
   );
 
   return (
-    <div className="flex flex-wrap border-b border-zinc-300 bg-white items-center">
+    <div className="flex flex-wrap border-b border-zinc-400 bg-white items-center">
       <ToolbarBtn 
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} 
         isActive={editor.isActive('heading', { level: 2 })}
@@ -142,7 +142,7 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
   }, [value, editor]);
 
   return (
-    <div className="border border-zinc-300 bg-white rounded-none flex flex-col focus-within:ring-2 focus-within:ring-zinc-900 focus-within:border-zinc-900 transition-all w-full shadow-sm">
+    <div className="border border-zinc-400 bg-white rounded-none flex flex-col focus-within:ring-2 focus-within:ring-zinc-900 focus-within:border-zinc-900 transition-all w-full shadow-sm">
       <MenuBar editor={editor} />
       
       {/* 
@@ -221,17 +221,17 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
         .ProseMirror p.is-editor-empty:first-child::before {
           content: '${placeholder || "Zacznij pisać..."}';
           float: left;
-          color: #52525b; /* zinc-600 to be darker */
+          color: #3f3f46; /* zinc-700 */
           pointer-events: none;
           height: 0;
         }
       `}</style>
       
-      <div className="bg-white border-t border-zinc-300 min-h-[250px]">
+      <div className="bg-white border-t border-zinc-400 min-h-[250px]">
         {isMounted ? (
            <EditorContent editor={editor} className="cursor-text h-full" />
         ) : (
-           <div className="p-4 text-zinc-400 font-mono text-sm">Ładowanie edytora...</div>
+           <div className="p-4 text-zinc-500 font-mono text-sm">Ładowanie edytora...</div>
         )}
       </div>
     </div>

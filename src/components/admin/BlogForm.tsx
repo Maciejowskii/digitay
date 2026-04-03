@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createPost, updatePost } from "@/actions/blog";
-import { Loader2, ArrowLeft, Save } from "lucide-react";
+import { Loader2, ArrowLeft, Save, Eye } from "lucide-react";
 import Link from "next/link";
 import { format } from "date-fns";
 import RichTextEditor from "./RichTextEditor";
@@ -103,7 +103,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 border border-zinc-200 shadow-sm relative">
+      <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 border border-zinc-300 shadow-sm relative">
         {isPending && (
           <div className="absolute inset-0 z-50 bg-white/50 backdrop-blur-sm flex items-center justify-center">
             <Loader2 className="w-8 h-8 animate-spin text-zinc-900" />
@@ -112,7 +112,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
 
         {/* Informacje Główne */}
         <div className="space-y-6">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 border-b border-zinc-200 pb-2">Informacje główne</h3>
+          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-600 border-b border-zinc-300 pb-2">Informacje główne</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
@@ -122,7 +122,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                 name="title"
                 value={formData.title}
                 onChange={handleChange}
-                className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
+                className="w-full p-3 border border-zinc-400 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-600"
                 placeholder="Np. 10 trendów Web Designu..."
               />
             </div>
@@ -133,7 +133,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                 name="slug"
                 value={formData.slug}
                 onChange={handleChange}
-                className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors font-mono text-xs placeholder:text-zinc-500"
+                className="w-full p-3 border border-zinc-400 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors font-mono text-xs placeholder:text-zinc-600"
                 placeholder="Np. 10-trendow-web-designu"
               />
             </div>
@@ -147,7 +147,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                 value={formData.excerpt}
                 onChange={handleChange}
                 rows={3}
-                className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
+                className="w-full p-3 border border-zinc-400 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-600"
                 placeholder="Widoczne na karcie wpisu na ekranie bloga..."
               />
             </div>
@@ -167,7 +167,7 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                   name="author"
                   value={formData.author}
                   onChange={handleChange}
-                  className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
+                  className="w-full p-3 border border-zinc-400 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-600"
                 />
               </div>
               <div className="space-y-2">
@@ -177,16 +177,16 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
                   name="publishedAt"
                   value={formData.publishedAt}
                   onChange={handleChange}
-                  className="w-full p-3 border border-zinc-300 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-500"
+                  className="w-full p-3 border border-zinc-400 rounded-none focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-colors placeholder:text-zinc-600"
                 />
-                <p className="text-xs text-zinc-500 font-mono">Brak daty = Szkic (niewidoczny publicznie)</p>
+                <p className="text-xs text-zinc-700 font-mono">Brak daty = Szkic (niewidoczny publicznie)</p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="space-y-6 pt-6">
-          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-400 border-b border-zinc-200 pb-2">Zawartość Artykułu</h3>
+          <h3 className="font-mono text-xs uppercase tracking-widest text-zinc-600 border-b border-zinc-300 pb-2">Zawartość Artykułu</h3>
           
           <div className="space-y-2">
              <RichTextEditor 
@@ -198,7 +198,18 @@ export default function BlogForm({ initialData }: { initialData?: BlogPostType }
         </div>
 
         {/* CTA */}
-        <div className="pt-8 border-t border-zinc-100 flex justify-end">
+        <div className="pt-8 border-t border-zinc-200 flex justify-between items-center">
+          {isEditing && formData.slug && (
+            <button
+              type="button"
+              onClick={() => window.open(`/blog/${formData.slug}`, '_blank')}
+              className="flex items-center gap-2 text-zinc-600 hover:text-zinc-900 font-bold uppercase tracking-widest text-xs transition-colors"
+            >
+              <Eye className="w-4 h-4" />
+              Podgląd na żywo
+            </button>
+          )}
+          {!isEditing && <div />}
           <button
             type="submit"
             disabled={isPending}
