@@ -11,7 +11,7 @@ export function generateStaticParams() {
 }
 
 interface Props {
-  params: { miasto: string };
+  params: Promise<{ miasto: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
