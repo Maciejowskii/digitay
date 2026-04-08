@@ -1,11 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: any[] }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 12;
+
   const displayPosts = initialPosts.length > 0 ? initialPosts.map(p => ({
     slug: p.slug,
     title: p.title,
@@ -14,6 +18,13 @@ export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: a
     date: p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('pl-PL', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase() : "",
     image: p.coverImage || "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=2670&auto=format&fit=crop"
   })) : [];
+
+  const totalPages = Math.ceil(displayPosts.length / postsPerPage);
+  const currentPosts = displayPosts.slice(
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage
+  );
+
   return (
     <div className="bg-background text-white selection:bg-primary/30 selection:text-white min-h-screen overflow-hidden">
       
@@ -63,15 +74,15 @@ export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: a
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 md:gap-8 auto-rows-[450px]">
             
-            {displayPosts.length === 0 && (
+            {currentPosts.length === 0 && (
               <div className="col-span-1 md:col-span-2 lg:col-span-6 flex items-center justify-center p-12 lg:p-24 rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-sm">
                 <p className="text-white/50 text-xl md:text-2xl font-light text-center">Brak wygenerowanych lub opublikowanych artykułów. Zaglądnij tu później!</p>
               </div>
             )}
 
-            {displayPosts.map((post: any, idx: number) => {
-              // Pierwszy post jest wyróżniony (Featured)
-              const isFeatured = idx === 0;
+            {currentPosts.map((post: any, idx: number) => {
+              // Pierwszy post na PIERWSZEJ stronie jest wyróżniony
+              const isFeatured = currentPage === 1 && idx === 0;
               // Drugi post zajmuje 3 kolumny (Pół siatki w dużym ekranie)
               // Trzeci zajmuje 3 kolumny
               const colSpanClass = isFeatured 
@@ -85,7 +96,7 @@ export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: a
                   className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-sm flex flex-col justify-end p-8 md:p-10 ${colSpanClass}`}
                 >
                   {/* Dynamic Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-black/20 z-10" />
                   
                   {/* Hover Glow Edge */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
@@ -115,7 +126,7 @@ export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: a
                       <span className="text-white/60 font-mono text-xs uppercase">{post.date}</span>
                     </div>
 
-                    <h3 className={`font-heading font-black text-white uppercase tracking-tighter leading-tight group-hover:text-primary transition-colors duration-500 mb-4 ${isFeatured ? 'text-4xl md:text-5xl lg:text-6xl max-w-4xl' : 'text-2xl md:text-3xl'}`}>
+                    <h3 className={`font-heading font-black text-white uppercase tracking-tighter leading-tight group-hover:text-primary transition-colors duration-500 mb-4 line-clamp-3 ${isFeatured ? 'text-4xl md:text-5xl lg:text-6xl max-w-4xl' : 'text-2xl md:text-3xl'}`}>
                       {post.title}
                     </h3>
                     
@@ -135,8 +146,74 @@ export default function BlogPageClient({ initialPosts = [] }: { initialPosts?: a
             })}
 
           </div>
+
+          {/* ═══════════════════════════════════════════════
+              PAGINATION
+          ═══════════════════════════════════════════════ */}
+          {totalPages > 1 && (
+            <div className="mt-16 flex justify-center items-center gap-4">
+              <button
+                onClick={() => {
+                  setCurrentPage(prev => Math.max(prev - 1, 1));
+                  window.scrollTo({ top: 300, behavior: 'smooth' });
+                }}
+                disabled={currentPage === 1}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                aria-label="Poprzednia strona"
+              >
+                <ChevronLeft className="w-5 h-5 text-white" />
+              </button>
+              
+              <div className="flex items-center gap-2">
+                {Array.from({ length: totalPages }).map((_, i) => {
+                  const pageNum = i + 1;
+                  // Prosta logika ograniczająca ilość widocznych przycisków
+                  if (
+                    pageNum === 1 || 
+                    pageNum === totalPages || 
+                    (pageNum >= currentPage - 1 && pageNum <= currentPage + 1)
+                  ) {
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setCurrentPage(pageNum);
+                          window.scrollTo({ top: 300, behavior: 'smooth' });
+                        }}
+                        className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
+                          currentPage === pageNum 
+                            ? "bg-primary text-black" 
+                            : "text-white hover:bg-white/10"
+                        }`}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  }
+                  if (pageNum === currentPage - 2 || pageNum === currentPage + 2) {
+                    return <span key={i} className="text-white/50 px-1">...</span>;
+                  }
+                  return null;
+                })}
+              </div>
+
+              <button
+                onClick={() => {
+                  setCurrentPage(prev => Math.min(prev + 1, totalPages));
+                  window.scrollTo({ top: 300, behavior: 'smooth' });
+                }}
+                disabled={currentPage === totalPages}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                aria-label="Następna strona"
+              >
+                <ChevronRight className="w-5 h-5 text-white" />
+              </button>
+            </div>
+          )}
+
         </div>
       </section>
     </div>
   );
 }
+
